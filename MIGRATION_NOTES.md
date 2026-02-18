@@ -2,7 +2,7 @@
 
 ## What was migrated
 
-- Site identity and metadata (`src/config.yaml`) now use Heartland Transpersonal Alliance + custom-domain defaults (`heartlandta.org`).
+- Site identity and metadata (`src/config.yaml`) now use Heartland Transpersonal Alliance + GitHub Pages defaults.
 - Global navigation and footer were rewritten for HTA pages and initiatives (`src/navigation.ts`).
 - Homepage redesigned for a modern nonprofit/corporate feel (`src/pages/index.astro`).
 - Existing program content was repurposed into:
@@ -39,6 +39,6 @@ This avoids pulling AstroWind sample posts into HTA news.
 - Workflow file: `.github/workflows/deploy-pages.yml`
 - Trigger: push to `main`
 - Deploy actions: `actions/configure-pages`, `actions/upload-pages-artifact`, `actions/deploy-pages`
-- Current site target: `https://heartlandta.org/`
+- Current site target: `https://heartlandtranspersonalalliance.github.io/hta-modern/`
 
-This configuration assumes GitHub Pages custom domain is set to `heartlandta.org`.
+This configuration assumes standard GitHub Pages project-site hosting (no custom domain).
