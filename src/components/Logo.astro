@@ -1,8 +1,27 @@
 ---
 import { SITE } from 'astrowind:config';
+import logoMark from '~/assets/images/hta_logo.png';
+import logoWordmark from '~/assets/images/hta_header.png';
 ---
 
-<span class="flex items-center gap-2 self-center text-lg md:text-base font-semibold text-default whitespace-nowrap">
-  <span class="h-2.5 w-2.5 rounded-full bg-primary inline-block" aria-hidden="true"></span>
-  <span>{SITE?.name}</span>
+<span class="flex items-center gap-3 self-center whitespace-nowrap">
+  <img
+    src={logoMark.src}
+    width={logoMark.width}
+    height={logoMark.height}
+    alt=""
+    aria-hidden="true"
+    class="h-9 w-9 md:h-8 md:w-8 object-contain"
+    loading="eager"
+    decoding="async"
+  />
+  <img
+    src={logoWordmark.src}
+    width={logoWordmark.width}
+    height={logoWordmark.height}
+    alt={SITE?.name ?? 'Heartland Transpersonal Alliance'}
+    class="h-7 md:h-6 w-auto object-contain"
+    loading="eager"
+    decoding="async"
+  />
 </span>
