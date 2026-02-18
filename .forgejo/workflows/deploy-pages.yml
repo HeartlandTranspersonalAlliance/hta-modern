@@ -26,8 +26,9 @@ jobs:
         run: npm run build
 
       - name: Deploy to Codeberg Pages
-        uses: https://codeberg.org/Codeberg-CI/git-pages/action@v2
+        uses: https://codeberg.org/git-pages/action@v2
+        if: ${{ forge.ref == 'refs/heads/main' }}
         with:
           token: ${{ forge.token }}
           source: dist/
-          site: "https://${{ forge.repository_owner }}.codeberg.page/"
+          site: "https://${{ forge.repository_owner }}.codeberg.page/hta-site/"
