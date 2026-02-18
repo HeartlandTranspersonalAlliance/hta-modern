@@ -1,7 +1,7 @@
 site:
   name: Heartland Transpersonal Alliance
-  site: 'https://heartlandta.org'
-  base: '/'
+  site: 'https://heartlandtranspersonalalliance.github.io'
+  base: '/hta-site'
   trailingSlash: false
 
   googleSiteVerificationId: false

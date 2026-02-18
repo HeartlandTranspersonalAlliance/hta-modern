@@ -1,7 +1,7 @@
 # HTA Migration Notes (Jekyll -> Astro)
 
 ## What was migrated
-- Site identity and metadata (`src/config.yaml`) now use Heartland Transpersonal Alliance + `heartlandta.org`.
+- Site identity and metadata (`src/config.yaml`) now use Heartland Transpersonal Alliance + GitHub Pages defaults.
 - Global navigation and footer were rewritten for HTA pages and initiatives (`src/navigation.ts`).
 - Homepage redesigned for a modern nonprofit/corporate feel (`src/pages/index.astro`).
 - Existing program content was repurposed into:
@@ -30,10 +30,10 @@ This avoids pulling AstroWind sample posts into HTA news.
 - Run `npm run build:offline` to generate `dist-offline/`.
 - Open `dist-offline/index.html` directly from disk for file-based preview.
 
-## Codeberg Pages deploy
-- Forgejo workflow file: `.forgejo/workflows/deploy-pages.yml`
+## GitHub Pages deploy
+- Workflow file: `.github/workflows/deploy-pages.yml`
 - Trigger: push to `main`
-- Deploy action: `Codeberg-CI/git-pages/action@v2`
-- Current site target: `https://${forge.repository_owner}.codeberg.page/`
+- Deploy actions: `actions/configure-pages`, `actions/upload-pages-artifact`, `actions/deploy-pages`
+- Current site target: `https://heartlandtranspersonalalliance.github.io/hta-site/`
 
-Important: This action-based deployment target currently supports the `*.codeberg.page` URL pattern. If you need custom-domain publishing, use legacy Pages deployment by pushing build output with `.domains`.
+When you are ready for a custom domain later, set the domain in GitHub Pages settings and update `src/config.yaml` (`site` and `base`) accordingly.
