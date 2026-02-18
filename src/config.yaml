@@ -18,9 +18,9 @@ metadata:
   openGraph:
     site_name: Heartland Transpersonal Alliance
     images:
-      - url: '~/assets/images/hta/hta_darklogo.png'
-        width: 500
-        height: 500
+      - url: '~/assets/images/hta_social_share.png'
+        width: 1170
+        height: 253
     type: website
   twitter:
     handle: ''
