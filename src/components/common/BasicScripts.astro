@@ -44,24 +44,20 @@ import { UI } from 'astrowind:config';
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
 
-    attachEvent('#header nav', 'click', function () {
+    const closeMobileNav = () => {
       document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
+      document.querySelector('#header [data-aw-mobile-nav]')?.classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('h-screen');
-      document.getElementById('header')?.classList.remove('expanded');
-      document.getElementById('header')?.classList.remove('bg-page');
-      document.querySelector('#header nav')?.classList.add('hidden');
-      document.querySelector('#header [data-aw-header-actions]')?.classList.add('hidden');
+    };
+
+    attachEvent('#header [data-aw-mobile-nav]', 'click', function () {
+      closeMobileNav();
     });
 
     attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
       elem.classList.toggle('expanded');
+      document.querySelector('#header [data-aw-mobile-nav]')?.classList.toggle('hidden');
       document.body.classList.toggle('overflow-hidden');
-      document.getElementById('header')?.classList.toggle('h-screen');
-      document.getElementById('header')?.classList.toggle('expanded');
-      document.getElementById('header')?.classList.toggle('bg-page');
-      document.querySelector('#header nav')?.classList.toggle('hidden');
-      document.querySelector('#header [data-aw-header-actions]')?.classList.toggle('hidden');
     });
 
     attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
@@ -110,13 +106,9 @@ import { UI } from 'astrowind:config';
 
     const screenSize = window.matchMedia('(max-width: 767px)');
     screenSize.addEventListener('change', function () {
-      document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
-      document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('h-screen');
-      document.getElementById('header')?.classList.remove('expanded');
-      document.getElementById('header')?.classList.remove('bg-page');
-      document.querySelector('#header nav')?.classList.add('hidden');
-      document.querySelector('#header [data-aw-header-actions]')?.classList.add('hidden');
+      if (!screenSize.matches) {
+        closeMobileNav();
+      }
     });
 
     function applyHeaderStylesOnScroll() {
@@ -144,14 +136,9 @@ import { UI } from 'astrowind:config';
   };
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');
-    const elem = document.querySelector('[data-aw-toggle-menu]');
-    if (elem) {
-      elem.classList.remove('expanded');
-    }
+    document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
+    document.querySelector('#header [data-aw-mobile-nav]')?.classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
-    document.getElementById('header')?.classList.remove('h-screen');
-    document.getElementById('header')?.classList.remove('expanded');
-    document.querySelector('#header nav')?.classList.add('hidden');
   };
 
   window.onload = onLoad;
@@ -250,12 +237,6 @@ import { UI } from 'astrowind:config';
       });
     },
 
-    /* 
-      REF: #643;
-      We need to remove the delay to fix flickering/delay
-      when toggling the theme. Observer only removes them
-      after data-animated is gone (out of view).
-    */
     removeAnimationDelay() {
       this.elements.forEach((el) => {
         if (el.getAttribute('data-animated') === 'true') {

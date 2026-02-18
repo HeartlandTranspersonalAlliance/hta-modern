@@ -45,6 +45,8 @@ const {
 } = Astro.props;
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const navPlacementClass =
+  position === 'left' ? 'md:mr-auto md:ml-6' : position === 'right' ? 'md:ml-auto md:mr-6' : 'md:mx-6';
 ---
 
 <header
@@ -58,59 +60,37 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   <div class="max-w-7xl mx-auto px-2 md:px-4 pt-3 md:pt-5">
     <div
       class:list={[
-        'relative border rounded-2xl md:rounded-full px-3 md:px-5 py-2 md:py-3 surface-panel',
-        {
-          'md:flex md:justify-between': position !== 'center',
-        },
-        {
-          'md:grid md:grid-cols-3 md:items-center': position === 'center',
-        },
-        {
-          'max-w-7xl': !isFullWidth,
-        },
+        'relative border rounded-2xl md:rounded-full px-3 md:px-5 py-2.5 md:py-3 surface-panel',
+        { 'max-w-7xl': !isFullWidth },
       ]}
     >
-      <div
-        class:list={[
-          { 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' },
-          'flex items-center justify-between gap-3',
-        ]}
-      >
+      <div class="flex items-center justify-between gap-3">
         <a class="flex items-center" href={getHomePermalink()}>
           <Logo />
         </a>
-        <div class="flex items-center md:hidden">
-          <ToggleMenu
-            class="flex h-11 w-11 rounded-full border border-[var(--aw-border)] bg-white/70 dark:bg-slate-900/80 justify-center items-center cursor-pointer"
-          />
-        </div>
-      </div>
 
-      <nav
-        class="items-start md:items-center w-full md:w-auto hidden md:flex md:mx-5 overflow-y-auto md:overflow-visible md:justify-self-center"
-        aria-label="Main navigation"
-      >
-        <ul
-          class="flex flex-col md:flex-row gap-1 md:gap-0 w-full md:w-auto text-[1.02rem] md:text-[0.95rem] tracking-[0.01rem] font-medium md:justify-center"
+        <nav
+          class:list={['hidden md:flex items-center gap-1.5 lg:gap-2', navPlacementClass]}
+          aria-label="Main navigation"
         >
           {
             links.map(({ text, href, links }) => (
-              <li class:list={[links?.length ? 'dropdown relative' : 'relative']}>
+              <div class:list={[links?.length ? 'dropdown relative' : 'relative']}>
                 {links?.length ? (
                   <>
                     <button
                       type="button"
-                      class="px-4 py-3 md:py-2.5 rounded-xl md:rounded-full text-left md:text-center hover:bg-white/70 dark:hover:bg-slate-800/75 hover:text-primary flex items-center gap-1.5 whitespace-nowrap"
+                      class="px-3.5 py-2 rounded-full text-sm hover:bg-white/75 dark:hover:bg-slate-800/70 hover:text-primary flex items-center gap-1"
                     >
                       {text}
-                      <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 hidden md:inline" />
+                      <Icon name="tabler:chevron-down" class="w-3.5 h-3.5" />
                     </button>
-                    <ul class="dropdown-menu md:backdrop-blur-md rounded-xl md:absolute pl-0 md:hidden font-medium bg-[var(--aw-surface-strong)] border border-[var(--aw-border)] md:min-w-[220px] shadow-2xl mt-1">
+                    <ul class="dropdown-menu hidden absolute top-[calc(100%+0.4rem)] left-0 rounded-xl font-medium bg-[var(--aw-surface-strong)] border border-[var(--aw-border)] min-w-[210px] shadow-2xl py-1.5 z-20">
                       {links.map(({ text: text2, href: href2 }) => (
                         <li>
                           <a
                             class:list={[
-                              'first:rounded-t-xl last:rounded-b-xl py-2.5 px-4 block whitespace-nowrap hover:bg-white/60 dark:hover:bg-slate-800/70 hover:text-primary',
+                              'py-2 px-3.5 block whitespace-nowrap hover:bg-white/60 dark:hover:bg-slate-800/70 hover:text-primary',
                               { 'text-primary font-semibold': href2 === currentPath },
                             ]}
                             href={href2}
@@ -124,7 +104,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 ) : (
                   <a
                     class:list={[
-                      'px-4 py-3 md:py-2.5 rounded-xl md:rounded-full hover:bg-white/70 dark:hover:bg-slate-800/75 hover:text-primary flex items-center whitespace-nowrap transition',
+                      'px-3.5 py-2 rounded-full text-sm hover:bg-white/75 dark:hover:bg-slate-800/70 hover:text-primary transition whitespace-nowrap',
                       { 'text-primary font-semibold bg-white/75 dark:bg-slate-800/65': href === currentPath },
                     ]}
                     href={href}
@@ -132,22 +112,100 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                     {text}
                   </a>
                 )}
-              </li>
+              </div>
             ))
           }
-        </ul>
-      </nav>
+        </nav>
 
-      <div
-        class:list={[
-          { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
-          'hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end',
-        ]}
-        data-aw-header-actions
-      >
-        <div
-          class="items-center flex justify-between w-full md:w-auto rounded-2xl md:rounded-none border md:border-0 border-[var(--aw-border)] bg-[var(--aw-surface-strong)] md:bg-transparent p-2 md:p-0"
-        >
+        <div class="hidden md:flex items-center gap-1.5" data-aw-header-actions>
+          {
+            showToggleTheme && (
+              <ToggleTheme
+                class="text-muted hover:text-default hover:bg-white/75 dark:hover:bg-slate-800/70 rounded-full p-2.5 inline-flex items-center"
+                iconClass="w-5 h-5"
+              />
+            )
+          }
+          {
+            showRssFeed && (
+              <a
+                class="text-muted hover:text-default hover:bg-white/75 dark:hover:bg-slate-800/70 rounded-full p-2.5 inline-flex items-center"
+                aria-label="RSS Feed"
+                href={getAsset('/rss.xml')}
+              >
+                <Icon name="tabler:rss" class="w-5 h-5" />
+              </a>
+            )
+          }
+          {
+            actions?.length ? (
+              <span class="flex gap-2 pl-1">
+                {actions.map((btnProps) => (
+                  <Button
+                    {...btnProps}
+                    class="py-2.5 px-4.5 font-semibold shadow-none text-sm w-auto whitespace-nowrap"
+                  />
+                ))}
+              </span>
+            ) : (
+              ''
+            )
+          }
+        </div>
+
+        <div class="flex items-center md:hidden">
+          <ToggleMenu
+            class="flex h-11 w-11 rounded-full border border-[var(--aw-border)] bg-white/75 dark:bg-slate-900/82 justify-center items-center cursor-pointer"
+          />
+        </div>
+      </div>
+
+      <div class="hidden md:hidden border-t border-[var(--aw-border)] mt-3 pt-3" data-aw-mobile-nav>
+        <nav aria-label="Mobile navigation">
+          <ul class="flex flex-col gap-1.5">
+            {
+              links.map(({ text, href, links }) => (
+                <li>
+                  {!links?.length ? (
+                    <a
+                      class:list={[
+                        'block px-3.5 py-3 rounded-xl hover:bg-white/70 dark:hover:bg-slate-800/70 transition',
+                        { 'text-primary font-semibold bg-white/70 dark:bg-slate-800/65': href === currentPath },
+                      ]}
+                      href={href}
+                    >
+                      {text}
+                    </a>
+                  ) : (
+                    <details class="group rounded-xl bg-white/35 dark:bg-slate-900/35 border border-[var(--aw-border)]">
+                      <summary class="list-none cursor-pointer px-3.5 py-3 flex items-center justify-between">
+                        <span>{text}</span>
+                        <Icon name="tabler:chevron-down" class="w-4 h-4 transition group-open:rotate-180" />
+                      </summary>
+                      <ul class="pb-2 px-2">
+                        {links.map(({ text: text2, href: href2 }) => (
+                          <li>
+                            <a
+                              class:list={[
+                                'block px-3 py-2 rounded-lg hover:bg-white/60 dark:hover:bg-slate-800/60',
+                                { 'text-primary font-semibold': href2 === currentPath },
+                              ]}
+                              href={href2}
+                            >
+                              {text2}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <div class="mt-3 pt-3 border-t border-[var(--aw-border)] flex items-center justify-between gap-3">
           <div class="flex items-center gap-1.5">
             {
               showToggleTheme && (
@@ -171,12 +229,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           </div>
           {
             actions?.length ? (
-              <span class="ml-2 rtl:ml-0 rtl:mr-2 flex gap-2">
+              <span class="flex flex-wrap gap-2 justify-end">
                 {actions.map((btnProps) => (
-                  <Button
-                    {...btnProps}
-                    class="py-2.5 px-5 md:px-5 font-semibold shadow-none text-sm w-auto whitespace-nowrap"
-                  />
+                  <Button {...btnProps} class="py-2.5 px-4 text-sm shadow-none" />
                 ))}
               </span>
             ) : (

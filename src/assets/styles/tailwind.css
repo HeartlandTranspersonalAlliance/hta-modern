@@ -40,7 +40,7 @@
   .btn {
     @apply inline-flex items-center justify-center rounded-full border font-semibold text-center text-base leading-snug px-6 py-3 transition duration-200 ease-out cursor-pointer;
     @apply border-[var(--aw-border)] bg-white/70 text-default hover:-translate-y-0.5 hover:bg-white;
-    @apply dark:bg-slate-900/70 dark:text-slate-100 dark:hover:bg-slate-900;
+    @apply dark:bg-slate-900/65 dark:text-slate-100 dark:hover:bg-slate-900;
   }
 
   .btn-primary {
@@ -58,30 +58,8 @@
 }
 
 #header.scroll > div:first-child > div:first-child {
-  @apply border border-[var(--aw-border)] bg-white/80 dark:bg-slate-950/75;
+  @apply border border-[var(--aw-border)] bg-white/80 dark:bg-slate-950/80;
   box-shadow: 0 16px 42px rgb(12 17 35 / 15%);
-}
-
-#header.expanded > div:first-child > div:first-child {
-  @apply bg-page dark:bg-slate-950 border-[var(--aw-border)];
-}
-
-#header.expanded nav {
-  position: fixed;
-  top: 76px;
-  left: 0;
-  right: 0;
-  bottom: 88px;
-  padding: 1.25rem 1rem;
-}
-
-#header.expanded nav ul {
-  @apply rounded-2xl border border-[var(--aw-border)] bg-[var(--aw-surface-strong)] p-3;
-}
-
-#header.expanded nav ul li a,
-#header.expanded nav ul li button {
-  @apply rounded-xl;
 }
 
 .dropdown:focus .dropdown-menu,

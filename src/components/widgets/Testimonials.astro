@@ -26,7 +26,7 @@ const {
     {
       testimonials &&
         testimonials.map(({ title, testimonial, name, job, image }) => (
-          <article class="surface-card border rounded-2xl p-5 md:p-6 flex flex-col h-full intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+          <article class="rounded-[1.4rem] p-5 md:p-6 flex flex-col h-full intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter bg-white/58 dark:bg-slate-900/45 ring-1 ring-[var(--aw-border)]">
             {title && <h2 class="text-lg font-semibold font-heading pb-3">{title}</h2>}
             {testimonial && (
               <blockquote class="flex-auto">

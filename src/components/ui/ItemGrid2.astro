@@ -34,7 +34,7 @@ const {
       {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
         <article
           class={twMerge(
-            'relative h-full surface-card border rounded-2xl p-5 md:p-6 flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+            'relative h-full rounded-[1.4rem] p-5 md:p-6 flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade bg-white/62 dark:bg-slate-900/48 ring-1 ring-[var(--aw-border)]',
             panelClass,
             itemClasses?.panel
           )}
