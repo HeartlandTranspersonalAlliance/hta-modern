@@ -13,9 +13,6 @@ import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import siteBackground from '~/assets/images/hta_background.png';
 
-// View transitions are disabled to keep file-based offline preview predictable.
-// import { ClientRouter } from 'astro:transitions';
-
 import type { MetaData as MetaDataType } from '~/types';
 
 export interface Props {
@@ -27,7 +24,7 @@ const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+<html lang={language} dir={textDirection} class="2xl:text-[19px]">
   <head>
     <CommonMeta />
     <Favicons />
@@ -36,23 +33,35 @@ const { language, textDirection } = I18N;
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
-
-    <!-- View transitions disabled for robust file:// offline preview -->
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight relative min-h-screen">
-    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+  <body class="antialiased text-default bg-page tracking-tight relative min-h-screen overflow-x-hidden">
+    <div class="pointer-events-none fixed inset-0 -z-20" aria-hidden="true">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-orange-100/90 via-amber-50/70 to-cyan-100/55 dark:from-slate-950 dark:via-slate-900 dark:to-cyan-950/70"
+      >
+      </div>
       <img
         src={siteBackground.src}
         width={siteBackground.width}
         height={siteBackground.height}
         alt=""
-        class="h-full w-full object-cover opacity-35 dark:opacity-55"
+        class="absolute inset-0 h-full w-full object-cover opacity-22 dark:opacity-30"
         loading="eager"
         decoding="async"
       />
-      <div class="absolute inset-0 bg-page/70 dark:bg-page/72"></div>
+      <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-orange-300/35 blur-3xl dark:bg-orange-400/22">
+      </div>
+      <div
+        class="absolute bottom-[-8rem] right-[-5rem] h-[24rem] w-[24rem] rounded-full bg-cyan-300/30 blur-3xl dark:bg-teal-400/18"
+      >
+      </div>
+      <div
+        class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[size:46px_46px] opacity-35 dark:opacity-10"
+      >
+      </div>
     </div>
+
     <slot />
 
     <BasicScripts />

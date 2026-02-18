@@ -14,7 +14,7 @@ const { id, isDark = false, containerClass = '', bg, as = 'section' } = Astro.pr
 const WrapperTag = as;
 ---
 
-<WrapperTag class="relative not-prose scroll-mt-[72px]" {...id ? { id } : {}}>
+<WrapperTag class="relative not-prose scroll-mt-[90px]" {...id ? { id } : {}}>
   <div class="absolute inset-0 pointer-events-none -z-[1]" aria-hidden="true">
     <slot name="bg">
       {bg ? <Fragment set:html={bg} /> : <Background isDark={isDark} />}
@@ -23,12 +23,14 @@ const WrapperTag = as;
   <div
     class:list={[
       twMerge(
-        'relative mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16 lg:py-20 text-default intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+        'relative mx-auto max-w-7xl px-4 md:px-6 py-10 md:py-14 lg:py-16 text-default intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
         containerClass
       ),
       { dark: isDark },
     ]}
   >
-    <slot />
+    <div class="surface-panel border rounded-[1.75rem] px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10">
+      <slot />
+    </div>
   </div>
 </WrapperTag>

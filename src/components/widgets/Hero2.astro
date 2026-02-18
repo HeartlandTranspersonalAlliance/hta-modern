@@ -16,39 +16,76 @@ const {
   id,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const condenseHeading = (value?: string) => {
+  const trimmed = value?.trim();
+  if (!trimmed) return trimmed;
+  const words = trimmed
+    .replace(/<[^>]+>/g, ' ')
+    .trim()
+    .split(/\s+/);
+  return words.length > 3 ? words.slice(0, 3).join(' ') : trimmed;
+};
+
+const compactTitle = condenseHeading(typeof title === 'string' ? title : undefined);
 ---
 
-<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
+<section class="relative not-prose" {...id ? { id } : {}}>
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <slot name="bg">
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
   </div>
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
-    <div class="py-12 md:py-20 lg:py-0 lg:flex lg:items-center lg:h-screen lg:gap-8">
-      <div class="basis-1/2 text-center lg:text-left pb-10 md:pb-16 mx-auto">
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-6 md:pt-8 lg:pt-10">
+    <div class="surface-panel border rounded-[2rem] p-6 md:p-10 lg:p-12">
+      <div class:list={['grid gap-8 lg:gap-12 items-center', { 'lg:grid-cols-[0.92fr_1.08fr]': image }]}>
         {
-          tagline && (
-            <p
-              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
-              set:html={tagline}
-            />
+          image && (
+            <div class="order-2 lg:order-1 intersect-once intersect-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              <div class="relative rounded-[1.6rem] overflow-hidden border border-[var(--aw-border)] bg-black/10">
+                <div class="absolute inset-0 bg-gradient-to-tl from-black/12 to-transparent pointer-events-none" />
+                {typeof image === 'string' ? (
+                  <Fragment set:html={image} />
+                ) : (
+                  <Image
+                    class="w-full h-full object-cover"
+                    widths={[400, 768, 1024, 2040]}
+                    sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                    loading="eager"
+                    width={820}
+                    height={820}
+                    {...image}
+                  />
+                )}
+              </div>
+            </div>
           )
         }
-        {
-          title && (
-            <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
-              set:html={title}
-            />
-          )
-        }
-        <div class="max-w-3xl mx-auto lg:max-w-none">
+
+        <div class="order-1 lg:order-2 text-center lg:text-left">
+          {
+            tagline && (
+              <p
+                class="inline-block rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-secondary dark:text-cyan-200 bg-white/55 dark:bg-slate-800/50 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+                set:html={tagline}
+              />
+            )
+          }
+
+          {
+            compactTitle && (
+              <h1
+                class="mt-4 text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.03] tracking-[-0.025em] font-heading text-heading intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+                set:html={compactTitle}
+              />
+            )
+          }
+
           {
             subtitle && (
               <p
-                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+                class="mt-5 text-lg md:text-xl text-muted leading-relaxed max-w-2xl lg:max-w-none mx-auto lg:mx-0 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
                 set:html={subtitle}
               />
             )
@@ -56,11 +93,11 @@ const {
 
           {
             actions && (
-              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:justify-start lg:m-0 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+              <div class="mt-7 max-w-xl mx-auto lg:mx-0 flex flex-col sm:flex-row gap-3 sm:gap-4 lg:justify-start intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
                 {Array.isArray(actions) ? (
                   actions.map((action) => (
                     <div class="flex w-full sm:w-auto">
-                      <Button {...(action || {})} class="w-full sm:mb-0" />
+                      <Button {...(action || {})} class="w-full sm:w-auto" />
                     </div>
                   ))
                 ) : (
@@ -69,29 +106,9 @@ const {
               </div>
             )
           }
+
+          {content && <div class="mt-7" set:html={content} />}
         </div>
-        {content && <Fragment set:html={content} />}
-      </div>
-      <div class="basis-1/2">
-        {
-          image && (
-            <div class="relative m-auto max-w-5xl intersect-once intersect-no-queue motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
-              {typeof image === 'string' ? (
-                <Fragment set:html={image} />
-              ) : (
-                <Image
-                  class="mx-auto rounded-md w-full"
-                  widths={[400, 768, 1024, 2040]}
-                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
-                  loading="eager"
-                  width={600}
-                  height={600}
-                  {...image}
-                />
-              )}
-            </div>
-          )
-        }
       </div>
     </div>
   </div>

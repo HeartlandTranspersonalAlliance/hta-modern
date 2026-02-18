@@ -2,11 +2,12 @@
 import { getPermalink } from '~/utils/permalinks';
 ---
 
-<div
-  class="text-sm bg-slate-900 text-slate-100 hidden md:flex gap-1 overflow-hidden px-3 py-2 relative text-ellipsis whitespace-nowrap"
->
-  <span class="bg-slate-100 text-slate-900 font-semibold px-1 py-0.5 text-xs inline-block">HTA</span>
-  <a href={getPermalink('/initiatives')} class="hover:underline font-medium"
-    >Community, education, harm reduction, and integration in Kansas City »</a
+<div class="hidden md:flex justify-center px-3 pt-3">
+  <a
+    href={getPermalink('/initiatives')}
+    class="surface-panel border rounded-full px-4 py-2 text-xs md:text-sm font-medium text-default hover:text-primary transition"
   >
+    <span class="font-heading uppercase tracking-[0.2em] text-secondary dark:text-cyan-200 mr-2">HTA</span>
+    Community, education, harm reduction, and integration in Kansas City
+  </a>
 </div>

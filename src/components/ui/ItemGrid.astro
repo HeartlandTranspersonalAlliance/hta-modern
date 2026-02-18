@@ -20,7 +20,7 @@ const {
   items && items.length > 0 && (
     <div
       class={twMerge(
-        `grid mx-auto gap-8 md:gap-y-12 ${
+        `grid mx-auto gap-4 md:gap-6 ${
           columns === 4
             ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
             : columns === 3
@@ -33,32 +33,42 @@ const {
       )}
     >
       {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
-        <div class="intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class={twMerge('flex flex-row max-w-md', panelClass, itemClasses?.panel)}>
-            <div class="flex justify-center">
-              {(icon || defaultIcon) && (
-                <Icon
-                  name={icon || defaultIcon}
-                  class={twMerge('w-7 h-7 mr-2 rtl:mr-0 rtl:ml-2', defaultIconClass, itemClasses?.icon)}
-                />
-              )}
-            </div>
-            <div class="mt-0.5">
-              {title && <h3 class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</h3>}
-              {description && (
-                <p
-                  class={twMerge(`${title ? 'mt-3' : ''} text-muted`, descriptionClass, itemClasses?.description)}
-                  set:html={description}
-                />
-              )}
-              {callToAction && (
-                <div class={twMerge(`${title || description ? 'mt-3' : ''}`, actionClass, itemClasses?.actionClass)}>
-                  <Button variant="link" {...callToAction} />
-                </div>
-              )}
-            </div>
+        <article class="intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div
+            class={twMerge(
+              'h-full surface-card border rounded-2xl p-5 md:p-6 flex flex-col max-w-none',
+              panelClass,
+              itemClasses?.panel
+            )}
+          >
+            {(icon || defaultIcon) && (
+              <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/12 dark:bg-primary/20">
+                <Icon name={icon || defaultIcon} class={twMerge('w-5 h-5', defaultIconClass, itemClasses?.icon)} />
+              </div>
+            )}
+
+            {title && (
+              <h3 class={twMerge('text-xl font-semibold font-heading', titleClass, itemClasses?.title)}>{title}</h3>
+            )}
+
+            {description && (
+              <p
+                class={twMerge(
+                  `${title ? 'mt-3' : ''} text-muted leading-relaxed`,
+                  descriptionClass,
+                  itemClasses?.description
+                )}
+                set:html={description}
+              />
+            )}
+
+            {callToAction && (
+              <div class={twMerge(`mt-4`, actionClass, itemClasses?.actionClass)}>
+                <Button variant="link" {...callToAction} />
+              </div>
+            )}
           </div>
-        </div>
+        </article>
       ))}
     </div>
   )

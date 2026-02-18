@@ -27,25 +27,25 @@ const {
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <div
-    class="max-w-3xl mx-auto text-center p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600"
+    class="rounded-[1.5rem] border border-[var(--aw-border)] bg-gradient-to-r from-orange-100/70 via-white/75 to-cyan-100/70 dark:from-slate-900/80 dark:via-slate-900/65 dark:to-cyan-950/50 p-6 md:p-8 lg:p-10"
   >
     <Headline
       title={title}
       subtitle={subtitle}
       tagline={tagline}
       classes={{
-        container: 'mb-0 md:mb-0',
-        title: 'text-4xl md:text-4xl font-bold tracking-tighter mb-4 font-heading',
-        subtitle: 'text-xl text-muted dark:text-slate-400',
+        container: 'max-w-3xl mx-auto mb-0',
+        title: 'text-3xl md:text-5xl',
+        subtitle: 'text-lg md:text-xl',
       }}
     />
     {
       actions && (
-        <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 mt-6">
+        <div class="max-w-xl m-auto flex flex-col sm:flex-row sm:justify-center gap-3 sm:gap-4 mt-7">
           {Array.isArray(actions) ? (
             actions.map((action) => (
               <div class="flex w-full sm:w-auto">
-                <Button {...(action || {})} class="w-full sm:mb-0" />
+                <Button {...(action || {})} class="w-full sm:w-auto" />
               </div>
             ))
           ) : (

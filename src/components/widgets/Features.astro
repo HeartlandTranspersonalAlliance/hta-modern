@@ -20,16 +20,16 @@ const {
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
   <ItemGrid
     items={items}
     columns={columns}
     defaultIcon={defaultIcon}
     classes={{
-      container: '',
-      title: 'md:text-[1.3rem]',
-      icon: 'text-white bg-primary rounded-full w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mr-4 rtl:ml-4 rtl:mr-0',
+      container: 'gap-4 md:gap-5',
+      title: 'text-lg md:text-xl',
+      icon: 'text-primary',
       ...((classes?.items as Record<string, never>) ?? {}),
     }}
   />

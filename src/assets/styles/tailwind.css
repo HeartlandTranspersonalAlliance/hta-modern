@@ -6,27 +6,46 @@
   .bg-page {
     background-color: var(--aw-color-bg-page);
   }
+
   .bg-dark {
     background-color: var(--aw-color-bg-page-dark);
   }
+
   .bg-light {
     background-color: var(--aw-color-bg-page);
   }
+
   .text-page {
-    color: var(--aw-color-text-page);
+    color: var(--aw-color-text-default);
   }
+
   .text-muted {
     color: var(--aw-color-text-muted);
+  }
+
+  .surface-panel {
+    background: var(--aw-surface);
+    border-color: var(--aw-border);
+    backdrop-filter: blur(14px);
+  }
+
+  .surface-card {
+    background: var(--aw-surface-strong);
+    border-color: var(--aw-border);
+    backdrop-filter: blur(10px);
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
+    @apply inline-flex items-center justify-center rounded-full border font-semibold text-center text-base leading-snug px-6 py-3 transition duration-200 ease-out cursor-pointer;
+    @apply border-[var(--aw-border)] bg-white/70 text-default hover:-translate-y-0.5 hover:bg-white;
+    @apply dark:bg-slate-900/70 dark:text-slate-100 dark:hover:bg-slate-900;
   }
 
   .btn-primary {
-    @apply btn font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
+    @apply btn text-white border-transparent bg-primary hover:bg-accent hover:text-white;
+    box-shadow: 0 10px 28px rgb(220 98 41 / 28%);
   }
 
   .btn-secondary {
@@ -34,30 +53,35 @@
   }
 
   .btn-tertiary {
-    @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
+    @apply btn border-transparent bg-transparent px-3 py-2 shadow-none text-muted hover:text-default dark:hover:text-white;
   }
 }
 
-#header.scroll > div:first-child {
-  @apply bg-page md:bg-white/90 md:backdrop-blur-md;
-  box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
+#header.scroll > div:first-child > div:first-child {
+  @apply border border-[var(--aw-border)] bg-white/80 dark:bg-slate-950/75;
+  box-shadow: 0 16px 42px rgb(12 17 35 / 15%);
 }
-.dark #header.scroll > div:first-child,
-#header.scroll.dark > div:first-child {
-  @apply bg-page md:bg-[#030621e6] border-b border-gray-500/20;
-  box-shadow: none;
+
+#header.expanded > div:first-child > div:first-child {
+  @apply bg-page dark:bg-slate-950 border-[var(--aw-border)];
 }
-/* #header.scroll > div:last-child {
-  @apply py-3;
-} */
 
 #header.expanded nav {
   position: fixed;
-  top: 70px;
+  top: 76px;
   left: 0;
   right: 0;
-  bottom: 70px !important;
-  padding: 0 5px;
+  bottom: 88px;
+  padding: 1.25rem 1rem;
+}
+
+#header.expanded nav ul {
+  @apply rounded-2xl border border-[var(--aw-border)] bg-[var(--aw-surface-strong)] p-3;
+}
+
+#header.expanded nav ul li a,
+#header.expanded nav ul li button {
+  @apply rounded-xl;
 }
 
 .dropdown:focus .dropdown-menu,
@@ -71,21 +95,12 @@
 }
 
 [astro-icon].icon-bold > * {
-  stroke-width: 2.4;
+  stroke-width: 2.2;
 }
 
 [data-aw-toggle-menu] path {
   @apply transition;
 }
-[data-aw-toggle-menu].expanded g > path:first-child {
-  @apply -rotate-45 translate-y-[15px] translate-x-[-3px];
-}
-
-[data-aw-toggle-menu].expanded g > path:last-child {
-  @apply rotate-45 translate-y-[-8px] translate-x-[14px];
-}
-
-/* To deprecated */
 
 .dd *:first-child {
   margin-top: 0;

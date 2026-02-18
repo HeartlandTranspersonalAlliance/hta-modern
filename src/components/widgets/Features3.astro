@@ -26,44 +26,45 @@ const {
 <WidgetWrapper
   id={id}
   isDark={isDark}
-  containerClass={`${isBeforeContent ? 'md:pb-8 lg:pb-12' : ''} ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${
+  containerClass={`${isBeforeContent ? 'md:pb-8 lg:pb-10' : ''} ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${
     classes?.container ?? ''
   }`}
   bg={bg}
 >
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
 
-  <div aria-hidden="true" class="aspect-w-16 aspect-h-7">
-    {
-      image && (
-        <div class="w-full h-80 object-cover rounded-xl mx-auto bg-gray-500 shadow-lg">
-          {typeof image === 'string' ? (
-            <Fragment set:html={image} />
-          ) : (
-            <Image
-              class="w-full h-80 object-cover rounded-xl mx-auto bg-gray-500 shadow-lg"
-              width="auto"
-              height={320}
-              widths={[400, 768]}
-              layout="fullWidth"
-              {...image}
-            />
-          )}
-        </div>
-      )
-    }
-  </div>
+  {
+    image && (
+      <div
+        aria-hidden="true"
+        class="mb-6 md:mb-8 rounded-[1.5rem] overflow-hidden border border-[var(--aw-border)] bg-black/10"
+      >
+        {typeof image === 'string' ? (
+          <Fragment set:html={image} />
+        ) : (
+          <Image
+            class="w-full h-72 md:h-80 object-cover"
+            width={1300}
+            height={640}
+            widths={[400, 768, 1200]}
+            layout="fullWidth"
+            {...image}
+          />
+        )}
+      </div>
+    )
+  }
 
   <ItemGrid
     items={items}
     columns={columns}
     defaultIcon={defaultIcon}
     classes={{
-      container: 'mt-12',
-      panel: 'max-w-full sm:max-w-md',
+      container: 'gap-4 md:gap-5',
+      panel: 'h-full',
       title: 'text-lg font-semibold',
-      description: 'mt-0.5',
-      icon: 'flex-shrink-0 mt-1 text-primary w-6 h-6',
+      description: 'mt-1.5',
+      icon: 'text-primary',
       ...((classes?.items as object) ?? {}),
     }}
   />

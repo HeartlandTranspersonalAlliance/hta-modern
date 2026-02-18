@@ -36,59 +36,64 @@ const {
     subtitle={subtitle}
     tagline={tagline}
     classes={{
-      container: 'max-w-xl sm:mx-auto lg:max-w-2xl',
-      title: 'text-4xl md:text-5xl font-bold tracking-tighter mb-4 font-heading',
-      subtitle: 'max-w-3xl mx-auto sm:text-center text-xl text-muted dark:text-slate-400',
+      container: 'max-w-3xl mx-auto',
+      title: 'text-3xl md:text-5xl',
+      subtitle: 'text-lg md:text-xl',
     }}
   />
-  <div class="mx-auto max-w-7xl p-4 md:px-8">
-    <div class={`md:flex ${isReversed ? 'md:flex-row-reverse' : ''} md:gap-16`}>
-      <div class="md:basis-1/2 self-center">
-        {content && <div class="mb-12 text-lg dark:text-slate-400" set:html={content} />}
 
-        {
-          callToAction && (
-            <div class="mt-[-40px] mb-8 text-primary">
-              <Button variant="link" {...callToAction} />
-            </div>
-          )
-        }
+  <div
+    class:list={[
+      'grid gap-6 md:gap-8 lg:gap-10 items-start',
+      { 'lg:grid-cols-[1.05fr_0.95fr]': image, 'lg:grid-cols-[0.95fr_1.05fr]': image && isReversed },
+    ]}
+  >
+    <div class:list={['min-w-0', { 'lg:order-2': isReversed }]}>
+      {content && <div class="mb-6 text-lg text-muted leading-relaxed" set:html={content} />}
 
-        <ItemGrid
-          items={items}
-          columns={columns}
-          defaultIcon="tabler:check"
-          classes={{
-            container: `gap-y-4 md:gap-y-8`,
-            panel: 'max-w-none',
-            title: 'text-lg font-medium leading-6 dark:text-white ml-2 rtl:ml-0 rtl:mr-2',
-            description: 'text-muted dark:text-slate-400 ml-2 rtl:ml-0 rtl:mr-2',
-            icon: 'flex h-7 w-7 items-center justify-center rounded-full bg-green-600 dark:bg-green-700 text-gray-50 p-1',
-            action: 'text-lg font-medium leading-6 dark:text-white ml-2 rtl:ml-0 rtl:mr-2',
-          }}
-        />
-      </div>
-      <div aria-hidden="true" class="mt-10 md:mt-0 md:basis-1/2">
-        {
-          image && (
-            <div class="relative m-auto max-w-4xl">
-              {typeof image === 'string' ? (
-                <Fragment set:html={image} />
-              ) : (
-                <Image
-                  class="mx-auto w-full rounded-lg bg-gray-500 shadow-lg"
-                  width={500}
-                  height={500}
-                  widths={[400, 768]}
-                  sizes="(max-width: 768px) 100vw, 432px"
-                  layout="responsive"
-                  {...image}
-                />
-              )}
-            </div>
-          )
-        }
-      </div>
+      {
+        callToAction && (
+          <div class="mb-6">
+            <Button variant="link" {...callToAction} />
+          </div>
+        )
+      }
+
+      <ItemGrid
+        items={items}
+        columns={columns}
+        defaultIcon="tabler:check"
+        classes={{
+          container: 'gap-3 md:gap-4',
+          panel: 'h-full',
+          title: 'text-lg md:text-xl',
+          description: 'text-sm md:text-base',
+          icon: 'text-primary',
+          action: 'mt-3',
+        }}
+      />
     </div>
+
+    {
+      image && (
+        <div class:list={['min-w-0', { 'lg:order-1': isReversed }]}>
+          <div class="relative rounded-[1.4rem] overflow-hidden border border-[var(--aw-border)] bg-black/10">
+            {typeof image === 'string' ? (
+              <Fragment set:html={image} />
+            ) : (
+              <Image
+                class="w-full h-full object-cover"
+                width={820}
+                height={720}
+                widths={[400, 768, 1200]}
+                sizes="(max-width: 1023px) 100vw, 46vw"
+                layout="responsive"
+                {...image}
+              />
+            )}
+          </div>
+        </div>
+      )
+    }
   </div>
 </WidgetWrapper>

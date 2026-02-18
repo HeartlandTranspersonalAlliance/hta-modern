@@ -20,34 +20,36 @@ const {
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
-  <div class:list={['flex flex-col gap-8 md:gap-12', { 'md:flex-row-reverse': isReversed }, { 'md:flex-row': image }]}>
-    <div class:list={['md:py-4 md:self-center', { 'md:basis-1/2': image }, { 'w-full': !image }]}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl ${classes?.container ?? ''}`} bg={bg}>
+  <div class:list={['grid gap-8 md:gap-10 items-start', { 'lg:grid-cols-[1.02fr_0.98fr]': image }]}>
+    <div class:list={[{ 'lg:order-2': isReversed }]}>
       <Headline
         title={title}
         subtitle={subtitle}
         tagline={tagline}
         classes={{
-          container: 'text-left rtl:text-right',
-          title: 'text-3xl lg:text-4xl',
+          container: 'text-left rtl:text-right max-w-none',
+          title: 'text-3xl md:text-4xl',
+          subtitle: 'text-base md:text-lg',
           ...((classes?.headline as object) ?? {}),
         }}
       />
       <Timeline items={items} classes={classes?.items as Record<string, never>} />
     </div>
+
     {
       image && (
-        <div class="relative md:basis-1/2">
+        <div class:list={['relative', { 'lg:order-1': isReversed }]}>
           {typeof image === 'string' ? (
             <Fragment set:html={image} />
           ) : (
             <Image
-              class="inset-0 object-cover object-top w-full rounded-md shadow-lg md:absolute md:h-full bg-gray-400 dark:bg-slate-700"
-              widths={[400, 768]}
-              sizes="(max-width: 768px) 100vw, 432px"
-              width={432}
-              height={768}
-              layout="cover"
+              class="w-full rounded-[1.5rem] border border-[var(--aw-border)] object-cover bg-gray-400 dark:bg-slate-700"
+              widths={[400, 768, 1200]}
+              sizes="(max-width: 1023px) 100vw, 46vw"
+              width={740}
+              height={900}
+              layout="responsive"
               src={image?.src}
               alt={image?.alt || ''}
             />
