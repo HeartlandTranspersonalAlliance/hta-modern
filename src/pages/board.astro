@@ -1,0 +1,84 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Image from '~/components/common/Image.astro';
+
+import daleImage from '~/assets/images/hta/dale-bio2.jpg';
+import christineImage from '~/assets/images/hta/christine-bio.jpg';
+import elizabethImage from '~/assets/images/hta/liz-bio-3.png';
+import ashleyImage from '~/assets/images/hta/ashley-bio.jpg';
+import nateImage from '~/assets/images/hta/nate-bio.jpg';
+
+const metadata = {
+  title: 'Board of Directors',
+  description:
+    'Meet the Heartland Transpersonal Alliance board. We are actively seeking mission-aligned professionals in the Kansas City area.',
+};
+
+const members = [
+  {
+    name: 'Dale Morgan',
+    role: 'President',
+    image: daleImage,
+    bio: 'Licensed EMT with harm-reduction experience across medical and festival teams since 2018, including RGX Medical, The Zendo Project, Lighthouse Medical, Jamcare Medical, NEST, and RaveSafe Kansas City.',
+  },
+  {
+    name: 'Dr. Christine Ziemer',
+    role: 'Executive Director',
+    image: christineImage,
+    bio: 'Professor of Psychology at Missouri Western State University with peer-counseling and integration leadership experience through The Zendo Project, Fireside Project, and regional psychedelic education networks.',
+  },
+  {
+    name: 'Elizabeth Wells',
+    role: 'Secretary',
+    image: elizabethImage,
+    bio: 'Master\'s-prepared nurse with over a decade of clinical experience and active work in trauma-informed care, harm reduction, and psychedelic-assisted psychotherapy pathways.',
+  },
+  {
+    name: 'Ashley Bennett',
+    role: 'Director of Marketing',
+    image: ashleyImage,
+    bio: 'Leads HTA marketing, social campaigns, and community outreach with a focus on accessibility, responsible communication, and harm-reduction-aligned public education.',
+  },
+  {
+    name: 'Nate Beam',
+    role: 'Treasurer',
+    image: nateImage,
+    bio: 'Serves as Treasurer and on the Events Committee, bringing experience in community-centered budget coaching and event production to support sustainable organizational operations.',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <HeroText
+    tagline="Board of Directors"
+    title="Mission-aligned leadership in Kansas City"
+    subtitle="We are seeking motivated professionals in community activism, medicine, psychotherapy, social work, and education."
+    callToAction={{ text: 'Apply Now', href: '/board-app' }}
+  />
+
+  <section class="px-4 sm:px-6 pb-16 sm:pb-20 mx-auto max-w-7xl not-prose">
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {
+        members.map((member) => (
+          <article class="rounded-xl border border-slate-200 bg-white shadow-sm p-6">
+            <div class="flex items-center gap-4 mb-4">
+              <Image
+                src={member.image}
+                alt={member.name}
+                width={112}
+                height={112}
+                class="h-28 w-28 rounded-full object-cover"
+              />
+              <div>
+                <h2 class="text-xl font-bold tracking-tight">{member.name}</h2>
+                <p class="text-secondary font-semibold">{member.role}</p>
+              </div>
+            </div>
+            <p class="text-muted">{member.bio}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

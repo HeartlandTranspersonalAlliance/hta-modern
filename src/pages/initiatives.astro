@@ -1,0 +1,61 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+
+const metadata = {
+  title: 'Initiatives',
+};
+
+const initiatives = [
+  {
+    name: 'Kansas City Psychedelic Integration Circle',
+    summary:
+      'A confidential community focused on processing experiences outside the ordinary within a supportive, non-judgmental peer environment.',
+    href: 'https://kc-psychedelic.com',
+    cta: 'Visit KCPIC',
+  },
+  {
+    name: 'Psychedelic Society of Kansas City',
+    summary:
+      'A community hub with in-person events exploring the intersection of psychedelics in art, culture, and medicine.',
+    href: 'https://psychedelickc.org',
+    cta: 'Visit PSKC',
+  },
+  {
+    name: 'Safe Journey Sanctum',
+    summary:
+      'Compassionate, evidence-based peer support and overdose prevention at festivals and live events, including harm-reduction and Narcan training.',
+    href: 'https://safejourneysanctum.org',
+    cta: 'Visit SJS',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <HeroText
+    tagline="Initiatives"
+    title="Regional programs built for real-world impact"
+    subtitle="HTA initiatives create a connected support ecosystem across education, events, and integration pathways."
+  />
+
+  <section class="px-4 sm:px-6 pb-16 sm:pb-20 mx-auto max-w-6xl not-prose">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        initiatives.map((initiative) => (
+          <article class="rounded-xl border border-slate-200 bg-white shadow-sm p-6 flex flex-col">
+            <h2 class="text-2xl font-bold tracking-tight mb-3">{initiative.name}</h2>
+            <p class="text-muted mb-6 flex-1">{initiative.summary}</p>
+            <a
+              href={initiative.href}
+              class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-white font-semibold hover:opacity-90 transition"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {initiative.cta}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
