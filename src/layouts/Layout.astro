@@ -11,6 +11,7 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import siteBackground from '~/assets/images/hta_background.png';
 
 // View transitions are disabled to keep file-based offline preview predictable.
 // import { ClientRouter } from 'astro:transitions';
@@ -39,7 +40,19 @@ const { language, textDirection } = I18N;
     <!-- View transitions disabled for robust file:// offline preview -->
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight">
+  <body class="antialiased text-default bg-page tracking-tight relative min-h-screen">
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <img
+        src={siteBackground.src}
+        width={siteBackground.width}
+        height={siteBackground.height}
+        alt=""
+        class="h-full w-full object-cover opacity-35 dark:opacity-55"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-page/70 dark:bg-page/72"></div>
+    </div>
     <slot />
 
     <BasicScripts />
