@@ -59,24 +59,24 @@ const members = [
   />
 
   <section class="px-4 sm:px-6 pb-16 sm:pb-20 mx-auto max-w-7xl not-prose">
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
       {
         members.map((member) => (
-          <article class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow-sm dark:shadow-none p-6">
+          <article class="field-card rounded-[1.6rem] p-6">
             <div class="flex items-center gap-4 mb-4">
               <Image
                 src={member.image}
                 alt={member.name}
                 width={112}
                 height={112}
-                class="h-28 w-28 rounded-full object-cover"
+                class="h-28 w-28 rounded-full border border-[var(--aw-border)] object-cover"
               />
               <div>
-                <h2 class="text-xl font-bold tracking-tight">{member.name}</h2>
+                <h2 class="font-heading text-xl font-semibold">{member.name}</h2>
                 <p class="text-secondary font-semibold">{member.role}</p>
               </div>
             </div>
-            <p class="text-muted">{member.bio}</p>
+            <p class="text-muted leading-relaxed">{member.bio}</p>
           </article>
         ))
       }

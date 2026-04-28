@@ -1,54 +1,58 @@
----
-import '@fontsource-variable/inter';
----
-
 <style is:inline>
   :root {
-    --aw-font-sans: 'Avenir Next', 'Segoe UI Variable', 'Trebuchet MS', sans-serif;
-    --aw-font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
-    --aw-font-heading: 'Optima', 'Avenir Next', 'Trebuchet MS', sans-serif;
+    color-scheme: light;
 
-    --aw-color-primary: rgb(220 98 41);
-    --aw-color-secondary: rgb(22 99 108);
-    --aw-color-accent: rgb(168 53 42);
+    --aw-font-sans: 'Avenir Next', 'Gill Sans', 'Trebuchet MS', sans-serif;
+    --aw-font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+    --aw-font-heading: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 
-    --aw-color-text-heading: rgb(26 30 43);
-    --aw-color-text-default: rgb(43 49 67);
-    --aw-color-text-muted: rgb(74 82 107 / 86%);
-    --aw-color-bg-page: rgb(243 241 233);
-    --aw-color-bg-page-dark: rgb(15 23 35);
+    --aw-color-primary: rgb(190 82 43);
+    --aw-color-secondary: rgb(20 111 113);
+    --aw-color-accent: rgb(219 156 68);
 
-    --aw-surface: rgb(255 255 255 / 78%);
-    --aw-surface-strong: rgb(255 255 255 / 92%);
-    --aw-border: rgb(170 157 137 / 34%);
+    --aw-color-text-heading: rgb(31 29 23);
+    --aw-color-text-default: rgb(48 48 39);
+    --aw-color-text-muted: rgb(75 78 68 / 88%);
+    --aw-color-bg-page: rgb(246 239 221);
+    --aw-color-bg-page-dark: rgb(18 31 33);
+
+    --aw-surface: rgb(255 250 239 / 78%);
+    --aw-surface-strong: rgb(255 251 242 / 94%);
+    --aw-border: rgb(143 117 83 / 30%);
+    --hta-moss: rgb(97 126 89);
+    --hta-clay: rgb(190 82 43);
+    --hta-gold: rgb(219 156 68);
+    --hta-lagoon: rgb(20 111 113);
 
     ::selection {
-      background-color: rgb(246 199 153);
-      color: rgb(33 21 14);
+      background-color: rgb(225 170 86);
+      color: rgb(31 21 14);
     }
   }
 
   .dark {
-    --aw-font-sans: 'Avenir Next', 'Segoe UI Variable', 'Trebuchet MS', sans-serif;
-    --aw-font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
-    --aw-font-heading: 'Optima', 'Avenir Next', 'Trebuchet MS', sans-serif;
+    color-scheme: dark;
 
-    --aw-color-primary: rgb(255 136 73);
-    --aw-color-secondary: rgb(86 200 188);
-    --aw-color-accent: rgb(243 105 79);
+    --aw-font-sans: 'Avenir Next', 'Gill Sans', 'Trebuchet MS', sans-serif;
+    --aw-font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+    --aw-font-heading: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 
-    --aw-color-text-heading: rgb(240 246 255);
-    --aw-color-text-default: rgb(223 233 246);
-    --aw-color-text-muted: rgb(156 175 199 / 90%);
-    --aw-color-bg-page: rgb(15 23 35);
+    --aw-color-primary: rgb(238 131 80);
+    --aw-color-secondary: rgb(110 211 195);
+    --aw-color-accent: rgb(239 185 102);
 
-    --aw-surface: rgb(14 31 45 / 74%);
-    --aw-surface-strong: rgb(16 37 52 / 88%);
-    --aw-border: rgb(116 180 188 / 28%);
+    --aw-color-text-heading: rgb(246 239 222);
+    --aw-color-text-default: rgb(227 229 214);
+    --aw-color-text-muted: rgb(175 190 179 / 90%);
+    --aw-color-bg-page: rgb(18 31 33);
+
+    --aw-surface: rgb(21 47 47 / 74%);
+    --aw-surface-strong: rgb(24 55 54 / 90%);
+    --aw-border: rgb(150 190 170 / 25%);
 
     ::selection {
-      background-color: rgb(220 98 41);
-      color: rgb(248 247 245);
+      background-color: rgb(238 131 80);
+      color: rgb(18 31 33);
     }
   }
 </style>

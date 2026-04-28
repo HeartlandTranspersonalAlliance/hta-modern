@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-kerning: normal;
+    text-rendering: geometricPrecision;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--aw-color-text-heading);
+    letter-spacing: 0;
+  }
+}
+
 @layer utilities {
   .bg-page {
     background-color: var(--aw-color-bg-page);
@@ -24,28 +45,95 @@
   }
 
   .surface-panel {
-    background: var(--aw-surface);
+    background: linear-gradient(135deg, rgb(255 253 247 / 86%), rgb(247 230 194 / 54%));
     border-color: var(--aw-border);
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 50px rgb(70 50 29 / 10%);
   }
 
   .surface-card {
     background: var(--aw-surface-strong);
     border-color: var(--aw-border);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 45px rgb(69 50 32 / 9%);
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase;
+    color: var(--aw-color-secondary);
+    background: rgb(255 251 242 / 70%);
+    border: 1px solid var(--aw-border);
+    letter-spacing: 0;
+  }
+
+  .page-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  .flow-field {
+    background:
+      linear-gradient(116deg, rgb(250 235 197 / 95%) 0%, rgb(245 238 218 / 86%) 34%, transparent 35%),
+      linear-gradient(152deg, transparent 0 52%, rgb(206 229 218 / 56%) 53%, rgb(232 205 155 / 50%) 100%);
+  }
+
+  .page-wash {
+    background: linear-gradient(100deg, rgb(246 239 221 / 82%), rgb(246 239 221 / 38%) 45%, rgb(20 111 113 / 10%) 100%);
+  }
+
+  .organic-panel {
+    background:
+      linear-gradient(135deg, rgb(255 252 242 / 95%), rgb(249 234 202 / 86%)),
+      linear-gradient(90deg, rgb(190 82 43 / 12%), rgb(20 111 113 / 12%));
+    border: 1px solid var(--aw-border);
+    box-shadow: 0 26px 70px rgb(70 50 29 / 12%);
+  }
+
+  .field-card {
+    background:
+      linear-gradient(180deg, rgb(255 253 247 / 94%), rgb(250 241 219 / 86%)),
+      linear-gradient(90deg, rgb(190 82 43 / 8%), rgb(20 111 113 / 8%));
+    border: 1px solid var(--aw-border);
+    box-shadow: 0 18px 46px rgb(66 47 30 / 10%);
+  }
+
+  .dark .surface-panel {
+    background: linear-gradient(135deg, rgb(22 50 50 / 84%), rgb(23 38 39 / 72%));
+    box-shadow: 0 20px 56px rgb(2 12 13 / 26%);
+  }
+
+  .dark .field-card,
+  .dark .organic-panel {
+    background:
+      linear-gradient(145deg, rgb(24 55 54 / 92%), rgb(18 35 36 / 88%)),
+      linear-gradient(90deg, rgb(238 131 80 / 10%), rgb(110 211 195 / 10%));
+    box-shadow: 0 24px 62px rgb(2 12 13 / 30%);
+  }
+
+  .dark .section-kicker {
+    background: rgb(24 55 54 / 76%);
+    color: rgb(159 224 213);
+  }
+
+  .dark .page-wash {
+    background: linear-gradient(100deg, rgb(18 31 33 / 88%), rgb(18 31 33 / 66%) 55%, rgb(238 131 80 / 10%) 100%);
   }
 }
 
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center rounded-full border font-semibold text-center text-base leading-snug px-6 py-3 transition duration-200 ease-out cursor-pointer;
-    @apply border-[var(--aw-border)] bg-white/70 text-default hover:-translate-y-0.5 hover:bg-white;
-    @apply dark:bg-slate-900/65 dark:text-slate-100 dark:hover:bg-slate-900;
+    @apply border-[var(--aw-border)] text-default hover:-translate-y-0.5;
+    background: rgb(255 251 242 / 76%);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 34%),
+      0 12px 26px rgb(67 47 29 / 8%);
   }
 
   .btn-primary {
-    @apply btn text-white border-transparent bg-primary hover:bg-accent hover:text-white;
-    box-shadow: 0 10px 28px rgb(220 98 41 / 28%);
+    @apply btn text-white border-transparent hover:text-white;
+    background: linear-gradient(135deg, rgb(190 82 43), rgb(207 112 54));
+    box-shadow: 0 14px 32px rgb(190 82 43 / 26%);
   }
 
   .btn-secondary {
@@ -55,11 +143,20 @@
   .btn-tertiary {
     @apply btn border-transparent bg-transparent px-3 py-2 shadow-none text-muted hover:text-default dark:hover:text-white;
   }
+
+  .dark .btn {
+    background: rgb(24 55 54 / 74%);
+    color: var(--aw-color-text-default);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 5%),
+      0 14px 30px rgb(2 12 13 / 22%);
+  }
 }
 
 #header.scroll > div:first-child > div:first-child {
-  @apply border border-[var(--aw-border)] bg-white/80 dark:bg-slate-950/80;
-  box-shadow: 0 16px 42px rgb(12 17 35 / 15%);
+  @apply border border-[var(--aw-border)];
+  background: var(--aw-surface-strong);
+  box-shadow: 0 16px 42px rgb(70 50 29 / 14%);
 }
 
 .dropdown:focus .dropdown-menu,

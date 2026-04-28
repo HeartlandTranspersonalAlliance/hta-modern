@@ -66,7 +66,7 @@ const compactTitle = condenseHeading(typeof title === 'string' ? title : undefin
         {
           tagline && (
             <p
-              class="inline-block rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-secondary dark:text-cyan-200 bg-white/55 dark:bg-slate-800/50 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+              class="section-kicker intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
               set:html={tagline}
             />
           )
@@ -75,7 +75,7 @@ const compactTitle = condenseHeading(typeof title === 'string' ? title : undefin
         {
           compactTitle && (
             <h1
-              class="mt-4 text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.03] tracking-[-0.025em] font-heading text-heading intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+              class="mt-4 text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.03] font-heading text-heading intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
               set:html={compactTitle}
             />
           )

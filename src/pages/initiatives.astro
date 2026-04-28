@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
   title: 'Initiatives',
@@ -13,6 +14,7 @@ const initiatives = [
       'A confidential community focused on processing experiences outside the ordinary within a supportive, non-judgmental peer environment.',
     href: 'https://kc-psychedelic.com',
     cta: 'Visit KCPIC',
+    icon: 'tabler:circles',
   },
   {
     name: 'Psychedelic Society of Kansas City',
@@ -20,6 +22,7 @@ const initiatives = [
       'A community hub with in-person events exploring the intersection of psychedelics in art, culture, and medicine.',
     href: 'https://psychedelickc.org',
     cta: 'Visit PSKC',
+    icon: 'tabler:calendar-event',
   },
   {
     name: 'Safe Journey Sanctum',
@@ -27,6 +30,7 @@ const initiatives = [
       'Compassionate, evidence-based peer support and overdose prevention at festivals and live events, including harm-reduction and Narcan training.',
     href: 'https://safejourneysanctum.org',
     cta: 'Visit SJS',
+    icon: 'tabler:shield-heart',
   },
 ];
 ---
@@ -39,19 +43,26 @@ const initiatives = [
   />
 
   <section class="px-4 sm:px-6 pb-16 sm:pb-20 mx-auto max-w-6xl not-prose">
-    <div class="grid gap-6 md:grid-cols-3">
+    <div class="grid gap-5 md:grid-cols-3">
       {
-        initiatives.map((initiative) => (
-          <article class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow-sm dark:shadow-none p-6 flex flex-col">
-            <h2 class="text-2xl font-bold tracking-tight mb-3">{initiative.name}</h2>
-            <p class="text-muted mb-6 flex-1">{initiative.summary}</p>
+        initiatives.map((initiative, index) => (
+          <article class="field-card group flex min-h-[22rem] flex-col rounded-[1.6rem] p-6 transition duration-200 hover:-translate-y-1">
+            <div class="flex items-start justify-between gap-4">
+              <span class="font-heading text-4xl font-semibold text-primary">{String(index + 1).padStart(2, '0')}</span>
+              <span class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary/12 text-secondary">
+                <Icon name={initiative.icon} class="h-6 w-6" />
+              </span>
+            </div>
+            <h2 class="mt-8 font-heading text-2xl font-semibold leading-tight">{initiative.name}</h2>
+            <p class="text-muted mt-4 mb-6 flex-1 leading-relaxed">{initiative.summary}</p>
             <a
               href={initiative.href}
-              class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-white font-semibold hover:opacity-90 transition"
+              class="inline-flex items-center gap-2 text-sm font-semibold uppercase text-primary transition group-hover:text-accent"
               target="_blank"
               rel="noreferrer"
             >
               {initiative.cta}
+              <Icon name="tabler:arrow-up-right" class="h-4 w-4" />
             </a>
           </article>
         ))

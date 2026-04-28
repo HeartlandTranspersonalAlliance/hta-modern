@@ -29,7 +29,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative mt-10 md:mt-14 pb-8 md:pb-12 not-prose']}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="rounded-[2rem] px-2 sm:px-3 py-4">
+    <div class="organic-panel rounded-[2rem] px-5 sm:px-7 py-7 md:py-8">
       <div class="grid grid-cols-12 gap-8">
         <div class="col-span-12 lg:col-span-4">
           <a class="inline-block" href={getHomePermalink()}>
@@ -64,9 +64,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         {
           links.map(({ title, links: groupLinks }) => (
             <div class="col-span-6 md:col-span-4 lg:col-span-2">
-              <div class="font-heading text-sm uppercase tracking-[0.22em] text-secondary dark:text-cyan-200 mb-3">
-                {title}
-              </div>
+              <div class="font-heading text-sm uppercase text-secondary dark:text-cyan-200 mb-3">{title}</div>
               {groupLinks && groupLinks.length > 0 && (
                 <ul class="text-sm space-y-2.5">
                   {groupLinks.map(({ text, href, ariaLabel }) => (

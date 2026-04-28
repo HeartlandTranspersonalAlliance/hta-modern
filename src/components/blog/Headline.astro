@@ -15,9 +15,6 @@ const compactTitle = condenseHeading(typeof title === 'string' ? title : undefin
 ---
 
 <header class="mb-7 md:mb-9 text-center max-w-3xl mx-auto">
-  <h1
-    class="text-4xl md:text-5xl font-heading font-semibold leading-[1.04] tracking-[-0.02em]"
-    set:html={compactTitle}
-  />
+  <h1 class="text-4xl md:text-5xl font-heading font-semibold leading-[1.04]" set:html={compactTitle} />
   {subtitle && <div class="mt-3 mx-auto text-lg md:text-xl text-muted" set:html={subtitle} />}
 </header>
