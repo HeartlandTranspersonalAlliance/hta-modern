@@ -1,6 +1,7 @@
 ---
 import { SITE } from 'astrowind:config';
 import logoWordmark from '~/assets/images/hta_logo.png';
+import darkLogoWordmark from '~/assets/images/hta/hta_darklogo.png';
 ---
 
 <span class="flex items-center self-center whitespace-nowrap">
@@ -9,7 +10,16 @@ import logoWordmark from '~/assets/images/hta_logo.png';
     width={logoWordmark.width}
     height={logoWordmark.height}
     alt={SITE?.name ?? 'Heartland Transpersonal Alliance'}
-    class="h-11 md:h-12 w-auto max-w-[78vw] object-contain drop-shadow-[0_8px_14px_rgba(12,16,30,0.12)]"
+    class="h-11 md:h-12 w-auto max-w-[78vw] object-contain drop-shadow-[0_8px_14px_rgba(12,16,30,0.12)] dark:hidden"
+    loading="eager"
+    decoding="async"
+  />
+  <img
+    src={darkLogoWordmark.src}
+    width={darkLogoWordmark.width}
+    height={darkLogoWordmark.height}
+    alt={SITE?.name ?? 'Heartland Transpersonal Alliance'}
+    class="hidden h-11 md:h-12 w-auto max-w-[14rem] rounded-xl object-contain dark:block"
     loading="eager"
     decoding="async"
   />

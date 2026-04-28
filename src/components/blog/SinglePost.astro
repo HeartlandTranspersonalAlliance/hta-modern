@@ -55,7 +55,7 @@ const { post, url } = Astro.props;
         }
       </div>
 
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold leading-[1.04]">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold leading-[1.1]">
         {post.title}
       </h1>
       <p class="mt-4 text-lg md:text-2xl text-muted leading-relaxed">
@@ -66,7 +66,7 @@ const { post, url } = Astro.props;
         post.image ? (
           <Image
             src={post.image}
-            class="w-full mx-auto mt-6 md:mt-8 rounded-[1.2rem] border border-[var(--aw-border)] bg-gray-400 dark:bg-slate-700"
+            class="w-full mx-auto mt-6 md:mt-8 rounded-[1.2rem] border border-[var(--aw-border)] bg-[var(--aw-surface)] object-cover object-[center_35%]"
             widths={[400, 900, 1400]}
             sizes="(max-width: 900px) 100vw, 900px"
             alt={post?.excerpt || ''}
@@ -80,7 +80,7 @@ const { post, url } = Astro.props;
     </header>
 
     <div
-      class="mx-auto mt-8 px-2 md:px-4 prose prose-md lg:prose-xl max-w-none dark:prose-invert dark:prose-headings:text-slate-200 prose-headings:font-heading prose-headings:leading-tight prose-headings:font-semibold prose-a:text-primary dark:prose-a:text-orange-300 prose-img:rounded-lg prose-img:shadow-none prose-headings:scroll-mt-[100px] prose-li:my-0"
+      class="mx-auto mt-8 px-2 md:px-4 prose prose-md lg:prose-xl max-w-none dark:prose-invert prose-headings:font-heading prose-headings:leading-tight prose-headings:font-semibold prose-a:text-primary prose-img:rounded-lg prose-img:shadow-none prose-headings:scroll-mt-[100px] prose-li:my-0"
     >
       <slot />
     </div>

@@ -23,10 +23,10 @@ const {
     {
       stats &&
         stats.map(({ amount, title, icon }) => (
-          <article class="rounded-[1.4rem] p-5 md:p-6 text-center intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter bg-white/58 dark:bg-slate-900/45 ring-1 ring-[var(--aw-border)]">
+          <article class="field-card rounded-[1.4rem] p-5 md:p-6 text-center intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter">
             {icon && (
-              <div class="flex items-center justify-center mx-auto mb-4 text-primary">
-                <Icon name={icon} class="w-8 h-8" />
+              <div class="flex h-12 w-12 items-center justify-center mx-auto mb-4 rounded-lg bg-primary/10 text-primary">
+                <Icon name={icon} class="w-6 h-6" />
               </div>
             )}
             {amount && <div class="font-heading text-primary text-4xl md:text-5xl font-semibold">{amount}</div>}

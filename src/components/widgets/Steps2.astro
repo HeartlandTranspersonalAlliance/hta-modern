@@ -53,8 +53,8 @@ const {
           items && items.length
             ? items.map(({ title: title2, description, icon }, index) => (
                 <li class="surface-card border rounded-2xl p-5 md:p-6 flex gap-4">
-                  <span class="flex shrink-0 w-10 h-10 items-center justify-center rounded-full bg-primary/12 dark:bg-primary/24 text-primary">
-                    {icon ? <Icon name={icon} class="w-5 h-5 icon-bold" /> : index + 1}
+                  <span class="flex shrink-0 w-11 h-11 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary">
+                    {icon ? <Icon name={icon} class="w-6 h-6 icon-bold" /> : index + 1}
                   </span>
                   <div>
                     <h3 class="text-lg md:text-xl font-semibold font-heading" set:html={title2} />

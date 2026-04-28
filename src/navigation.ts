@@ -23,7 +23,7 @@ export const headerData = {
       href: getPermalink('/contact'),
     },
   ],
-  actions: [{ text: 'Apply for Board', href: getPermalink('/board-app') }],
+  actions: [{ variant: 'primary' as const, text: 'Apply for Board', href: getPermalink('/board-app') }],
 };
 
 export const footerData = {

@@ -12,6 +12,16 @@ export default {
         accent: 'var(--aw-color-accent)',
         default: 'var(--aw-color-text-default)',
         muted: 'var(--aw-color-text-muted)',
+        hta: {
+          blue: '#1E6FFF',
+          blueDark: '#0B3A75',
+          teal: '#0F2E2F',
+          tealSoft: '#164B4D',
+          gold: '#F4A261',
+          coral: '#FF7A59',
+          text: '#E6F1F2',
+          muted: '#9FB6B8',
+        },
       },
       fontFamily: {
         sans: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],

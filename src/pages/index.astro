@@ -59,7 +59,7 @@ const principles = [
     >
       <div class="max-w-2xl">
         <p class="section-kicker">Community Education Harm Reduction Integration</p>
-        <h1 class="mt-5 font-heading text-5xl font-semibold leading-[0.98] text-heading md:text-6xl lg:text-7xl">
+        <h1 class="mt-5 font-heading text-5xl font-semibold leading-[1.1] text-heading md:text-6xl lg:text-7xl">
           Heartland Transpersonal Alliance
         </h1>
         <p class="mt-6 text-lg leading-relaxed text-muted md:text-xl">
@@ -89,9 +89,7 @@ const principles = [
       </div>
 
       <div class="relative">
-        <div
-          class="overflow-hidden rounded-[2rem] border border-[var(--aw-border)] shadow-[0_28px_82px_rgba(70,50,29,0.18)]"
-        >
+        <div class="overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-blue-950/20">
           <Image
             src={heroImage}
             alt="Abstract mandala artwork in warm earth tones and teal, representing HTA's integration work."
@@ -99,13 +97,13 @@ const principles = [
             height={902}
             widths={[480, 768, 1200, 1721]}
             sizes="(max-width: 1023px) 100vw, 52vw"
-            class="aspect-[16/10] h-full w-full object-cover"
+            class="aspect-[16/10] h-full w-full object-cover opacity-90 transition duration-300 hover:opacity-100"
             loading="eager"
           />
         </div>
         <div class="surface-card absolute -bottom-5 left-4 max-w-[18rem] rounded-2xl border p-4 md:left-8">
           <div class="flex items-center gap-3">
-            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/12 text-primary">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <Icon name="tabler:heart-handshake" class="h-6 w-6" />
             </span>
             <p class="text-sm leading-relaxed text-muted">
@@ -151,7 +149,7 @@ const principles = [
             <article class="field-card group flex min-h-[21rem] flex-col rounded-[1.6rem] p-6 transition duration-200 hover:-translate-y-1">
               <div class="flex items-start justify-between gap-4">
                 <span class="font-heading text-4xl font-semibold text-primary">{item.label}</span>
-                <span class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary/12 text-secondary">
+                <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <Icon name={item.icon} class="h-6 w-6" />
                 </span>
               </div>
@@ -175,7 +173,7 @@ const principles = [
 
   <section class="relative not-prose">
     <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
-      <div class="overflow-hidden rounded-[2rem] border border-[var(--aw-border)]">
+      <div class="overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-blue-950/20">
         <Image
           src={heroImage}
           alt="Warm abstract field artwork used as a visual anchor for HTA initiatives."
@@ -183,7 +181,7 @@ const principles = [
           height={900}
           widths={[480, 768, 1200]}
           sizes="(max-width: 1023px) 100vw, 43vw"
-          class="aspect-[4/5] h-full w-full object-cover"
+          class="aspect-[4/5] h-full w-full object-cover opacity-90 transition duration-300 hover:opacity-100"
         />
       </div>
 
@@ -201,7 +199,7 @@ const principles = [
           {
             principles.map((principle) => (
               <li class="flex gap-3 text-base leading-relaxed">
-                <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/12 text-primary">
+                <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Icon name="tabler:check" class="h-4 w-4" />
                 </span>
                 <span>{principle}</span>
