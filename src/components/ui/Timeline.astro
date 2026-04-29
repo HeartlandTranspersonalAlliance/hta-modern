@@ -16,7 +16,7 @@ const {
   panel: panelClass = '',
   title: titleClass = '',
   description: descriptionClass = '',
-  icon: defaultIconClass = 'text-primary',
+  icon: defaultIconClass = 'text-[var(--hta-icon)]',
 } = classes;
 ---
 
@@ -32,19 +32,22 @@ const {
           )}
         >
           <div class="absolute left-0 top-0 flex flex-col items-center">
-            <span class="flex w-10 h-10 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 border border-primary/25">
+            <span class="hta-icon-badge">
               {(icon || defaultIcon) && (
                 <Icon name={icon || defaultIcon} class={twMerge('w-5 h-5', defaultIconClass, itemClasses?.icon)} />
               )}
             </span>
-            {index !== items.length - 1 && <span class="mt-2 block h-[calc(100%-2rem)] w-px bg-[var(--aw-border)]" />}
+            {index !== items.length - 1 && <span class="mt-2 block h-[calc(100%-2rem)] w-px bg-[var(--hta-border)]" />}
           </div>
           {title && (
-            <p class={twMerge('text-lg font-semibold font-heading', titleClass, itemClasses?.title)} set:html={title} />
+            <p
+              class={twMerge('hta-strong text-lg font-semibold font-heading', titleClass, itemClasses?.title)}
+              set:html={title}
+            />
           )}
           {description && (
             <p
-              class={twMerge('text-muted mt-2 leading-relaxed', descriptionClass, itemClasses?.description)}
+              class={twMerge('hta-muted mt-2 text-[0.95rem] leading-7', descriptionClass, itemClasses?.description)}
               set:html={description}
             />
           )}

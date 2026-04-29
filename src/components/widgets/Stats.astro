@@ -23,14 +23,16 @@ const {
     {
       stats &&
         stats.map(({ amount, title, icon }) => (
-          <article class="field-card rounded-[1.4rem] p-5 md:p-6 text-center intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter">
+          <article class="hta-card field-card rounded-lg p-5 text-center md:p-6 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter">
             {icon && (
-              <div class="flex h-12 w-12 items-center justify-center mx-auto mb-4 rounded-lg bg-primary/10 text-primary">
-                <Icon name={icon} class="w-6 h-6" />
+              <div class="hta-icon-badge mx-auto mb-4 !h-12 !w-12">
+                <Icon name={icon} class="!h-6 !w-6" />
               </div>
             )}
-            {amount && <div class="font-heading text-primary text-4xl md:text-5xl font-semibold">{amount}</div>}
-            {title && <div class="mt-2 text-xs md:text-sm font-semibold uppercase text-muted">{title}</div>}
+            {amount && (
+              <div class="font-heading text-4xl font-semibold text-[var(--hta-link)] md:text-5xl">{amount}</div>
+            )}
+            {title && <div class="hta-muted mt-2 text-sm font-semibold uppercase tracking-[0.05em]">{title}</div>}
           </article>
         ))
     }

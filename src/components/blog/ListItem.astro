@@ -22,7 +22,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
 ---
 
 <article
-  class={`surface-card border rounded-2xl p-5 md:p-6 max-w-none grid gap-6 md:gap-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${
+  class={`surface-card border rounded-lg p-5 md:p-6 max-w-none grid gap-6 md:gap-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${
     image ? 'md:grid-cols-[0.92fr_1.08fr]' : ''
   }`}
 >
@@ -30,7 +30,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
     image &&
       (link ? (
         <a class="relative block group" href={link ?? 'javascript:void(0)'}>
-          <div class="relative h-56 overflow-hidden bg-[var(--aw-surface)] rounded-xl border border-[var(--aw-border)]">
+          <div class="relative h-56 overflow-hidden bg-[var(--aw-surface)] rounded-md border border-[var(--aw-border)]">
             {image && (
               <Image
                 src={image}
@@ -47,7 +47,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
           </div>
         </a>
       ) : (
-        <div class="relative h-56 overflow-hidden bg-[var(--aw-surface)] rounded-xl border border-[var(--aw-border)]">
+        <div class="relative h-56 overflow-hidden bg-[var(--aw-surface)] rounded-md border border-[var(--aw-border)]">
           {image && (
             <Image
               src={image}

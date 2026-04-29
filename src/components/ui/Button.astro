@@ -17,22 +17,20 @@ const variants = {
   primary: 'btn-primary',
   secondary: 'btn-secondary',
   tertiary: 'btn btn-tertiary',
-  link: 'inline-flex items-center gap-1 text-sm font-semibold uppercase text-primary hover:text-accent transition',
+  link: 'hta-focus-ring inline-flex min-h-10 items-center gap-1.5 rounded-md text-sm font-bold uppercase tracking-[0.04em] text-[var(--hta-link)] hover:text-[var(--hta-link-hover)] transition duration-200',
 };
+
+const controlClass = twMerge('hta-focus-ring', variants[variant] || '', className);
 ---
 
 {
   type === 'button' || type === 'submit' || type === 'reset' ? (
-    <button type={type} class={twMerge(variants[variant] || '', className)} {...rest}>
+    <button type={type} class={controlClass} {...rest}>
       <Fragment set:html={text} />
       {icon && <Icon name={icon} class="w-4 h-4 inline-block" />}
     </button>
   ) : (
-    <a
-      class={twMerge(variants[variant] || '', className)}
-      {...(target ? { target: target, rel: 'noopener noreferrer' } : {})}
-      {...rest}
-    >
+    <a class={controlClass} {...(target ? { target: target, rel: 'noopener noreferrer' } : {})} {...rest}>
       <Fragment set:html={text} />
       {icon && <Icon name={icon} class="w-4 h-4 inline-block" />}
     </a>

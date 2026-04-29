@@ -3,20 +3,20 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 export const headerData = {
   links: [
     {
-      text: 'News',
-      href: getBlogPermalink(),
+      text: 'About',
+      href: getPermalink('/about'),
     },
     {
-      text: 'Who We Are',
-      href: getPermalink('/board'),
-    },
-    {
-      text: 'Initiatives',
+      text: 'Our Work',
       href: getPermalink('/initiatives'),
     },
     {
-      text: 'About',
-      href: getPermalink('/about'),
+      text: 'Board',
+      href: getPermalink('/board'),
+    },
+    {
+      text: 'News',
+      href: getBlogPermalink(),
     },
     {
       text: 'Contact',
@@ -34,12 +34,14 @@ export const footerData = {
         { text: 'About HTA', href: getPermalink('/about') },
         { text: 'Board of Directors', href: getPermalink('/board') },
         { text: 'News', href: getBlogPermalink() },
+        { text: 'Support HTA', href: getPermalink('/pricing') },
       ],
     },
     {
       title: 'Programs',
       links: [
-        { text: 'Initiatives', href: getPermalink('/initiatives') },
+        { text: 'Our Work', href: getPermalink('/initiatives') },
+        { text: 'Services', href: getPermalink('/services') },
         { text: 'KCPIC', href: 'https://kc-psychedelic.com' },
         { text: 'PSKC', href: 'https://psychedelickc.org' },
         { text: 'Safe Journey Sanctum', href: 'https://safejourneysanctum.org' },

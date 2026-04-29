@@ -52,13 +52,17 @@ const {
         {
           items && items.length
             ? items.map(({ title: title2, description, icon }, index) => (
-                <li class="surface-card border rounded-2xl p-5 md:p-6 flex gap-4">
-                  <span class="flex shrink-0 w-11 h-11 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary">
-                    {icon ? <Icon name={icon} class="w-6 h-6 icon-bold" /> : index + 1}
+                <li class="hta-card surface-card flex gap-4 rounded-lg border p-5 md:p-6">
+                  <span class="hta-icon-badge shrink-0">
+                    {icon ? (
+                      <Icon name={icon} class="h-6 w-6 icon-bold" />
+                    ) : (
+                      <span class="font-heading text-lg font-bold text-[var(--hta-logo-yellow)]">{index + 1}</span>
+                    )}
                   </span>
                   <div>
-                    <h3 class="text-lg md:text-xl font-semibold font-heading" set:html={title2} />
-                    <p class="text-muted mt-2 leading-relaxed" set:html={description} />
+                    <h3 class="hta-strong font-heading text-lg font-semibold md:text-xl" set:html={title2} />
+                    <p class="hta-muted mt-2 text-[0.95rem] leading-7" set:html={description} />
                   </div>
                 </li>
               ))

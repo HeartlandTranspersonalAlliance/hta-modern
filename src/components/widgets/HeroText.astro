@@ -21,8 +21,8 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative not-prose">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-6 md:pt-8 lg:pt-10 text-center">
+<section class="institutional-band relative not-prose border-y border-white/10">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 lg:py-20">
     {
       tagline && (
         <p
@@ -35,7 +35,7 @@ const {
     {
       title && (
         <h1
-          class="mt-4 mx-auto max-w-4xl text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] font-heading text-heading intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+          class="mt-5 max-w-4xl text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.04] font-heading text-white intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
           set:html={title}
         />
       )
@@ -44,7 +44,7 @@ const {
     {
       subtitle && (
         <p
-          class="mt-5 max-w-3xl mx-auto text-lg md:text-xl text-muted leading-relaxed intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+          class="mt-5 max-w-3xl text-lg md:text-xl text-white/80 leading-relaxed intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
           set:html={subtitle}
         />
       )
@@ -52,7 +52,7 @@ const {
 
     {
       (callToAction || callToAction2) && (
-        <div class="mt-7 max-w-xl mx-auto flex flex-col sm:flex-row sm:justify-center gap-3 sm:gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="mt-7 max-w-xl flex flex-col sm:flex-row gap-3 sm:gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           {callToAction && (
             <div class="flex w-full sm:w-auto">
               {typeof callToAction === 'string' ? (

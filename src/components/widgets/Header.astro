@@ -57,15 +57,13 @@ const navPlacementClass =
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
 >
-  <div class="max-w-7xl mx-auto px-3 md:px-4 pt-3 md:pt-5">
-    <div
-      class:list={[
-        'relative border rounded-2xl md:rounded-full px-3 md:px-5 py-2.5 md:py-3 surface-panel backdrop-blur-md',
-        { 'max-w-7xl': !isFullWidth },
-      ]}
-    >
+  <div class="max-w-7xl mx-auto px-3 md:px-4 pt-3 md:pt-4">
+    <div class:list={['hta-nav-shell relative border rounded-lg px-3 md:px-4 py-2.5', { 'max-w-7xl': !isFullWidth }]}>
       <div class="flex items-center justify-between gap-3">
-        <a class="flex items-center" href={getHomePermalink()}>
+        <a
+          class="hta-logo-plate hta-focus-ring inline-flex shrink-0 items-center rounded-md px-2.5 py-1.5 md:px-3 md:py-2"
+          href={getHomePermalink()}
+        >
           <Logo />
         </a>
 
@@ -80,19 +78,21 @@ const navPlacementClass =
                   <>
                     <button
                       type="button"
-                      class="px-3.5 py-2 rounded-full text-sm hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary flex items-center gap-1 transition-colors duration-300"
+                      class="hta-nav-link hta-focus-ring inline-flex items-center gap-1 whitespace-nowrap"
+                      data-active={links.some(({ href: href2 }) => href2 === currentPath) ? 'true' : undefined}
                     >
                       {text}
-                      <Icon name="tabler:chevron-down" class="w-3.5 h-3.5" />
+                      <Icon name="tabler:chevron-down" class="h-4 w-4" />
                     </button>
-                    <ul class="dropdown-menu hidden absolute top-[calc(100%+0.4rem)] left-0 rounded-xl font-medium bg-[var(--aw-surface-strong)] border border-[var(--aw-border)] min-w-[210px] shadow-2xl py-1.5 z-20">
+                    <ul class="dropdown-menu hta-nav-shell hidden absolute top-[calc(100%+0.4rem)] left-0 rounded-lg border min-w-[210px] shadow-2xl p-1.5 z-20">
                       {links.map(({ text: text2, href: href2 }) => (
                         <li>
                           <a
                             class:list={[
-                              'py-2 px-3.5 block whitespace-nowrap hover:bg-primary/10 hover:text-primary transition-colors duration-300',
-                              { 'text-primary font-semibold': href2 === currentPath },
+                              'hta-nav-link hta-focus-ring block whitespace-nowrap rounded-md px-3.5 py-2 text-[0.95rem]',
+                              { 'is-active': href2 === currentPath },
                             ]}
+                            aria-current={href2 === currentPath ? 'page' : undefined}
                             href={href2}
                           >
                             {text2}
@@ -104,9 +104,10 @@ const navPlacementClass =
                 ) : (
                   <a
                     class:list={[
-                      'px-3.5 py-2 rounded-full text-sm hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary transition-colors duration-300 whitespace-nowrap',
-                      { 'text-primary font-semibold bg-primary/10 dark:bg-primary/20': href === currentPath },
+                      'hta-nav-link hta-focus-ring block whitespace-nowrap',
+                      { 'is-active': href === currentPath },
                     ]}
+                    aria-current={href === currentPath ? 'page' : undefined}
                     href={href}
                   >
                     {text}
@@ -118,22 +119,11 @@ const navPlacementClass =
         </nav>
 
         <div class="hidden md:flex items-center gap-1.5" data-aw-header-actions>
-          {
-            showToggleTheme && (
-              <ToggleTheme
-                class="text-muted hover:text-default hover:bg-primary/10 dark:hover:bg-primary/20 rounded-full p-2.5 inline-flex items-center transition-colors duration-300"
-                iconClass="w-5 h-5"
-              />
-            )
-          }
+          {showToggleTheme && <ToggleTheme class="hta-icon-button hta-focus-ring" iconClass="h-5 w-5" />}
           {
             showRssFeed && (
-              <a
-                class="text-muted hover:text-default hover:bg-primary/10 dark:hover:bg-primary/20 rounded-full p-2.5 inline-flex items-center transition-colors duration-300"
-                aria-label="RSS Feed"
-                href={getAsset('/rss.xml')}
-              >
-                <Icon name="tabler:rss" class="w-5 h-5" />
+              <a class="hta-icon-button hta-focus-ring" aria-label="RSS Feed" href={getAsset('/rss.xml')}>
+                <Icon name="tabler:rss" class="h-5 w-5" />
               </a>
             )
           }
@@ -141,10 +131,7 @@ const navPlacementClass =
             actions?.length ? (
               <span class="flex gap-2 pl-1">
                 {actions.map((btnProps) => (
-                  <Button
-                    {...btnProps}
-                    class="py-2.5 px-4.5 font-semibold shadow-md shadow-blue-900/30 text-sm w-auto whitespace-nowrap"
-                  />
+                  <Button {...btnProps} class="min-h-11 w-auto whitespace-nowrap px-5 py-2.5 text-sm font-bold" />
                 ))}
               </span>
             ) : (
@@ -154,11 +141,11 @@ const navPlacementClass =
         </div>
 
         <div class="flex items-center md:hidden">
-          <ToggleMenu class="border border-[var(--aw-border)] bg-white/75 dark:bg-hta-tealSoft/80" />
+          <ToggleMenu class="hta-icon-button hta-focus-ring border-[var(--hta-icon-border)] bg-[var(--hta-icon-bg)]" />
         </div>
       </div>
 
-      <div class="hidden md:hidden border-t border-[var(--aw-border)] mt-3 pt-3" data-aw-mobile-nav>
+      <div class="hidden md:hidden border-t border-[var(--hta-border)] mt-3 pt-3" data-aw-mobile-nav>
         <nav aria-label="Mobile navigation">
           <ul class="flex flex-col gap-1.5">
             {
@@ -167,16 +154,17 @@ const navPlacementClass =
                   {!links?.length ? (
                     <a
                       class:list={[
-                        'block px-3.5 py-3 rounded-xl hover:bg-primary/10 transition',
-                        { 'text-primary font-semibold bg-primary/10 dark:bg-primary/20': href === currentPath },
+                        'hta-nav-link hta-focus-ring block min-h-11 rounded-md px-3.5 py-3 text-base',
+                        { 'is-active': href === currentPath },
                       ]}
+                      aria-current={href === currentPath ? 'page' : undefined}
                       href={href}
                     >
                       {text}
                     </a>
                   ) : (
-                    <details class="group rounded-xl bg-white/35 dark:bg-hta-tealSoft/40 border border-[var(--aw-border)]">
-                      <summary class="list-none cursor-pointer px-3.5 py-3 flex items-center justify-between">
+                    <details class="group rounded-lg border border-[var(--hta-border)] bg-[var(--hta-surface)]">
+                      <summary class="hta-nav-link hta-focus-ring flex min-h-11 cursor-pointer list-none items-center justify-between rounded-md px-3.5 py-3 text-base">
                         <span>{text}</span>
                         <Icon name="tabler:chevron-down" class="w-4 h-4 transition group-open:rotate-180" />
                       </summary>
@@ -185,9 +173,10 @@ const navPlacementClass =
                           <li>
                             <a
                               class:list={[
-                                'block px-3 py-2 rounded-lg hover:bg-primary/10',
-                                { 'text-primary font-semibold': href2 === currentPath },
+                                'hta-nav-link hta-focus-ring block min-h-10 rounded-md px-3 py-2 text-base',
+                                { 'is-active': href2 === currentPath },
                               ]}
+                              aria-current={href2 === currentPath ? 'page' : undefined}
                               href={href2}
                             >
                               {text2}
@@ -203,24 +192,13 @@ const navPlacementClass =
           </ul>
         </nav>
 
-        <div class="mt-3 pt-3 border-t border-[var(--aw-border)] flex items-center justify-between gap-3">
+        <div class="mt-3 pt-3 border-t border-[var(--hta-border)] flex items-center justify-between gap-3">
           <div class="flex items-center gap-1.5">
-            {
-              showToggleTheme && (
-                <ToggleTheme
-                  class="text-muted hover:text-default hover:bg-primary/10 rounded-full p-2.5 inline-flex items-center transition-colors duration-300"
-                  iconClass="w-5 h-5"
-                />
-              )
-            }
+            {showToggleTheme && <ToggleTheme class="hta-icon-button hta-focus-ring" iconClass="h-5 w-5" />}
             {
               showRssFeed && (
-                <a
-                  class="text-muted hover:text-default hover:bg-primary/10 rounded-full p-2.5 inline-flex items-center transition-colors duration-300"
-                  aria-label="RSS Feed"
-                  href={getAsset('/rss.xml')}
-                >
-                  <Icon name="tabler:rss" class="w-5 h-5" />
+                <a class="hta-icon-button hta-focus-ring" aria-label="RSS Feed" href={getAsset('/rss.xml')}>
+                  <Icon name="tabler:rss" class="h-5 w-5" />
                 </a>
               )
             }
@@ -229,7 +207,7 @@ const navPlacementClass =
             actions?.length ? (
               <span class="flex flex-wrap gap-2 justify-end">
                 {actions.map((btnProps) => (
-                  <Button {...btnProps} class="py-2.5 px-4 text-sm shadow-md shadow-blue-900/30" />
+                  <Button {...btnProps} class="min-h-11 px-5 py-2.5 text-sm font-bold" />
                 ))}
               </span>
             ) : (

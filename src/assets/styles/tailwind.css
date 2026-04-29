@@ -3,6 +3,83 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --hta-logo-cyan: #18c7ee;
+    --hta-logo-cyan-rgb: 24 199 238;
+    --hta-logo-blue: #0b7dff;
+    --hta-logo-blue-rgb: 11 125 255;
+    --hta-logo-navy: #071f3f;
+    --hta-logo-navy-rgb: 7 31 63;
+    --hta-logo-yellow: #f4c84a;
+    --hta-logo-yellow-rgb: 244 200 74;
+
+    --hta-ink: #071624;
+    --hta-ink-rgb: 7 22 36;
+    --hta-institutional: #09243a;
+    --hta-research: #0b62c7;
+    --hta-education: #0aa6c8;
+    --hta-harm-reduction: #d9a400;
+    --hta-community: #22775b;
+    --hta-integration: #6a5a9d;
+
+    --hta-bg: #f4f7f5;
+    --hta-bg-soft: #e8f0ee;
+    --hta-paper: #fffdf6;
+    --hta-surface: #ffffff;
+    --hta-surface-raised: #fffdf6;
+    --hta-surface-glass: #ffffff;
+
+    --hta-text: #20333a;
+    --hta-text-strong: #071624;
+    --hta-text-muted: #5c6f73;
+
+    --hta-border: rgba(7, 22, 36, 0.16);
+    --hta-border-strong: rgba(7, 22, 36, 0.32);
+
+    --hta-link: #075fb2;
+    --hta-link-hover: #043f7a;
+    --hta-nav-active: #071624;
+    --hta-nav-active-bg: rgba(11, 125, 255, 0.1);
+
+    --hta-icon: var(--hta-research);
+    --hta-icon-strong: var(--hta-institutional);
+    --hta-icon-bg: rgba(11, 125, 255, 0.1);
+    --hta-icon-border: rgba(11, 125, 255, 0.28);
+
+    --hta-focus: var(--hta-logo-blue);
+    --hta-shadow: rgba(7, 22, 36, 0.12);
+  }
+
+  .dark,
+  [data-theme='dark'] {
+    --hta-bg: #071624;
+    --hta-bg-soft: #0d2334;
+    --hta-paper: #10283a;
+    --hta-surface: #0d2334;
+    --hta-surface-raised: #123149;
+    --hta-surface-glass: #0d2334;
+
+    --hta-text: #e8f2f1;
+    --hta-text-strong: #ffffff;
+    --hta-text-muted: #aec3c2;
+
+    --hta-border: rgba(255, 255, 255, 0.16);
+    --hta-border-strong: rgba(255, 255, 255, 0.34);
+
+    --hta-link: #64d8f3;
+    --hta-link-hover: #ffffff;
+    --hta-nav-active: #ffffff;
+    --hta-nav-active-bg: rgba(100, 216, 243, 0.12);
+
+    --hta-icon: #64d8f3;
+    --hta-icon-strong: #ffffff;
+    --hta-icon-bg: rgba(100, 216, 243, 0.12);
+    --hta-icon-border: rgba(100, 216, 243, 0.3);
+
+    --hta-focus: #64d8f3;
+    --hta-shadow: rgba(0, 0, 0, 0.34);
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -10,6 +87,8 @@
   body {
     font-kerning: normal;
     text-rendering: geometricPrecision;
+    color: var(--hta-text);
+    background-color: var(--hta-bg);
   }
 
   h1,
@@ -37,205 +116,395 @@
   }
 
   .text-page {
-    color: var(--aw-color-text-default);
+    color: var(--hta-text);
   }
 
   .text-muted {
-    color: var(--aw-color-text-muted);
+    color: var(--hta-text-muted);
   }
 
-  .surface-panel {
-    background: linear-gradient(135deg, rgb(255 255 255 / 88%), rgb(229 244 249 / 68%));
-    border-color: var(--aw-border);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 18px 50px rgb(11 58 117 / 11%);
+  .hta-muted {
+    color: var(--hta-text-muted);
   }
 
-  .surface-card {
-    position: relative;
-    overflow: hidden;
-    background: var(--aw-surface-strong);
-    border-color: var(--aw-border);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 18px 45px rgb(11 58 117 / 10%);
-    transition:
-      transform 300ms ease-out,
-      border-color 300ms ease-out,
-      box-shadow 300ms ease-out;
+  .hta-strong {
+    color: var(--hta-text-strong);
   }
 
-  .surface-card::before {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    content: '';
-    background: linear-gradient(135deg, rgb(255 255 255 / 18%), transparent 52%);
+  .page-grid {
+    background-image:
+      linear-gradient(rgba(7, 22, 36, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7, 22, 36, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
   }
 
-  .surface-card > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .surface-card:hover {
-    transform: translateY(-0.25rem);
-    border-color: rgb(30 111 255 / 40%);
-    box-shadow: 0 24px 60px rgb(11 58 117 / 18%);
-  }
-
-  .section-kicker {
-    @apply inline-flex items-center rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase;
-    color: var(--aw-color-secondary);
-    background: rgb(255 255 255 / 76%);
-    border: 1px solid var(--aw-border);
-    letter-spacing: 0;
-  }
-
-  .page-grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
-    mix-blend-mode: multiply;
-  }
-
-  .flow-field {
-    background:
-      linear-gradient(116deg, rgb(247 251 252 / 96%) 0%, rgb(225 242 247 / 86%) 34%, transparent 35%),
-      linear-gradient(152deg, transparent 0 52%, rgb(30 111 255 / 11%) 53%, rgb(244 162 97 / 22%) 100%);
+  .dark .page-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   }
 
   .page-wash {
-    background: linear-gradient(100deg, rgb(247 251 252 / 92%), rgb(247 251 252 / 56%) 48%, rgb(30 111 255 / 10%) 100%);
-  }
-
-  .organic-panel {
-    position: relative;
-    overflow: hidden;
     background:
-      linear-gradient(135deg, rgb(255 255 255 / 96%), rgb(232 244 248 / 86%)),
-      linear-gradient(90deg, rgb(30 111 255 / 10%), rgb(244 162 97 / 12%));
-    border: 1px solid var(--aw-border);
-    box-shadow: 0 26px 70px rgb(11 58 117 / 14%);
-  }
-
-  .field-card {
-    position: relative;
-    overflow: hidden;
-    background:
-      linear-gradient(180deg, rgb(255 255 255 / 94%), rgb(235 247 250 / 86%)),
-      linear-gradient(90deg, rgb(30 111 255 / 8%), rgb(244 162 97 / 10%));
-    border: 1px solid var(--aw-border);
-    box-shadow: 0 18px 46px rgb(11 58 117 / 10%);
-    transition:
-      transform 300ms ease-out,
-      border-color 300ms ease-out,
-      box-shadow 300ms ease-out;
-  }
-
-  .field-card::before {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    content: '';
-    background: linear-gradient(135deg, rgb(255 255 255 / 20%), transparent 52%);
-  }
-
-  .field-card > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .field-card:hover {
-    transform: translateY(-0.25rem);
-    border-color: rgb(30 111 255 / 40%);
-    box-shadow: 0 24px 58px rgb(11 58 117 / 20%);
-  }
-
-  .dark .surface-panel {
-    background: linear-gradient(135deg, rgb(18 57 59 / 86%), rgb(15 46 47 / 78%));
-    box-shadow: 0 20px 56px rgb(3 14 24 / 34%);
-  }
-
-  .dark .surface-card {
-    box-shadow: 0 20px 54px rgb(3 14 24 / 32%);
-  }
-
-  .dark .field-card,
-  .dark .organic-panel {
-    background:
-      linear-gradient(145deg, rgb(22 75 77 / 94%), rgb(15 46 47 / 90%)),
-      linear-gradient(90deg, rgb(30 111 255 / 16%), rgb(255 122 89 / 10%));
-    box-shadow: 0 24px 62px rgb(3 14 24 / 36%);
-  }
-
-  .dark .section-kicker {
-    background: rgb(22 75 77 / 78%);
-    color: rgb(159 182 184);
+      linear-gradient(180deg, rgba(244, 247, 245, 0.94), rgba(244, 247, 245, 0.78) 46%, rgba(244, 247, 245, 0.96)),
+      linear-gradient(100deg, rgba(var(--hta-logo-blue-rgb) / 0.1), transparent 38%),
+      linear-gradient(150deg, transparent 58%, rgba(var(--hta-logo-yellow-rgb) / 0.18));
   }
 
   .dark .page-wash {
-    background: linear-gradient(100deg, rgb(15 46 47 / 92%), rgb(15 46 47 / 72%) 56%, rgb(30 111 255 / 10%) 100%);
+    background:
+      linear-gradient(180deg, rgba(7, 22, 36, 0.94), rgba(7, 22, 36, 0.78) 46%, rgba(7, 22, 36, 0.98)),
+      linear-gradient(100deg, rgba(var(--hta-logo-cyan-rgb) / 0.12), transparent 38%),
+      linear-gradient(150deg, transparent 58%, rgba(var(--hta-logo-yellow-rgb) / 0.08));
   }
 
-  .footer-shell {
+  .page-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  .dark .page-grain {
+    mix-blend-mode: screen;
+  }
+
+  .section-kicker,
+  .hta-section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 1.9rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--hta-border-strong);
+    border-left: 4px solid var(--hta-logo-yellow);
+    border-radius: 0.35rem;
+    color: var(--hta-text-strong);
+    background: var(--hta-paper);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .surface-panel,
+  .surface-card,
+  .organic-panel,
+  .field-card,
+  .hta-card,
+  .editorial-card {
+    position: relative;
+    color: var(--hta-text);
+    background: var(--hta-surface);
+    border: 1px solid var(--hta-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 16px 40px var(--hta-shadow);
+  }
+
+  .surface-card,
+  .field-card,
+  .editorial-card {
+    transition:
+      transform 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .surface-card:hover,
+  .field-card:hover,
+  .editorial-card:hover {
+    border-color: var(--hta-border-strong);
+    box-shadow: 0 20px 48px var(--hta-shadow);
+    transform: translateY(-2px);
+  }
+
+  .paper-panel {
+    color: var(--hta-text);
+    background: var(--hta-paper);
+    border: 1px solid var(--hta-border);
+    border-radius: 0.5rem;
+  }
+
+  .institutional-band {
+    color: #ffffff;
     background:
-      linear-gradient(135deg, rgb(11 58 117), rgb(15 46 47) 62%),
-      linear-gradient(90deg, rgb(30 111 255 / 22%), rgb(244 162 97 / 10%));
-    border: 1px solid rgb(255 255 255 / 12%);
-    box-shadow: 0 28px 72px rgb(3 14 24 / 28%);
-    color: white;
+      linear-gradient(90deg, rgba(var(--hta-logo-cyan-rgb) / 0.16), transparent 34%),
+      linear-gradient(135deg, var(--hta-ink), var(--hta-institutional) 62%, #0f3a45);
+  }
+
+  .dark .institutional-band {
+    background:
+      linear-gradient(90deg, rgba(var(--hta-logo-cyan-rgb) / 0.2), transparent 34%),
+      linear-gradient(135deg, #050d16, var(--hta-institutional) 64%, #0f3a45);
+  }
+
+  .cta-band {
+    color: #ffffff;
+    background:
+      linear-gradient(90deg, rgba(var(--hta-logo-yellow-rgb) / 0.2), transparent 36%),
+      linear-gradient(135deg, var(--hta-institutional), #0a3c5e 64%, #0b5963);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.5rem;
+    box-shadow: 0 22px 52px var(--hta-shadow);
+  }
+
+  .cta-band .btn-secondary {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.42);
+  }
+
+  .cta-band .btn-secondary:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.68);
+  }
+
+  .resource-stripe {
+    background: linear-gradient(90deg, rgba(var(--hta-logo-blue-rgb) / 0.13), transparent 28%), var(--hta-paper);
+    border-block: 1px solid var(--hta-border);
+  }
+
+  .accent-research {
+    --hta-card-accent: var(--hta-research);
+  }
+
+  .accent-education {
+    --hta-card-accent: var(--hta-education);
+  }
+
+  .accent-harm-reduction {
+    --hta-card-accent: var(--hta-harm-reduction);
+  }
+
+  .accent-community {
+    --hta-card-accent: var(--hta-community);
+  }
+
+  .accent-integration {
+    --hta-card-accent: var(--hta-integration);
+  }
+
+  .accent-institutional {
+    --hta-card-accent: var(--hta-institutional);
   }
 }
 
 @layer components {
-  .btn {
-    @apply inline-flex items-center justify-center rounded-full border font-semibold text-center text-base leading-snug px-6 py-3 transition-all duration-300 ease-out cursor-pointer active:scale-95;
-    @apply border-[var(--aw-border)] text-default hover:-translate-y-0.5;
-    background: rgb(255 255 255 / 78%);
+  .hta-focus-ring {
+    outline: none;
+  }
+
+  .hta-focus-ring:focus-visible {
     box-shadow:
-      inset 0 0 0 1px rgb(255 255 255 / 34%),
-      0 12px 26px rgb(11 58 117 / 10%);
+      0 0 0 3px var(--hta-bg),
+      0 0 0 6px var(--hta-focus);
+  }
+
+  .hta-nav-shell {
+    background: color-mix(in srgb, var(--hta-surface) 94%, transparent);
+    border-color: var(--hta-border);
+    box-shadow: 0 16px 40px var(--hta-shadow);
+    backdrop-filter: blur(10px);
+  }
+
+  .dark .hta-nav-shell {
+    background: color-mix(in srgb, var(--hta-surface) 88%, transparent);
+  }
+
+  .hta-logo-plate {
+    background: var(--hta-institutional);
+    border: 1px solid rgba(24, 199, 238, 0.28);
+    box-shadow: none;
+  }
+
+  .hta-nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    color: var(--hta-text);
+    border-radius: 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    padding: 0.55rem 0.7rem;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .hta-nav-link:hover {
+    color: var(--hta-link-hover);
+    background: var(--hta-nav-active-bg);
+  }
+
+  .hta-nav-link[aria-current='page'],
+  .hta-nav-link.is-active,
+  .hta-nav-link[data-active='true'] {
+    color: var(--hta-nav-active);
+    background: var(--hta-nav-active-bg);
+    box-shadow: inset 0 0 0 1px var(--hta-icon-border);
+  }
+
+  .hta-button-primary {
+    color: #071624;
+    background: var(--hta-logo-yellow);
+    border-color: var(--hta-logo-yellow);
+  }
+
+  .hta-button-primary:hover {
+    color: #071624;
+    background: #ffd95c;
+    border-color: #ffd95c;
+  }
+
+  .hta-button-secondary {
+    color: var(--hta-text-strong);
+    background: transparent;
+    border-color: var(--hta-border-strong);
+  }
+
+  .hta-button-secondary:hover {
+    color: var(--hta-link-hover);
+    background: var(--hta-nav-active-bg);
+    border-color: var(--hta-icon-border);
+  }
+
+  .btn {
+    @apply hta-focus-ring inline-flex items-center justify-center border font-bold text-center text-base leading-snug transition-all duration-200 ease-out cursor-pointer active:scale-[0.99];
+    min-height: 2.75rem;
+    border-radius: 0.35rem;
+    padding: 0.78rem 1.1rem;
   }
 
   .btn-primary {
-    @apply btn text-white border-transparent hover:text-white;
-    background: linear-gradient(135deg, rgb(30 111 255), rgb(11 58 117));
-    box-shadow: 0 16px 36px rgb(11 58 117 / 30%);
+    @apply btn hta-button-primary;
   }
 
   .btn-secondary {
-    @apply btn;
-    color: var(--aw-color-primary);
-    border-color: rgb(30 111 255 / 42%);
-  }
-
-  .btn-secondary:hover {
-    color: white;
-    background: rgb(30 111 255);
-    border-color: rgb(30 111 255);
-    box-shadow: 0 16px 34px rgb(11 58 117 / 22%);
+    @apply btn hta-button-secondary;
   }
 
   .btn-tertiary {
-    @apply btn border-transparent bg-transparent px-3 py-2 shadow-none text-muted hover:text-default dark:hover:text-white;
+    @apply btn border-transparent bg-transparent px-2 py-2 shadow-none;
+    color: var(--hta-link);
   }
 
-  .dark .btn {
-    background: rgb(22 75 77 / 74%);
-    color: var(--aw-color-text-default);
-    box-shadow:
-      inset 0 0 0 1px rgb(255 255 255 / 5%),
-      0 14px 30px rgb(3 14 24 / 30%);
+  .btn-tertiary:hover {
+    color: var(--hta-link-hover);
+    background: var(--hta-nav-active-bg);
   }
 
-  .dark .btn-secondary {
-    color: rgb(230 241 242);
-    border-color: rgb(30 111 255 / 54%);
+  .dark .btn-primary {
+    color: #071624;
+  }
+
+  .hta-icon-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.55rem;
+    height: 2.55rem;
+    flex: none;
+    color: var(--hta-card-accent, var(--hta-icon));
+    background: color-mix(in srgb, var(--hta-card-accent, var(--hta-icon)) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--hta-card-accent, var(--hta-icon)) 34%, transparent);
+    border-radius: 0.45rem;
+  }
+
+  .hta-icon-badge svg {
+    width: 1.3rem;
+    height: 1.3rem;
+    stroke-width: 2.1;
+  }
+
+  .hta-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.65rem;
+    height: 2.65rem;
+    color: var(--hta-icon);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.35rem;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .hta-icon-button:hover {
+    color: var(--hta-icon-strong);
+    background: var(--hta-icon-bg);
+    border-color: var(--hta-icon-border);
+  }
+
+  .program-card {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+    border-top: 5px solid var(--hta-card-accent, var(--hta-logo-blue));
+  }
+
+  .program-card::after {
+    position: absolute;
+    right: -2rem;
+    bottom: -2rem;
+    width: 9rem;
+    height: 9rem;
+    content: '';
+    background: color-mix(in srgb, var(--hta-card-accent, var(--hta-logo-blue)) 10%, transparent);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+
+  .program-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .resource-card {
+    border-left: 5px solid var(--hta-card-accent, var(--hta-logo-blue));
+  }
+
+  .impact-number {
+    font-family: var(--aw-font-heading);
+    color: var(--hta-text-strong);
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
+    font-weight: 700;
+    line-height: 0.95;
+  }
+
+  .footer-shell {
+    color: #ffffff;
+    background:
+      linear-gradient(90deg, rgba(var(--hta-logo-cyan-rgb) / 0.16), transparent 32%),
+      linear-gradient(135deg, #050d16, var(--hta-institutional) 66%, #0c3944);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 22px 52px var(--hta-shadow);
+  }
+
+  .form-field {
+    width: 100%;
+    min-height: 3rem;
+    border: 1px solid var(--hta-border);
+    border-radius: 0.4rem;
+    background: var(--hta-surface);
+    color: var(--hta-text);
+    padding: 0.78rem 0.9rem;
+  }
+
+  .form-field:focus {
+    border-color: var(--hta-focus);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--hta-focus) 22%, transparent);
   }
 }
 
 #header.scroll > div:first-child > div:first-child {
-  @apply border border-[var(--aw-border)];
-  background: var(--aw-surface-strong);
-  box-shadow: 0 16px 42px rgb(11 58 117 / 15%);
+  border-color: var(--hta-border-strong);
+  background: color-mix(in srgb, var(--hta-surface) 96%, transparent);
+  box-shadow: 0 18px 44px var(--hta-shadow);
 }
 
 .dropdown:focus .dropdown-menu,
@@ -258,4 +527,15 @@
 
 .dd *:first-child {
   margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

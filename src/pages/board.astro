@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Image from '~/components/common/Image.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 import daleImage from '~/assets/images/hta/dale-bio2.jpg';
@@ -53,33 +54,60 @@ const members = [
 <Layout metadata={metadata}>
   <HeroText
     tagline="Board of Directors"
-    title="KC leadership"
+    title="Kansas City leadership"
     subtitle="We are seeking motivated professionals in community activism, medicine, psychotherapy, social work, and education."
     callToAction={{ text: 'Apply Now', href: getPermalink('/board-app') }}
   />
 
-  <section class="px-4 sm:px-6 pb-16 sm:pb-20 mx-auto max-w-7xl not-prose">
+  <section class="px-4 py-14 sm:px-6 md:py-16 mx-auto max-w-7xl not-prose">
+    <div class="mb-8 grid items-end gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <p class="section-kicker">Governance</p>
+        <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">Mission stewards</h2>
+      </div>
+      <p class="max-w-3xl text-lg leading-relaxed text-muted">
+        HTA's board supports the organizational systems behind integration, education, harm reduction, and community
+        partnerships.
+      </p>
+    </div>
+
     <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
       {
         members.map((member) => (
-          <article class="field-card rounded-[1.6rem] p-6">
+          <article class="hta-card field-card resource-card accent-institutional rounded-lg p-6 transition duration-200">
             <div class="flex items-center gap-4 mb-4">
               <Image
                 src={member.image}
                 alt={member.name}
                 width={112}
                 height={112}
-                class="h-28 w-28 rounded-full border border-[var(--aw-border)] object-cover"
+                class="h-28 w-28 rounded-md border border-[var(--hta-border)] object-cover"
               />
               <div>
-                <h2 class="font-heading text-xl font-semibold">{member.name}</h2>
-                <p class="text-secondary font-semibold">{member.role}</p>
+                <h2 class="hta-strong font-heading text-xl font-semibold">{member.name}</h2>
+                <p class="font-semibold text-[var(--hta-link)]">{member.role}</p>
               </div>
             </div>
-            <p class="text-muted leading-relaxed">{member.bio}</p>
+            <p class="hta-muted text-[0.95rem] leading-7">{member.bio}</p>
           </article>
         ))
       }
     </div>
   </section>
+
+  <CallToAction
+    title="Help build the next phase"
+    subtitle="HTA is actively expanding board capacity with people who can strengthen governance, community programs, and professional partnerships."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Apply for Board',
+        href: getPermalink('/board-app'),
+      },
+      {
+        text: 'Contact HTA',
+        href: getPermalink('/contact'),
+      },
+    ]}
+  />
 </Layout>

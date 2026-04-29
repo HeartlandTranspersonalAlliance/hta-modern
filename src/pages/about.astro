@@ -1,12 +1,45 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
+import researchIcon from '~/assets/images/hta/visuals/research.svg';
+import communityIcon from '~/assets/images/hta/visuals/community.svg';
+import integrationIcon from '~/assets/images/hta/visuals/integration.svg';
+import harmReductionIcon from '~/assets/images/hta/visuals/harm-reduction.svg';
 
 const metadata = {
   title: 'About HTA',
 };
+
+const values = [
+  {
+    title: 'Community First',
+    description:
+      'We build accessible spaces where people can connect, process, and learn without stigma or gatekeeping.',
+    icon: communityIcon,
+    accent: 'accent-community',
+  },
+  {
+    title: 'Evidence-Informed Practice',
+    description:
+      'Programs are informed by clinical insight, lived experience, and emerging best practices in harm reduction.',
+    icon: researchIcon,
+    accent: 'accent-research',
+  },
+  {
+    title: 'Responsible Integration',
+    description:
+      'We prioritize what happens after intense experiences: integration, support, and sustainable well-being.',
+    icon: integrationIcon,
+    accent: 'accent-integration',
+  },
+  {
+    title: 'Harm-Reduction Clarity',
+    description: 'Safety information should be direct, practical, and easy to act on in community settings.',
+    icon: harmReductionIcon,
+    accent: 'accent-harm-reduction',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
@@ -16,30 +49,46 @@ const metadata = {
     subtitle="Heartland Transpersonal Alliance advances safe, responsible exploration of consciousness through community, education, harm reduction, and integration."
   />
 
-  <Features2
-    title="Our guide"
-    columns={3}
-    items={[
-      {
-        title: 'Community First',
-        description:
-          'We build accessible spaces where people can connect, process, and learn without stigma or gatekeeping.',
-        icon: 'tabler:users',
-      },
-      {
-        title: 'Evidence-Informed Practice',
-        description:
-          'Programs are informed by clinical insight, lived experience, and emerging best practices in harm reduction.',
-        icon: 'tabler:stethoscope',
-      },
-      {
-        title: 'Responsible Integration',
-        description:
-          'We prioritize what happens after intense experiences: integration, support, and sustainable well-being.',
-        icon: 'tabler:heart-handshake',
-      },
-    ]}
-  />
+  <section class="relative not-prose">
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
+      <div class="grid gap-8 lg:grid-cols-[0.78fr_1.22fr]">
+        <div>
+          <p class="section-kicker">Mission</p>
+          <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
+            A regional nonprofit home for careful consciousness work.
+          </h2>
+        </div>
+        <div class="paper-panel p-6 md:p-8">
+          <p class="text-lg leading-relaxed text-muted md:text-xl">
+            HTA exists to strengthen the community systems around education, harm reduction, and integration. The
+            organization gives related initiatives a durable structure for governance, partnerships, and responsible
+            public communication.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="resource-stripe relative not-prose">
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
+      <div class="mb-8 max-w-3xl">
+        <p class="section-kicker">Values</p>
+        <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">What guides the work</h2>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {
+          values.map((value) => (
+            <article class={`editorial-card program-card ${value.accent} p-5 md:p-6`}>
+              <img src={value.icon.src} width="48" height="48" alt="" class="h-12 w-12 rounded-md" loading="lazy" />
+              <h3 class="hta-strong mt-5 font-heading text-2xl font-semibold leading-tight">{value.title}</h3>
+              <p class="hta-muted mt-4 text-base leading-7">{value.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
   <Steps2
     title="How HTA operates"

@@ -11,7 +11,7 @@ const {
   panel: panelClass = '',
   title: titleClass = '',
   description: descriptionClass = '',
-  icon: defaultIconClass = 'text-primary',
+  icon: defaultIconClass = 'text-[var(--hta-icon)]',
   action: actionClass = '',
 } = classes;
 ---
@@ -36,25 +36,33 @@ const {
         <article class="intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <div
             class={twMerge(
-              'field-card h-full rounded-[1.4rem] p-5 md:p-6 flex flex-col max-w-none',
+              'hta-card field-card h-full rounded-lg p-5 md:p-6 flex flex-col max-w-none transition duration-200',
               panelClass,
               itemClasses?.panel
             )}
           >
             {(icon || defaultIcon) && (
-              <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20">
+              <div class="hta-icon-badge mb-5">
                 <Icon name={icon || defaultIcon} class={twMerge('w-6 h-6', defaultIconClass, itemClasses?.icon)} />
               </div>
             )}
 
             {title && (
-              <h3 class={twMerge('text-xl font-semibold font-heading', titleClass, itemClasses?.title)}>{title}</h3>
+              <h3
+                class={twMerge(
+                  'hta-strong text-xl font-semibold font-heading leading-snug',
+                  titleClass,
+                  itemClasses?.title
+                )}
+              >
+                {title}
+              </h3>
             )}
 
             {description && (
               <p
                 class={twMerge(
-                  `${title ? 'mt-3' : ''} text-muted leading-relaxed`,
+                  `${title ? 'mt-3' : ''} hta-muted text-[0.95rem] leading-7`,
                   descriptionClass,
                   itemClasses?.description
                 )}

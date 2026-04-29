@@ -26,15 +26,15 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <div class="organic-panel rounded-[2rem] p-6 md:p-8 lg:p-10">
+  <div class="cta-band p-6 md:p-8 lg:p-10">
     <Headline
       title={title}
       subtitle={subtitle}
       tagline={tagline}
       classes={{
-        container: 'max-w-3xl mx-auto mb-0',
-        title: 'text-3xl md:text-5xl',
-        subtitle: 'text-lg md:text-xl',
+        container: 'max-w-3xl mx-auto mb-0 text-white',
+        title: 'text-3xl md:text-5xl text-white',
+        subtitle: 'text-lg md:text-xl text-white/80',
       }}
     />
     {

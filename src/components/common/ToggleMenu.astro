@@ -8,10 +8,10 @@ export interface Props {
 
 const {
   label = 'Toggle Menu',
-  class: className = 'border border-[var(--aw-border)] bg-white/75 dark:bg-hta-tealSoft/80',
+  class: className = 'hta-icon-button hta-focus-ring border-[var(--hta-icon-border)] bg-[var(--hta-icon-bg)]',
 } = Astro.props;
 
-const baseClass = 'group flex flex-col h-11 w-11 rounded-full justify-center items-center cursor-pointer text-default';
+const baseClass = 'group flex h-11 w-11 flex-col items-center justify-center rounded-md text-[var(--hta-icon)]';
 ---
 
 <button type="button" class={twMerge(baseClass, className)} aria-label={label} data-aw-toggle-menu>

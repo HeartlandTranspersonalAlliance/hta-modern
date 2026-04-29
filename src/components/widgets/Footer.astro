@@ -29,31 +29,35 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative mt-10 md:mt-14 pb-8 md:pb-12 not-prose']}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="footer-shell rounded-[2rem] px-5 sm:px-7 py-7 md:py-8">
+    <div class="footer-shell rounded-lg px-5 sm:px-7 py-7 md:py-8">
       <div class="grid grid-cols-12 gap-8">
         <div class="col-span-12 lg:col-span-4">
-          <a class="inline-block" href={getHomePermalink()}>
+          <a class="hta-logo-plate hta-focus-ring inline-flex rounded-md px-3 py-2" href={getHomePermalink()}>
             <img
               src={footerWordmark.src}
               width={footerWordmark.width}
               height={footerWordmark.height}
               alt={SITE?.name ?? 'Heartland Transpersonal Alliance'}
-              class="h-12 md:h-16 w-auto max-w-[90vw] object-contain"
+              class="h-10 w-auto max-w-[80vw] object-contain md:h-12"
               loading="lazy"
               decoding="async"
             />
           </a>
-          <p class="mt-5 text-sm text-white/70 leading-relaxed">
+          <p class="mt-5 text-sm text-white/80 leading-7">
             Heartland Transpersonal Alliance is building safe, practical pathways for community, education, and
             integration.
           </p>
           {
             secondaryLinks.length > 0 && (
-              <div class="mt-4 text-sm text-white/70 flex gap-1 flex-wrap">
+              <div class="mt-4 flex flex-wrap gap-1 text-sm text-white/80">
                 {secondaryLinks.map(({ text, href }, index) => (
                   <>
                     {index !== 0 ? ' · ' : ''}
-                    <a class="hover:text-white hover:underline transition" href={href} set:html={text} />
+                    <a
+                      class="hta-focus-ring rounded-sm hover:text-[var(--hta-logo-cyan)] hover:underline transition"
+                      href={href}
+                      set:html={text}
+                    />
                   </>
                 ))}
               </div>
@@ -64,12 +68,18 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         {
           links.map(({ title, links: groupLinks }) => (
             <div class="col-span-6 md:col-span-4 lg:col-span-2">
-              <div class="font-heading text-sm uppercase text-white mb-3">{title}</div>
+              <div class="mb-3 font-heading text-[0.78rem] font-bold uppercase tracking-[0.07em] text-white">
+                {title}
+              </div>
               {groupLinks && groupLinks.length > 0 && (
                 <ul class="text-sm space-y-2.5">
                   {groupLinks.map(({ text, href, ariaLabel }) => (
                     <li>
-                      <a class="text-white/70 hover:text-white transition" href={href} aria-label={ariaLabel}>
+                      <a
+                        class="hta-focus-ring rounded-sm text-white/80 hover:text-[var(--hta-logo-cyan)] transition"
+                        href={href}
+                        aria-label={ariaLabel}
+                      >
                         <Fragment set:html={text} />
                       </a>
                     </li>
@@ -87,7 +97,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                 {socialLinks.map(({ ariaLabel, href, text, icon }) => (
                   <li>
                     <a
-                      class="text-white/70 hover:text-white hover:bg-white/10 rounded-full text-sm h-10 w-10 inline-flex items-center justify-center transition-colors duration-300"
+                      class="hta-focus-ring inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/10 text-sm text-white/80 transition-colors duration-200 hover:border-[var(--hta-icon-border)] hover:bg-[var(--hta-icon-bg)] hover:text-[var(--hta-logo-cyan)]"
                       aria-label={ariaLabel}
                       href={href}
                     >
@@ -104,7 +114,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         </div>
       </div>
 
-      <div class="mt-8 pt-6 border-t border-white/10 text-sm text-white/70">
+      <div class="mt-8 border-t border-white/10 pt-6 text-[0.82rem] leading-6 text-white/75">
         <Fragment set:html={footNote} />
       </div>
     </div>

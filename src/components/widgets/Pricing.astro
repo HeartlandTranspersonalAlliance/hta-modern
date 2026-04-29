@@ -24,23 +24,23 @@ const {
     {
       prices &&
         prices.map(({ title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle }) => (
-          <article class="relative surface-card border rounded-2xl p-6 md:p-7 flex flex-col h-full intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+          <article class="hta-card surface-card relative flex h-full flex-col rounded-lg border p-6 md:p-7 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
             {hasRibbon && ribbonTitle && (
-              <span class="absolute top-3 right-3 rounded-full px-3 py-1 text-[0.62rem] font-bold uppercase bg-primary text-white">
+              <span class="absolute top-3 right-3 rounded-sm bg-[var(--hta-logo-yellow)] px-3 py-1 text-[0.75rem] font-bold uppercase text-[var(--hta-logo-navy)]">
                 {ribbonTitle}
               </span>
             )}
 
-            {title && <h3 class="text-xl font-heading font-semibold uppercase mb-2">{title}</h3>}
-            {subtitle && <p class="text-muted text-sm md:text-base">{subtitle}</p>}
+            {title && <h3 class="hta-strong mb-2 font-heading text-xl font-semibold uppercase">{title}</h3>}
+            {subtitle && <p class="hta-muted text-sm md:text-base">{subtitle}</p>}
 
             {price && period && (
               <div class="my-6">
                 <div class="flex items-end gap-1">
-                  <span class="text-2xl text-primary">$</span>
-                  <span class="text-5xl font-heading font-semibold text-primary leading-none">{price}</span>
+                  <span class="text-2xl text-[var(--hta-link)]">$</span>
+                  <span class="font-heading text-5xl font-semibold leading-none text-[var(--hta-link)]">{price}</span>
                 </div>
-                <span class="text-sm text-muted uppercase">{period}</span>
+                <span class="hta-muted text-sm uppercase">{period}</span>
               </div>
             )}
 
@@ -50,10 +50,10 @@ const {
                   ({ description, icon }) =>
                     description && (
                       <li class="flex items-start gap-2.5">
-                        <span class="rounded-lg bg-primary/10 dark:bg-primary/20 p-1 mt-0.5">
-                          <Icon name={icon ? icon : 'tabler:check'} class="w-4 h-4 text-primary" />
+                        <span class="hta-icon-badge mt-0.5 !h-7 !w-7">
+                          <Icon name={icon ? icon : 'tabler:check'} class="!h-4 !w-4" />
                         </span>
-                        <span class="text-sm md:text-base text-default leading-relaxed">{description}</span>
+                        <span class="text-sm leading-relaxed text-default md:text-base">{description}</span>
                       </li>
                     )
                 )}

@@ -1,40 +1,71 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import { Icon } from 'astro-icon/components';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'Contact',
 };
+
+const contacts = [
+  {
+    title: 'Email',
+    description: 'info@psychedelickc.org',
+    href: 'mailto:info@psychedelickc.org',
+    icon: 'tabler:mail',
+    accent: 'accent-research',
+  },
+  {
+    title: 'Website',
+    description: 'https://heartlandta.org',
+    href: 'https://heartlandta.org',
+    icon: 'tabler:world',
+    accent: 'accent-community',
+  },
+  {
+    title: 'Facebook',
+    description: 'facebook.com/profile.php?id=61569597747801',
+    href: 'https://www.facebook.com/profile.php?id=61569597747801',
+    icon: 'tabler:brand-facebook',
+    accent: 'accent-education',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
   <HeroText
     tagline="Contact"
-    title="Connect HTA"
+    title="Connect with HTA"
     subtitle="For partnerships, community programming, or board-related inquiries, reach out through the channels below."
     callToAction={{ text: 'Apply for Board', href: getPermalink('/board-app') }}
   />
 
-  <Features2
-    columns={3}
-    items={[
-      {
-        title: 'Email',
-        description: 'info@psychedelickc.org',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Website',
-        description: 'https://heartlandta.org',
-        icon: 'tabler:world',
-      },
-      {
-        title: 'Facebook',
-        description: 'facebook.com/profile.php?id=61569597747801',
-        icon: 'tabler:brand-facebook',
-      },
-    ]}
-  />
+  <section class="relative not-prose">
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
+      <div class="mb-8 max-w-3xl">
+        <p class="section-kicker">Inquiry Paths</p>
+        <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
+          Simple ways to start the conversation.
+        </h2>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        {
+          contacts.map((item) => (
+            <a
+              href={item.href}
+              class={`editorial-card resource-card ${item.accent} hta-focus-ring block p-6 transition duration-200 hover:-translate-y-0.5`}
+            >
+              <span class="hta-icon-badge">
+                <Icon name={item.icon} />
+              </span>
+              <h2 class="hta-strong mt-6 font-heading text-2xl font-semibold leading-tight">{item.title}</h2>
+              <p class="hta-muted mt-3 break-words text-base leading-7">{item.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </Layout>

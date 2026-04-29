@@ -6,67 +6,135 @@
     --aw-font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
     --aw-font-heading: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 
-    --aw-color-primary: rgb(30 111 255);
-    --aw-color-secondary: rgb(11 58 117);
-    --aw-color-accent: rgb(244 162 97);
+    --hta-logo-cyan: #18c7ee;
+    --hta-logo-cyan-rgb: 24 199 238;
+    --hta-logo-blue: #0b7dff;
+    --hta-logo-blue-rgb: 11 125 255;
+    --hta-logo-navy: #071f3f;
+    --hta-logo-navy-rgb: 7 31 63;
+    --hta-logo-yellow: #f4c84a;
+    --hta-logo-yellow-rgb: 244 200 74;
 
-    --aw-color-text-heading: rgb(15 46 47);
-    --aw-color-text-default: rgb(24 49 51);
-    --aw-color-text-muted: rgb(70 91 94 / 88%);
-    --aw-color-bg-page: rgb(247 251 252);
-    --aw-color-bg-page-dark: rgb(15 46 47);
+    --hta-ink: #071624;
+    --hta-ink-rgb: 7 22 36;
+    --hta-institutional: #09243a;
+    --hta-research: #0b62c7;
+    --hta-education: #0aa6c8;
+    --hta-harm-reduction: #d9a400;
+    --hta-community: #22775b;
+    --hta-integration: #6a5a9d;
 
-    --aw-surface: rgb(255 255 255 / 82%);
-    --aw-surface-strong: rgb(255 255 255 / 96%);
-    --aw-border: rgb(30 111 255 / 18%);
-    --hta-blue: rgb(30 111 255);
-    --hta-blue-dark: rgb(11 58 117);
-    --hta-teal: rgb(15 46 47);
-    --hta-teal-soft: rgb(22 75 77);
-    --hta-gold: rgb(244 162 97);
-    --hta-coral: rgb(255 122 89);
-    --hta-text: rgb(230 241 242);
-    --hta-muted: rgb(159 182 184);
-    --bg: var(--aw-color-bg-page);
-    --surface: var(--aw-surface);
-    --surface-strong: var(--aw-surface-strong);
-    --text: var(--aw-color-text-default);
-    --primary: var(--aw-color-primary);
+    --hta-bg: #f4f7f5;
+    --hta-bg-soft: #e8f0ee;
+    --hta-paper: #fffdf6;
+    --hta-surface: #ffffff;
+    --hta-surface-raised: #fffdf6;
+    --hta-surface-glass: #ffffff;
+
+    --hta-text: #20333a;
+    --hta-text-strong: #071624;
+    --hta-text-muted: #5c6f73;
+
+    --hta-border: rgba(7, 22, 36, 0.16);
+    --hta-border-strong: rgba(7, 22, 36, 0.32);
+
+    --hta-link: #075fb2;
+    --hta-link-hover: #043f7a;
+    --hta-nav-active: #071624;
+    --hta-nav-active-bg: rgba(11, 125, 255, 0.1);
+
+    --hta-icon: var(--hta-research);
+    --hta-icon-strong: var(--hta-institutional);
+    --hta-icon-bg: rgba(11, 125, 255, 0.1);
+    --hta-icon-border: rgba(11, 125, 255, 0.28);
+
+    --hta-focus: var(--hta-logo-blue);
+    --hta-shadow: rgba(7, 22, 36, 0.12);
+
+    --aw-color-primary: var(--hta-link);
+    --aw-color-secondary: var(--hta-institutional);
+    --aw-color-accent: var(--hta-logo-yellow);
+
+    --aw-color-text-heading: var(--hta-text-strong);
+    --aw-color-text-default: var(--hta-text);
+    --aw-color-text-muted: var(--hta-text-muted);
+    --aw-color-bg-page: var(--hta-bg);
+    --aw-color-bg-page-dark: #071624;
+
+    --aw-surface: var(--hta-surface);
+    --aw-surface-strong: var(--hta-paper);
+    --aw-border: var(--hta-border);
+    --hta-blue: var(--hta-logo-blue);
+    --hta-blue-dark: var(--hta-logo-navy);
+    --hta-teal: var(--hta-community);
+    --hta-teal-soft: #e4f4ef;
+    --hta-gold: var(--hta-logo-yellow);
+    --hta-coral: #c64e37;
+    --hta-muted: var(--hta-text-muted);
+    --bg: var(--hta-bg);
+    --surface: var(--hta-surface);
+    --surface-strong: var(--hta-surface-raised);
+    --text: var(--hta-text);
+    --primary: var(--hta-link);
 
     ::selection {
-      background-color: rgb(30 111 255);
-      color: rgb(247 251 252);
+      background-color: var(--hta-logo-blue);
+      color: #ffffff;
     }
   }
 
   .dark {
     color-scheme: dark;
 
-    --aw-font-sans: 'Avenir Next', 'Gill Sans', 'Trebuchet MS', sans-serif;
-    --aw-font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-    --aw-font-heading: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    --hta-bg: #071624;
+    --hta-bg-soft: #0d2334;
+    --hta-paper: #10283a;
+    --hta-surface: #0d2334;
+    --hta-surface-raised: #123149;
+    --hta-surface-glass: #0d2334;
 
-    --aw-color-primary: rgb(30 111 255);
-    --aw-color-secondary: rgb(99 190 237);
-    --aw-color-accent: rgb(255 122 89);
+    --hta-text: #e8f2f1;
+    --hta-text-strong: #ffffff;
+    --hta-text-muted: #aec3c2;
 
-    --aw-color-text-heading: rgb(230 241 242);
-    --aw-color-text-default: rgb(220 235 237);
-    --aw-color-text-muted: rgb(159 182 184 / 92%);
-    --aw-color-bg-page: rgb(15 46 47);
+    --hta-border: rgba(255, 255, 255, 0.16);
+    --hta-border-strong: rgba(255, 255, 255, 0.34);
 
-    --aw-surface: rgb(18 57 59 / 78%);
-    --aw-surface-strong: rgb(22 75 77 / 92%);
-    --aw-border: rgb(30 111 255 / 28%);
-    --bg: var(--aw-color-bg-page);
-    --surface: var(--aw-surface);
-    --surface-strong: var(--aw-surface-strong);
-    --text: var(--aw-color-text-default);
-    --primary: var(--aw-color-primary);
+    --hta-link: #64d8f3;
+    --hta-link-hover: #ffffff;
+    --hta-nav-active: #ffffff;
+    --hta-nav-active-bg: rgba(100, 216, 243, 0.12);
+
+    --hta-icon: #64d8f3;
+    --hta-icon-strong: #ffffff;
+    --hta-icon-bg: rgba(100, 216, 243, 0.12);
+    --hta-icon-border: rgba(100, 216, 243, 0.3);
+
+    --hta-focus: #64d8f3;
+    --hta-shadow: rgba(0, 0, 0, 0.34);
+
+    --aw-color-primary: var(--hta-link);
+    --aw-color-secondary: var(--hta-logo-cyan);
+    --aw-color-accent: var(--hta-logo-yellow);
+
+    --aw-color-text-heading: var(--hta-text-strong);
+    --aw-color-text-default: var(--hta-text);
+    --aw-color-text-muted: var(--hta-text-muted);
+    --aw-color-bg-page: var(--hta-bg);
+
+    --aw-surface: var(--hta-surface);
+    --aw-surface-strong: var(--hta-surface-raised);
+    --aw-border: var(--hta-border);
+    --hta-muted: var(--hta-text-muted);
+    --bg: var(--hta-bg);
+    --surface: var(--hta-surface);
+    --surface-strong: var(--hta-surface-raised);
+    --text: var(--hta-text);
+    --primary: var(--hta-link);
 
     ::selection {
-      background-color: rgb(30 111 255);
-      color: rgb(230 241 242);
+      background-color: var(--hta-logo-cyan);
+      color: #071624;
     }
   }
 </style>

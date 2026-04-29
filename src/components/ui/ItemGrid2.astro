@@ -11,7 +11,7 @@ const {
   panel: panelClass = '',
   title: titleClass = '',
   description: descriptionClass = '',
-  icon: defaultIconClass = 'text-primary',
+  icon: defaultIconClass = 'text-[var(--hta-icon)]',
 } = classes;
 ---
 
@@ -34,20 +34,28 @@ const {
       {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
         <article
           class={twMerge(
-            'field-card relative h-full rounded-[1.4rem] p-5 md:p-6 flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+            'hta-card field-card relative h-full rounded-lg p-5 md:p-6 flex flex-col transition duration-200 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
             panelClass,
             itemClasses?.panel
           )}
         >
           {(icon || defaultIcon) && (
-            <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20">
+            <div class="hta-icon-badge mb-5">
               <Icon name={icon || defaultIcon} class={twMerge('w-6 h-6', defaultIconClass, itemClasses?.icon)} />
             </div>
           )}
-          <div class={twMerge('text-xl font-semibold font-heading', titleClass, itemClasses?.title)}>{title}</div>
+          <div
+            class={twMerge(
+              'hta-strong text-xl font-semibold font-heading leading-snug',
+              titleClass,
+              itemClasses?.title
+            )}
+          >
+            {title}
+          </div>
           {description && (
             <p
-              class={twMerge('text-muted mt-3 leading-relaxed', descriptionClass, itemClasses?.description)}
+              class={twMerge('hta-muted mt-3 text-[0.95rem] leading-7', descriptionClass, itemClasses?.description)}
               set:html={description}
             />
           )}
