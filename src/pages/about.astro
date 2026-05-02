@@ -2,10 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
-import researchIcon from '~/assets/images/hta/visuals/research.svg';
-import communityIcon from '~/assets/images/hta/visuals/community.svg';
-import integrationIcon from '~/assets/images/hta/visuals/integration.svg';
-import harmReductionIcon from '~/assets/images/hta/visuals/harm-reduction.svg';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
   title: 'About HTA',
@@ -16,27 +13,27 @@ const values = [
     title: 'Community First',
     description:
       'We build accessible spaces where people can connect, process, and learn without stigma or gatekeeping.',
-    icon: communityIcon,
+    icon: 'tabler:users-group',
     accent: 'accent-community',
   },
   {
     title: 'Evidence-Informed Practice',
     description:
       'Programs are informed by clinical insight, lived experience, and emerging best practices in harm reduction.',
-    icon: researchIcon,
+    icon: 'tabler:flask-2',
     accent: 'accent-research',
   },
   {
     title: 'Responsible Integration',
     description:
       'We prioritize what happens after intense experiences: integration, support, and sustainable well-being.',
-    icon: integrationIcon,
+    icon: 'tabler:circles-relation',
     accent: 'accent-integration',
   },
   {
     title: 'Harm-Reduction Clarity',
     description: 'Safety information should be direct, practical, and easy to act on in community settings.',
-    icon: harmReductionIcon,
+    icon: 'tabler:lifebuoy',
     accent: 'accent-harm-reduction',
   },
 ];
@@ -80,7 +77,9 @@ const values = [
         {
           values.map((value) => (
             <article class={`editorial-card program-card ${value.accent} p-5 md:p-6`}>
-              <img src={value.icon.src} width="48" height="48" alt="" class="h-12 w-12 rounded-md" loading="lazy" />
+              <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
+                <Icon name={value.icon} />
+              </span>
               <h3 class="hta-strong mt-5 font-heading text-2xl font-semibold leading-tight">{value.title}</h3>
               <p class="hta-muted mt-4 text-base leading-7">{value.description}</p>
             </article>

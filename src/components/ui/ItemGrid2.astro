@@ -44,7 +44,7 @@ const {
               <Icon name={icon || defaultIcon} class={twMerge('w-6 h-6', defaultIconClass, itemClasses?.icon)} />
             </div>
           )}
-          <div
+          <h3
             class={twMerge(
               'hta-strong text-xl font-semibold font-heading leading-snug',
               titleClass,
@@ -52,7 +52,7 @@ const {
             )}
           >
             {title}
-          </div>
+          </h3>
           {description && (
             <p
               class={twMerge('hta-muted mt-3 text-[0.95rem] leading-7', descriptionClass, itemClasses?.description)}

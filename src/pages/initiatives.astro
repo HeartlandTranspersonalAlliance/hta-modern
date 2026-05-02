@@ -3,9 +3,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import { Icon } from 'astro-icon/components';
 
-import integrationIcon from '~/assets/images/hta/visuals/integration.svg';
-import educationIcon from '~/assets/images/hta/visuals/education.svg';
-import eventSupportIcon from '~/assets/images/hta/visuals/event-support.svg';
 import publicHealthGrid from '~/assets/images/hta/visuals/public-health-grid.svg';
 
 const metadata = {
@@ -19,7 +16,7 @@ const initiatives = [
       'A confidential community focused on processing experiences outside the ordinary within a supportive, non-judgmental peer environment.',
     href: 'https://kc-psychedelic.com',
     cta: 'Visit KCPIC',
-    icon: integrationIcon,
+    icon: 'tabler:circles-relation',
     accent: 'accent-integration',
     label: 'Integration',
   },
@@ -29,7 +26,7 @@ const initiatives = [
       'A community hub with in-person events exploring the intersection of psychedelics in art, culture, and medicine.',
     href: 'https://psychedelickc.org',
     cta: 'Visit PSKC',
-    icon: educationIcon,
+    icon: 'tabler:school',
     accent: 'accent-education',
     label: 'Education',
   },
@@ -39,7 +36,7 @@ const initiatives = [
       'Compassionate, evidence-based peer support and overdose prevention at festivals and live events, including harm-reduction and Narcan training.',
     href: 'https://safejourneysanctum.org',
     cta: 'Visit SJS',
-    icon: eventSupportIcon,
+    icon: 'tabler:shield-heart',
     accent: 'accent-harm-reduction',
     label: 'Event support',
   },
@@ -68,7 +65,7 @@ const initiatives = [
         </p>
       </div>
 
-      <div class="grid gap-5 md:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           initiatives.map((initiative, index) => (
             <article class={`editorial-card program-card ${initiative.accent} flex min-h-[23rem] flex-col p-6`}>
@@ -81,9 +78,11 @@ const initiatives = [
                     {initiative.label}
                   </p>
                 </div>
-                <img src={initiative.icon.src} width="48" height="48" alt="" class="h-12 w-12 rounded-md" />
+                <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
+                  <Icon name={initiative.icon} />
+                </span>
               </div>
-              <h2 class="hta-strong mt-8 font-heading text-2xl font-semibold leading-tight">{initiative.name}</h2>
+              <h3 class="hta-strong mt-8 font-heading text-2xl font-semibold leading-tight">{initiative.name}</h3>
               <p class="hta-muted mt-4 mb-6 flex-1 text-base leading-7">{initiative.summary}</p>
               <a
                 href={initiative.href}

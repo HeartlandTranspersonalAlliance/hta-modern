@@ -33,14 +33,14 @@ const support = [
 
   <section class="relative not-prose">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
-      <div class="grid gap-5 md:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           support.map((item, index) => (
             <article class="editorial-card resource-card accent-institutional p-6">
               <span class="font-heading text-4xl font-semibold text-[var(--hta-link)]">
                 {String(index + 1).padStart(2, '0')}
               </span>
-              <h2 class="hta-strong mt-6 font-heading text-2xl font-semibold leading-tight">{item.title}</h2>
+              <h3 class="hta-strong mt-6 font-heading text-2xl font-semibold leading-tight">{item.title}</h3>
               <p class="hta-muted mt-4 text-base leading-7">{item.description}</p>
             </article>
           ))

@@ -18,11 +18,17 @@
     --hta-ink: #071624;
     --hta-ink-rgb: 7 22 36;
     --hta-institutional: #09243a;
-    --hta-research: #0b62c7;
-    --hta-education: #0aa6c8;
-    --hta-harm-reduction: #d9a400;
-    --hta-community: #22775b;
-    --hta-integration: #6a5a9d;
+    --hta-accent-primary: #087086;
+    --hta-accent-primary-rgb: 8 112 134;
+    --hta-accent-secondary: #26745f;
+    --hta-accent-secondary-rgb: 38 116 95;
+    --hta-accent-warm: #8a6500;
+    --hta-accent-warm-rgb: 138 101 0;
+    --hta-research: var(--hta-accent-primary);
+    --hta-education: var(--hta-accent-primary);
+    --hta-harm-reduction: var(--hta-accent-warm);
+    --hta-community: var(--hta-accent-secondary);
+    --hta-integration: var(--hta-accent-secondary);
 
     --hta-bg: #f4f7f5;
     --hta-bg-soft: #e8f0ee;
@@ -33,23 +39,39 @@
 
     --hta-text: #20333a;
     --hta-text-strong: #071624;
-    --hta-text-muted: #5c6f73;
+    --hta-text-muted: #4c6166;
 
     --hta-border: rgba(7, 22, 36, 0.16);
     --hta-border-strong: rgba(7, 22, 36, 0.32);
 
-    --hta-link: #075fb2;
-    --hta-link-hover: #043f7a;
+    --hta-link: #075f72;
+    --hta-link-hover: #063f4e;
     --hta-nav-active: #071624;
-    --hta-nav-active-bg: rgba(11, 125, 255, 0.1);
+    --hta-nav-active-bg: rgba(var(--hta-accent-primary-rgb) / 0.11);
 
     --hta-icon: var(--hta-research);
     --hta-icon-strong: var(--hta-institutional);
-    --hta-icon-bg: rgba(11, 125, 255, 0.1);
-    --hta-icon-border: rgba(11, 125, 255, 0.28);
+    --hta-icon-bg: rgba(var(--hta-accent-primary-rgb) / 0.1);
+    --hta-icon-border: rgba(var(--hta-accent-primary-rgb) / 0.28);
 
-    --hta-focus: var(--hta-logo-blue);
+    --hta-focus: var(--hta-accent-primary);
     --hta-shadow: rgba(7, 22, 36, 0.12);
+
+    --hta-hero-bg:
+      linear-gradient(90deg, rgba(var(--hta-logo-cyan-rgb) / 0.16), transparent 34%),
+      linear-gradient(135deg, var(--hta-ink), var(--hta-institutional) 62%, #0f3a45);
+    --hta-cta-bg:
+      linear-gradient(90deg, rgba(var(--hta-logo-yellow-rgb) / 0.18), transparent 36%),
+      linear-gradient(135deg, var(--hta-paper), #edf5f2 64%, #e3f1ef);
+    --hta-cta-text: var(--hta-text-strong);
+    --hta-cta-muted: var(--hta-text-muted);
+    --hta-cta-border: var(--hta-border);
+    --hta-footer-bg:
+      linear-gradient(90deg, rgba(var(--hta-accent-primary-rgb) / 0.08), transparent 34%),
+      linear-gradient(135deg, var(--hta-paper), #edf4f1 68%, #e1f0ee);
+    --hta-footer-text: var(--hta-text-strong);
+    --hta-footer-muted: #516368;
+    --hta-footer-border: var(--hta-border);
 
     --aw-color-primary: var(--hta-link);
     --aw-color-secondary: var(--hta-institutional);
@@ -86,6 +108,18 @@
   .dark {
     color-scheme: dark;
 
+    --hta-accent-primary: #64d8f3;
+    --hta-accent-primary-rgb: 100 216 243;
+    --hta-accent-secondary: #82d8bd;
+    --hta-accent-secondary-rgb: 130 216 189;
+    --hta-accent-warm: #f6d36a;
+    --hta-accent-warm-rgb: 246 211 106;
+    --hta-research: var(--hta-accent-primary);
+    --hta-education: var(--hta-accent-primary);
+    --hta-harm-reduction: var(--hta-accent-warm);
+    --hta-community: var(--hta-accent-secondary);
+    --hta-integration: var(--hta-accent-secondary);
+
     --hta-bg: #071624;
     --hta-bg-soft: #0d2334;
     --hta-paper: #10283a;
@@ -95,7 +129,7 @@
 
     --hta-text: #e8f2f1;
     --hta-text-strong: #ffffff;
-    --hta-text-muted: #aec3c2;
+    --hta-text-muted: #c3d4d2;
 
     --hta-border: rgba(255, 255, 255, 0.16);
     --hta-border-strong: rgba(255, 255, 255, 0.34);
@@ -103,15 +137,31 @@
     --hta-link: #64d8f3;
     --hta-link-hover: #ffffff;
     --hta-nav-active: #ffffff;
-    --hta-nav-active-bg: rgba(100, 216, 243, 0.12);
+    --hta-nav-active-bg: rgba(var(--hta-accent-primary-rgb) / 0.12);
 
     --hta-icon: #64d8f3;
     --hta-icon-strong: #ffffff;
-    --hta-icon-bg: rgba(100, 216, 243, 0.12);
-    --hta-icon-border: rgba(100, 216, 243, 0.3);
+    --hta-icon-bg: rgba(var(--hta-accent-primary-rgb) / 0.12);
+    --hta-icon-border: rgba(var(--hta-accent-primary-rgb) / 0.3);
 
     --hta-focus: #64d8f3;
     --hta-shadow: rgba(0, 0, 0, 0.34);
+
+    --hta-hero-bg:
+      linear-gradient(90deg, rgba(var(--hta-logo-cyan-rgb) / 0.2), transparent 34%),
+      linear-gradient(135deg, #050d16, var(--hta-institutional) 64%, #0f3a45);
+    --hta-cta-bg:
+      linear-gradient(90deg, rgba(var(--hta-logo-yellow-rgb) / 0.18), transparent 36%),
+      linear-gradient(135deg, #071624, #0a2b42 64%, #0b5963);
+    --hta-cta-text: #ffffff;
+    --hta-cta-muted: rgba(255, 255, 255, 0.78);
+    --hta-cta-border: rgba(255, 255, 255, 0.14);
+    --hta-footer-bg:
+      linear-gradient(90deg, rgba(var(--hta-logo-cyan-rgb) / 0.16), transparent 32%),
+      linear-gradient(135deg, #050d16, var(--hta-institutional) 66%, #0c3944);
+    --hta-footer-text: #ffffff;
+    --hta-footer-muted: rgba(255, 255, 255, 0.78);
+    --hta-footer-border: rgba(255, 255, 255, 0.12);
 
     --aw-color-primary: var(--hta-link);
     --aw-color-secondary: var(--hta-logo-cyan);

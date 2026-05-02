@@ -7,12 +7,6 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 import heroImage from '~/assets/images/hta/hero-image.jpg';
-import researchIcon from '~/assets/images/hta/visuals/research.svg';
-import educationIcon from '~/assets/images/hta/visuals/education.svg';
-import harmReductionIcon from '~/assets/images/hta/visuals/harm-reduction.svg';
-import integrationIcon from '~/assets/images/hta/visuals/integration.svg';
-import communityIcon from '~/assets/images/hta/visuals/community.svg';
-import eventSupportIcon from '~/assets/images/hta/visuals/event-support.svg';
 import publicHealthGrid from '~/assets/images/hta/visuals/public-health-grid.svg';
 
 const metadata = {
@@ -25,7 +19,7 @@ const metadata = {
 const pillars = [
   {
     label: 'Research-minded education',
-    icon: researchIcon,
+    icon: 'tabler:flask-2',
     title: 'Evidence-informed public learning',
     description:
       'HTA creates approachable education around consciousness, psychedelic science, and responsible community care.',
@@ -33,7 +27,7 @@ const pillars = [
   },
   {
     label: 'Community infrastructure',
-    icon: communityIcon,
+    icon: 'tabler:users-group',
     title: 'Programs with local continuity',
     description:
       'Initiatives stay connected through nonprofit governance, shared standards, and Kansas City relationships.',
@@ -41,7 +35,7 @@ const pillars = [
   },
   {
     label: 'Harm-reduction clarity',
-    icon: harmReductionIcon,
+    icon: 'tabler:lifebuoy',
     title: 'Direct safety pathways',
     description:
       'Training, peer support, and overdose-prevention resources make care practical where people actually gather.',
@@ -52,7 +46,7 @@ const pillars = [
 const pathways = [
   {
     label: '01',
-    icon: integrationIcon,
+    icon: 'tabler:circles-relation',
     title: 'Integration circles',
     description:
       'Confidential peer spaces for making meaning after intense or non-ordinary experiences, grounded in care and discretion.',
@@ -62,7 +56,7 @@ const pathways = [
   },
   {
     label: '02',
-    icon: educationIcon,
+    icon: 'tabler:school',
     title: 'Public education',
     description:
       'Talks, community gatherings, and literacy-building events that keep complicated topics practical and accessible.',
@@ -72,7 +66,7 @@ const pathways = [
   },
   {
     label: '03',
-    icon: eventSupportIcon,
+    icon: 'tabler:shield-heart',
     title: 'Event support',
     description:
       'Harm-reduction training, compassionate presence, and overdose-prevention resources for festivals and live events.',
@@ -155,11 +149,13 @@ const principles = [
             Transform intensity into support people can actually reach.
           </h2>
         </div>
-        <div class="grid gap-4 md:grid-cols-3">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {
             pillars.map((item) => (
               <article class={`editorial-card program-card ${item.accent} p-5 md:p-6`}>
-                <img src={item.icon.src} width="48" height="48" alt="" class="h-12 w-12 rounded-md" loading="lazy" />
+                <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
+                  <Icon name={item.icon} />
+                </span>
                 <p class="mt-5 text-sm font-bold uppercase tracking-[0.06em] text-[var(--hta-card-accent)]">
                   {item.label}
                 </p>
@@ -186,13 +182,15 @@ const principles = [
         </p>
       </div>
 
-      <div class="grid gap-5 md:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           pathways.map((item) => (
             <article class={`editorial-card program-card ${item.accent} flex min-h-[22rem] flex-col p-6`}>
               <div class="flex items-start justify-between gap-4">
                 <span class="font-heading text-4xl font-semibold text-[var(--hta-card-accent)]">{item.label}</span>
-                <img src={item.icon.src} width="48" height="48" alt="" class="h-12 w-12 rounded-md" loading="lazy" />
+                <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
+                  <Icon name={item.icon} />
+                </span>
               </div>
               <h3 class="hta-strong mt-8 font-heading text-2xl font-semibold leading-snug">{item.title}</h3>
               <p class="hta-muted mt-4 flex-1 text-base leading-7">{item.description}</p>

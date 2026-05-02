@@ -1,7 +1,92 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" fill="none">
-  <rect width="720" height="420" fill="#FFFDF6"/>
-  <path d="M40 70h640M40 140h640M40 210h640M40 280h640M40 350h640" stroke="#071624" stroke-opacity=".1" stroke-width="2"/>
-  <path d="M110 40v340M220 40v340M330 40v340M440 40v340M550 40v340M660 40v340" stroke="#071624" stroke-opacity=".1" stroke-width="2"/>
-  <path d="M105 284c36-42 72-63 108-63 48 0 72 38 120 38 54 0 82-92 140-92 48 0 80 42 139 126" stroke="#0B62C7" stroke-width="16" stroke-linecap="round"/>
-  <path d="M99 294c40-16 82-24 126-24 67 0 115 20 169 20 73 0 125-38 226-38" stroke="#D9A400" stroke-width="10" stroke-linecap="round"/>
+  <rect width="720" height="420" fill="#FFFDF6" />
+  <path d="M44 76h632M44 154h632M44 232h632M44 310h632" stroke="#071624" stroke-opacity=".07" stroke-width="2" />
+  <path
+    d="M120 42v336M240 42v336M360 42v336M480 42v336M600 42v336"
+    stroke="#071624"
+    stroke-opacity=".07"
+    stroke-width="2"
+  />
+
+  <path
+    d="M360 207 188 120M360 207l168-88M360 207l182 98M360 207l-174 97"
+    stroke="#087086"
+    stroke-opacity=".28"
+    stroke-width="10"
+    stroke-linecap="round"
+  />
+  <path
+    d="M360 207 188 120M360 207l168-88M360 207l182 98M360 207l-174 97"
+    stroke="#FFFDF6"
+    stroke-opacity=".62"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <circle cx="360" cy="207" r="74" fill="#09243A" />
+  <circle cx="360" cy="207" r="54" fill="#0F3A45" />
+  <path
+    d="M334 211c10 17 42 17 52 0M326 190c14-22 54-22 68 0"
+    stroke="#F4C84A"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+  <path d="M360 166v82" stroke="#18C7EE" stroke-width="8" stroke-linecap="round" />
+  <text
+    x="360"
+    y="294"
+    text-anchor="middle"
+    fill="#071624"
+    font-family="Avenir Next, sans-serif"
+    font-size="20"
+    font-weight="700"
+  >
+    HTA
+  </text>
+
+  <g>
+    <rect x="96" y="72" width="184" height="96" rx="10" fill="#F0F8F7" stroke="#087086" stroke-opacity=".28" />
+    <circle cx="138" cy="120" r="22" fill="#D9F2F0" />
+    <path d="M128 120h20M138 110v20" stroke="#087086" stroke-width="5" stroke-linecap="round" />
+    <text x="174" y="112" fill="#071624" font-family="Avenir Next, sans-serif" font-size="18" font-weight="700">
+      Education
+    </text>
+    <text x="174" y="136" fill="#4C6166" font-family="Avenir Next, sans-serif" font-size="14">Public learning</text>
+  </g>
+
+  <g>
+    <rect x="438" y="72" width="186" height="96" rx="10" fill="#F0F8F7" stroke="#26745F" stroke-opacity=".3" />
+    <circle cx="480" cy="120" r="22" fill="#E4F4EF" />
+    <path d="M470 121c5-9 15-9 20 0M469 132h22M480 107v15" stroke="#26745F" stroke-width="5" stroke-linecap="round" />
+    <text x="516" y="112" fill="#071624" font-family="Avenir Next, sans-serif" font-size="18" font-weight="700">
+      Integration
+    </text>
+    <text x="516" y="136" fill="#4C6166" font-family="Avenir Next, sans-serif" font-size="14">Peer support</text>
+  </g>
+
+  <g>
+    <rect x="96" y="256" width="184" height="96" rx="10" fill="#F0F8F7" stroke="#26745F" stroke-opacity=".3" />
+    <circle cx="138" cy="304" r="22" fill="#E4F4EF" />
+    <path
+      d="M126 308c4-10 20-10 24 0M131 295a7 7 0 1 0 14 0"
+      stroke="#26745F"
+      stroke-width="5"
+      stroke-linecap="round"
+    />
+    <text x="174" y="296" fill="#071624" font-family="Avenir Next, sans-serif" font-size="18" font-weight="700">
+      Community
+    </text>
+    <text x="174" y="320" fill="#4C6166" font-family="Avenir Next, sans-serif" font-size="14">Local continuity</text>
+  </g>
+
+  <g>
+    <rect x="438" y="256" width="186" height="96" rx="10" fill="#FFF8E1" stroke="#8A6500" stroke-opacity=".34" />
+    <circle cx="480" cy="304" r="22" fill="#F7E7A8" />
+    <path d="M480 290v28M466 304h28" stroke="#8A6500" stroke-width="5" stroke-linecap="round" />
+    <path d="M470 294c5-5 15-5 20 0" stroke="#071624" stroke-opacity=".58" stroke-width="4" stroke-linecap="round" />
+    <text x="516" y="296" fill="#071624" font-family="Avenir Next, sans-serif" font-size="18" font-weight="700">
+      Field care
+    </text>
+    <text x="516" y="320" fill="#4C6166" font-family="Avenir Next, sans-serif" font-size="14">Harm reduction</text>
+  </g>
 </svg>

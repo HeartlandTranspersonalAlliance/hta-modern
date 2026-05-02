@@ -3,10 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import { getPermalink } from '~/utils/permalinks';
-
-import educationIcon from '~/assets/images/hta/visuals/education.svg';
-import harmReductionIcon from '~/assets/images/hta/visuals/harm-reduction.svg';
-import integrationIcon from '~/assets/images/hta/visuals/integration.svg';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
   title: 'Services',
@@ -16,19 +13,19 @@ const services = [
   {
     title: 'Community Education',
     description: 'Talks, gatherings, and public learning spaces for responsible exploration of consciousness.',
-    icon: educationIcon,
+    icon: 'tabler:school',
     accent: 'accent-education',
   },
   {
     title: 'Integration Support',
     description: 'Peer-oriented circles and referral pathways for making meaning after intense experiences.',
-    icon: integrationIcon,
+    icon: 'tabler:circles-relation',
     accent: 'accent-integration',
   },
   {
     title: 'Harm Reduction',
     description: 'Event support, overdose-prevention resources, and practical safety education for community settings.',
-    icon: harmReductionIcon,
+    icon: 'tabler:lifebuoy',
     accent: 'accent-harm-reduction',
   },
 ];
@@ -44,12 +41,14 @@ const services = [
 
   <section class="relative not-prose">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
-      <div class="grid gap-5 md:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           services.map((service) => (
             <article class={`editorial-card program-card ${service.accent} p-6`}>
-              <img src={service.icon.src} width="48" height="48" alt="" class="h-12 w-12 rounded-md" loading="lazy" />
-              <h2 class="hta-strong mt-6 font-heading text-2xl font-semibold leading-tight">{service.title}</h2>
+              <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
+                <Icon name={service.icon} />
+              </span>
+              <h3 class="hta-strong mt-6 font-heading text-2xl font-semibold leading-tight">{service.title}</h3>
               <p class="hta-muted mt-4 text-base leading-7">{service.description}</p>
             </article>
           ))
