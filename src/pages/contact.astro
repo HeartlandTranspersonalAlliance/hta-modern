@@ -74,8 +74,12 @@ const contacts = [
         action="mailto:info@psychedelickc.org"
         method="post"
         enctype="text/plain"
+        aria-describedby="contact-form-note"
       >
         <h2 class="hta-strong font-heading text-3xl font-semibold leading-tight md:text-4xl">Send a message</h2>
+        <p id="contact-form-note" class="sr-only">
+          Submitting this form opens an email addressed to Heartland Transpersonal Alliance.
+        </p>
 
         <div class="mt-7 grid gap-5 sm:grid-cols-2">
           <div>

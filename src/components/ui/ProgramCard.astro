@@ -1,0 +1,73 @@
+---
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
+
+export interface Props {
+  accent?: string;
+  icon?: string;
+  number?: string;
+  label?: string;
+  title: string;
+  description?: string;
+  href?: string;
+  cta?: string;
+  class?: string;
+  descriptionClass?: string;
+}
+
+const {
+  accent = 'accent-institutional',
+  icon,
+  number,
+  label,
+  title,
+  description,
+  href,
+  cta,
+  class: className = '',
+  descriptionClass = '',
+} = Astro.props;
+
+const isExternal = href?.startsWith('http://') || href?.startsWith('https://');
+const titleMargin = label ? 'mt-3' : number ? 'mt-8' : icon ? 'mt-5' : 'mt-6';
+---
+
+<article class={twMerge(`editorial-card program-card ${accent} flex h-full flex-col p-6`, className)}>
+  {
+    number || icon ? (
+      <div class:list={['flex items-start gap-4', number ? 'justify-between' : 'justify-start']}>
+        {number && <span class="font-heading text-4xl font-semibold text-[var(--hta-card-accent)]">{number}</span>}
+        {icon && (
+          <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
+            <Icon name={icon} />
+          </span>
+        )}
+      </div>
+    ) : null
+  }
+
+  {label && <p class="mt-5 text-sm font-bold uppercase tracking-[0.055em] text-[var(--hta-card-accent)]">{label}</p>}
+
+  <h3 class={twMerge('hta-strong font-heading text-2xl font-semibold leading-tight', titleMargin)}>{title}</h3>
+
+  {
+    description && (
+      <p class={twMerge('hta-muted readable-copy mt-4 flex-1 text-base leading-relaxed', descriptionClass)}>
+        {description}
+      </p>
+    )
+  }
+
+  {
+    href && cta && (
+      <a
+        href={href}
+        class="hta-focus-ring mt-6 inline-flex min-h-10 items-center gap-2 rounded-md text-sm font-bold uppercase tracking-[0.04em] text-[var(--hta-link)] transition duration-200 hover:text-[var(--hta-link-hover)]"
+        {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
+      >
+        {cta}
+        <Icon name="tabler:arrow-up-right" class="h-4 w-4" />
+      </a>
+    )
+  }
+</article>

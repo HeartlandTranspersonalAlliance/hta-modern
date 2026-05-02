@@ -2,7 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
-import { Icon } from 'astro-icon/components';
+import ProgramCard from '~/components/ui/ProgramCard.astro';
 
 const metadata = {
   title: 'About HTA',
@@ -76,13 +76,13 @@ const values = [
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {
           values.map((value) => (
-            <article class={`editorial-card program-card ${value.accent} p-5 md:p-6`}>
-              <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
-                <Icon name={value.icon} />
-              </span>
-              <h3 class="hta-strong mt-5 font-heading text-2xl font-semibold leading-tight">{value.title}</h3>
-              <p class="hta-muted mt-4 text-base leading-7">{value.description}</p>
-            </article>
+            <ProgramCard
+              accent={value.accent}
+              icon={value.icon}
+              title={value.title}
+              description={value.description}
+              class="p-5 md:p-6"
+            />
           ))
         }
       </div>

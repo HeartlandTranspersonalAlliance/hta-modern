@@ -14,7 +14,14 @@ const {
 const baseClass = 'group flex h-11 w-11 flex-col items-center justify-center rounded-md text-[var(--hta-icon)]';
 ---
 
-<button type="button" class={twMerge(baseClass, className)} aria-label={label} data-aw-toggle-menu>
+<button
+  type="button"
+  class={twMerge(baseClass, className)}
+  aria-label={label}
+  aria-controls="mobile-navigation"
+  aria-expanded="false"
+  data-aw-toggle-menu
+>
   <span class="sr-only">{label}</span>
   <slot>
     <span

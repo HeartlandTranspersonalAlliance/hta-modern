@@ -3,7 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import { getPermalink } from '~/utils/permalinks';
-import { Icon } from 'astro-icon/components';
+import ProgramCard from '~/components/ui/ProgramCard.astro';
 
 const metadata = {
   title: 'Services',
@@ -44,13 +44,12 @@ const services = [
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           services.map((service) => (
-            <article class={`editorial-card program-card ${service.accent} p-6`}>
-              <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
-                <Icon name={service.icon} />
-              </span>
-              <h3 class="hta-strong mt-6 font-heading text-2xl font-semibold leading-tight">{service.title}</h3>
-              <p class="hta-muted mt-4 text-base leading-7">{service.description}</p>
-            </article>
+            <ProgramCard
+              accent={service.accent}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
           ))
         }
       </div>

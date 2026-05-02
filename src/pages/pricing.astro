@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ProgramCard from '~/components/ui/ProgramCard.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
@@ -36,13 +37,13 @@ const support = [
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           support.map((item, index) => (
-            <article class="editorial-card resource-card accent-institutional p-6">
-              <span class="font-heading text-4xl font-semibold text-[var(--hta-link)]">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <h3 class="hta-strong mt-6 font-heading text-2xl font-semibold leading-tight">{item.title}</h3>
-              <p class="hta-muted mt-4 text-base leading-7">{item.description}</p>
-            </article>
+            <ProgramCard
+              accent="accent-institutional"
+              number={String(index + 1).padStart(2, '0')}
+              title={item.title}
+              description={item.description}
+              class="resource-card"
+            />
           ))
         }
       </div>

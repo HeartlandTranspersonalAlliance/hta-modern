@@ -131,7 +131,15 @@
   }
 
   html {
+    font-size: 17px;
     scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    transition:
+      color 180ms ease,
+      background-color 180ms ease;
   }
 
   body {
@@ -140,9 +148,6 @@
     color: var(--hta-text);
     background-color: var(--hta-bg);
     line-height: 1.6;
-    transition:
-      color 180ms ease,
-      background-color 180ms ease;
   }
 
   h1,
@@ -283,6 +288,17 @@
     background: var(--hta-paper);
     border: 1px solid var(--hta-border);
     border-radius: 0.5rem;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .surface-card p,
+  .field-card p,
+  .editorial-card p,
+  .paper-panel p {
+    line-height: 1.65;
   }
 
   .institutional-band {

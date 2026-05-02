@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import { Icon } from 'astro-icon/components';
+import ProgramCard from '~/components/ui/ProgramCard.astro';
 
 import publicHealthGrid from '~/assets/images/hta/visuals/public-health-grid.svg';
 
@@ -68,32 +68,18 @@ const initiatives = [
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           initiatives.map((initiative, index) => (
-            <article class={`editorial-card program-card ${initiative.accent} flex min-h-[23rem] flex-col p-6`}>
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <span class="font-heading text-4xl font-semibold text-[var(--hta-card-accent)]">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <p class="mt-2 text-sm font-bold uppercase tracking-[0.06em] text-[var(--hta-card-accent)]">
-                    {initiative.label}
-                  </p>
-                </div>
-                <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
-                  <Icon name={initiative.icon} />
-                </span>
-              </div>
-              <h3 class="hta-strong mt-8 font-heading text-2xl font-semibold leading-tight">{initiative.name}</h3>
-              <p class="hta-muted mt-4 mb-6 flex-1 text-base leading-7">{initiative.summary}</p>
-              <a
-                href={initiative.href}
-                class="hta-focus-ring inline-flex min-h-10 items-center gap-2 rounded-md text-sm font-bold uppercase tracking-[0.04em] text-[var(--hta-link)] transition duration-200 hover:text-[var(--hta-link-hover)]"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {initiative.cta}
-                <Icon name="tabler:arrow-up-right" class="h-4 w-4" />
-              </a>
-            </article>
+            <ProgramCard
+              accent={initiative.accent}
+              icon={initiative.icon}
+              number={String(index + 1).padStart(2, '0')}
+              label={initiative.label}
+              title={initiative.name}
+              description={initiative.summary}
+              href={initiative.href}
+              cta={initiative.cta}
+              class="min-h-[23rem]"
+              descriptionClass="mb-0"
+            />
           ))
         }
       </div>

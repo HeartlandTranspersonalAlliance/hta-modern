@@ -14,14 +14,15 @@ const {
   label = 'Toggle between Dark and Light mode',
   class: className = 'hta-icon-button hta-focus-ring',
   iconClass = 'h-5 w-5',
-  iconName = 'tabler:sun',
+  iconName = 'tabler:moon',
 } = Astro.props;
 ---
 
 {
   !(UI.theme && UI.theme.endsWith(':only')) && (
     <button type="button" class={className} aria-label={label} data-aw-toggle-color-scheme>
-      <Icon name={iconName} class={iconClass} />
+      <Icon name={iconName} class:list={[iconClass, 'dark:hidden']} aria-hidden="true" />
+      <Icon name="tabler:sun" class:list={[iconClass, 'hidden dark:block']} aria-hidden="true" />
     </button>
   )
 }
