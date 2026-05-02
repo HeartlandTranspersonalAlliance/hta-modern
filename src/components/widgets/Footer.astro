@@ -27,7 +27,7 @@ export interface Props {
 const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative mt-10 md:mt-14 pb-8 md:pb-12 not-prose']}>
+<footer class:list={[{ dark: theme === 'dark' }, 'relative mt-16 md:mt-20 pb-8 md:pb-12 not-prose']}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="footer-shell rounded-lg px-5 sm:px-7 py-7 md:py-8">
       <div class="grid grid-cols-12 gap-8">

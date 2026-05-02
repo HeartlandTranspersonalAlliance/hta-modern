@@ -42,8 +42,8 @@ const contacts = [
   />
 
   <section class="relative not-prose">
-    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-[0.86fr_1.14fr]">
-      <div>
+    <div class="mx-auto flex max-w-7xl flex-col gap-12 px-4 py-14 sm:px-6 md:py-16 lg:flex-row">
+      <div class="lg:basis-1/2">
         <div class="mb-8 max-w-3xl">
           <p class="section-kicker">Inquiry Paths</p>
           <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
@@ -51,18 +51,20 @@ const contacts = [
           </h2>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        <div class="editorial-card p-3 md:p-4">
           {
             contacts.map((item) => (
               <a
                 href={item.href}
-                class={`editorial-card resource-card ${item.accent} hta-focus-ring block p-5 transition duration-200 hover:-translate-y-0.5 md:p-6`}
+                class={`resource-card ${item.accent} hta-focus-ring flex items-start gap-4 rounded-md p-4 transition duration-200 hover:bg-[var(--hta-icon-bg)] md:p-5`}
               >
                 <span class="hta-icon-badge">
                   <Icon name={item.icon} />
                 </span>
-                <h3 class="hta-strong mt-5 font-heading text-2xl font-semibold leading-tight">{item.title}</h3>
-                <p class="hta-muted mt-3 break-words text-base leading-7">{item.description}</p>
+                <span class="min-w-0 flex-1">
+                  <span class="hta-strong block font-heading text-xl font-semibold leading-tight">{item.title}</span>
+                  <span class="hta-muted mt-1 block break-words text-base leading-7">{item.description}</span>
+                </span>
               </a>
             ))
           }
@@ -70,7 +72,7 @@ const contacts = [
       </div>
 
       <form
-        class="paper-panel p-6 md:p-8 lg:p-10"
+        class="paper-panel p-6 md:p-8 lg:basis-1/2 lg:p-10 xl:max-w-xl"
         action="mailto:info@psychedelickc.org"
         method="post"
         enctype="text/plain"
@@ -89,6 +91,7 @@ const contacts = [
               name="name"
               type="text"
               autocomplete="name"
+              aria-label="Name"
               required
               class="form-field block text-base"
             />
@@ -101,6 +104,7 @@ const contacts = [
               name="email"
               type="email"
               autocomplete="email"
+              aria-label="Email"
               required
               class="form-field block text-base"
             />
@@ -109,7 +113,7 @@ const contacts = [
 
         <div class="mt-5">
           <label for="contact-topic" class="mb-2 block text-sm font-bold uppercase tracking-[0.065em]">Topic</label>
-          <select id="contact-topic" name="topic" required class="form-field block text-base">
+          <select id="contact-topic" name="topic" required aria-label="Topic" class="form-field block text-base">
             <option value="">Select a topic</option>
             <option>Partnerships</option>
             <option>Community programming</option>
@@ -122,7 +126,13 @@ const contacts = [
           <label for="contact-message" class="mb-2 block text-sm font-bold uppercase tracking-[0.065em]">
             Message
           </label>
-          <textarea id="contact-message" name="message" rows="7" required class="form-field block text-base"></textarea>
+          <textarea
+            id="contact-message"
+            name="message"
+            rows="7"
+            required
+            aria-label="Message"
+            class="form-field block text-base"></textarea>
         </div>
 
         <label class="mt-5 flex items-start gap-3 text-sm leading-6 text-muted" for="contact-consent">

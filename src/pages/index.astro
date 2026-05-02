@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Button from '~/components/ui/Button.astro';
 import ProgramCard from '~/components/ui/ProgramCard.astro';
 import { getPermalink } from '~/utils/permalinks';
 
@@ -87,34 +88,44 @@ const principles = [
 <Layout metadata={metadata}>
   <section class="institutional-band relative not-prose border-y border-white/10">
     <div
-      class="mx-auto grid max-w-7xl items-center gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-[0.94fr_1.06fr] lg:gap-12 lg:py-20"
+      class="mx-auto grid max-w-7xl items-center gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-2 lg:gap-12 lg:py-20"
     >
       <div class="max-w-3xl">
         <p class="section-kicker">Community Education Harm Reduction Integration</p>
         <h1 class="mt-6 font-heading text-5xl font-semibold leading-[0.98] text-white md:text-6xl lg:text-7xl">
-          Heartland Transpersonal Alliance
+          <span class="block">Heartland Transpersonal</span>
+          <span class="block">Alliance</span>
         </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
+        <p class="mt-6 max-w-md text-lg leading-relaxed text-white/80 md:text-xl">
           HTA builds practical pathways for safe, responsible exploration of consciousness in Kansas City through
           nonprofit governance, community education, integration, and field-tested harm reduction.
         </p>
 
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a class="btn-primary w-full sm:w-auto" href={getPermalink('/initiatives')}>Explore Initiatives</a>
-          <a
-            class="btn-secondary w-full border-white/40 text-white hover:text-white sm:w-auto"
+          <Button
+            variant="primary"
+            href={getPermalink('/initiatives')}
+            icon="tabler:arrow-right"
+            class="w-full sm:w-auto"
+          >
+            Explore Initiatives
+          </Button>
+          <Button
+            variant="secondary"
             href={getPermalink('/board')}
+            icon="tabler:users"
+            class="w-full border-white/40 text-white hover:text-white sm:w-auto"
           >
             Meet the Board
-          </a>
+          </Button>
         </div>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-[0.82fr_0.18fr]">
+      <div class="grid gap-4">
         <div class="overflow-hidden rounded-lg border border-white/20 bg-white/5">
           <Image
             src={heroImage}
-            alt="Abstract mandala artwork in warm earth tones and teal, representing HTA's integration work."
+            alt="Abstract fractal mandala artwork representing consciousness and integration."
             width={1721}
             height={902}
             widths={[480, 768, 1200, 1721]}
@@ -123,7 +134,7 @@ const principles = [
             loading="eager"
           />
         </div>
-        <div class="grid grid-cols-3 gap-3 md:grid-cols-1">
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div class="border-l-4 border-[var(--hta-logo-yellow)] bg-white/10 p-4">
             <div class="font-heading text-3xl font-semibold text-white">3</div>
             <div class="text-sm font-semibold uppercase tracking-[0.05em] text-white/70">active initiatives</div>
@@ -149,6 +160,15 @@ const principles = [
           <h2 class="mt-5 max-w-2xl font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
             Transform intensity into support people can actually reach.
           </h2>
+          <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+            HTA is the nonprofit home for Kansas City programs that connect education, integration, and field care into
+            one responsible community pathway.
+          </p>
+          <div class="mt-6">
+            <Button variant="link" href={getPermalink('/about')} icon="tabler:arrow-right">
+              Learn more about HTA
+            </Button>
+          </div>
         </div>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {

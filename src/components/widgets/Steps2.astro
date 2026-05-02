@@ -20,55 +20,56 @@ const {
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <div class:list={['grid gap-8 md:gap-10 lg:grid-cols-2', { 'lg:[&>*:first-child]:order-2': isReversed }]}>
-    <div>
-      <Headline
-        title={title}
-        subtitle={subtitle}
-        tagline={tagline}
-        classes={{
-          container: 'text-left rtl:text-right max-w-none mb-5 md:mb-6',
-          title: 'mb-3 text-3xl md:text-4xl',
-          subtitle: 'text-base md:text-lg',
-        }}
-      />
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <div
+    class:list={[
+      'mb-8 grid items-end gap-6 lg:grid-cols-[0.82fr_1.18fr]',
+      { 'lg:[&>*:first-child]:order-2': isReversed },
+    ]}
+  >
+    <Headline
+      title={title}
+      subtitle={subtitle}
+      tagline={tagline}
+      classes={{
+        container: 'text-left rtl:text-right max-w-3xl mb-0',
+        title: 'mb-3 text-3xl md:text-4xl',
+        subtitle: 'text-base md:text-lg',
+      }}
+    />
 
-      <div class="w-full text-left rtl:text-right">
-        {
-          typeof callToAction === 'string' ? (
-            <Fragment set:html={callToAction} />
-          ) : (
-            callToAction &&
-            callToAction.text &&
-            callToAction.href && <Button variant="primary" {...callToAction} class="w-auto" />
-          )
-        }
-      </div>
-    </div>
-
-    <div>
-      <ul class="space-y-4 md:space-y-5">
-        {
-          items && items.length
-            ? items.map(({ title: title2, description, icon }, index) => (
-                <li class="hta-card surface-card flex gap-4 rounded-lg border p-5 md:p-6">
-                  <span class="hta-icon-badge shrink-0">
-                    {icon ? (
-                      <Icon name={icon} class="h-6 w-6 icon-bold" />
-                    ) : (
-                      <span class="font-heading text-lg font-bold text-[var(--hta-logo-yellow)]">{index + 1}</span>
-                    )}
-                  </span>
-                  <div>
-                    <h3 class="hta-strong font-heading text-lg font-semibold md:text-xl" set:html={title2} />
-                    <p class="hta-muted mt-2 text-[0.95rem] leading-7" set:html={description} />
-                  </div>
-                </li>
-              ))
-            : ''
-        }
-      </ul>
+    <div class="w-full text-left rtl:text-right lg:text-right">
+      {
+        typeof callToAction === 'string' ? (
+          <Fragment set:html={callToAction} />
+        ) : (
+          callToAction &&
+          callToAction.text &&
+          callToAction.href && <Button variant="primary" {...callToAction} class="w-auto" />
+        )
+      }
     </div>
   </div>
+
+  <ul class="grid gap-5 md:grid-cols-3">
+    {
+      items && items.length
+        ? items.map(({ title: title2, description, icon }, index) => (
+            <li class="hta-card surface-card flex h-full flex-col gap-4 rounded-lg border p-5 md:p-6">
+              <span class="hta-icon-badge shrink-0">
+                {icon ? (
+                  <Icon name={icon} class="h-6 w-6 icon-bold" />
+                ) : (
+                  <span class="font-heading text-lg font-bold text-[var(--hta-logo-yellow)]">{index + 1}</span>
+                )}
+              </span>
+              <div>
+                <h3 class="hta-strong font-heading text-lg font-semibold md:text-xl" set:html={title2} />
+                <p class="hta-muted mt-2 text-[0.95rem] leading-7" set:html={description} />
+              </div>
+            </li>
+          ))
+        : ''
+    }
+  </ul>
 </WidgetWrapper>

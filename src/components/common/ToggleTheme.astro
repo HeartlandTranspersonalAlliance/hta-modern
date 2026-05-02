@@ -20,7 +20,15 @@ const {
 
 {
   !(UI.theme && UI.theme.endsWith(':only')) && (
-    <button type="button" class={className} aria-label={label} data-aw-toggle-color-scheme>
+    <button
+      type="button"
+      class={className}
+      aria-label={label}
+      aria-pressed="false"
+      title="Toggle dark mode"
+      data-aw-toggle-color-scheme
+    >
+      <span class="sr-only">{label}</span>
       <Icon name={iconName} class:list={[iconClass, 'dark:hidden']} aria-hidden="true" />
       <Icon name="tabler:sun" class:list={[iconClass, 'hidden dark:block']} aria-hidden="true" />
     </button>

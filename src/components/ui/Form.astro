@@ -23,6 +23,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
+                aria-label={label || name}
                 class="form-field block text-base"
               />
             </div>
@@ -41,6 +42,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
+          aria-label={textarea.label || textarea.name || 'Message'}
           class="form-field block text-base"
         />
       </div>
@@ -49,16 +51,16 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
 
   {
     disclaimer && (
-      <div class="mt-4 flex items-start">
+      <div class="mt-5 flex items-start gap-3">
         <div class="flex mt-0.5">
           <input
             id="disclaimer"
             name="disclaimer"
             type="checkbox"
-            class="cursor-pointer mt-1 rounded-sm border border-[var(--aw-border)] bg-[var(--aw-surface)]"
+            class="form-checkbox mt-1 cursor-pointer rounded-sm"
           />
         </div>
-        <div class="ml-3">
+        <div>
           <label for="disclaimer" class="cursor-pointer select-none text-sm text-muted">
             {disclaimer.label}
           </label>

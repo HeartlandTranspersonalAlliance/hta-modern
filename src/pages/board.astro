@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Image from '~/components/common/Image.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
 import { getPermalink } from '~/utils/permalinks';
 
 import daleImage from '~/assets/images/hta/dale-bio2.jpg';
@@ -71,10 +72,10 @@ const members = [
       </p>
     </div>
 
-    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
       {
         members.map((member) => (
-          <article class="hta-card field-card resource-card accent-institutional flex h-full flex-col rounded-lg p-5 transition duration-200 md:p-6">
+          <article class="hta-card field-card resource-card accent-institutional flex min-h-[25rem] flex-col rounded-lg p-5 transition duration-200 md:p-6">
             <div class="grid gap-4 sm:grid-cols-[7rem_1fr] sm:items-center">
               <Image
                 src={member.image}
@@ -82,14 +83,21 @@ const members = [
                 width={112}
                 height={112}
                 widths={[112, 224]}
-                class="aspect-square h-28 w-28 rounded-md border border-[var(--hta-border)] object-cover"
+                class="aspect-square h-28 w-28 rounded-full border border-[var(--hta-border)] object-cover"
               />
               <div>
                 <h3 class="hta-strong font-heading text-xl font-semibold">{member.name}</h3>
                 <p class="font-semibold text-[var(--hta-link)]">{member.role}</p>
               </div>
             </div>
-            <p class="hta-muted readable-copy mt-5 text-base">{member.bio}</p>
+            <p class="hta-muted readable-copy mt-5 line-clamp-3 text-base">{member.bio}</p>
+            <details class="group mt-auto pt-4">
+              <summary class="hta-focus-ring inline-flex cursor-pointer list-none items-center gap-2 rounded-md text-sm font-bold uppercase tracking-[0.04em] text-[var(--hta-link)] transition hover:text-[var(--hta-link-hover)]">
+                Read more
+                <Icon name="tabler:chevron-down" class="h-4 w-4 transition group-open:rotate-180" />
+              </summary>
+              <p class="hta-muted readable-copy mt-3 text-base leading-relaxed">{member.bio}</p>
+            </details>
           </article>
         ))
       }
@@ -98,7 +106,7 @@ const members = [
 
   <CallToAction
     title="Help build the next phase"
-    subtitle="HTA is actively expanding board capacity with people who can strengthen governance, community programs, and professional partnerships."
+    subtitle="Board service supports governance, community programs, fundraising, partnerships, and responsible public communication. HTA is actively expanding capacity with people who can help steward the next stage."
     actions={[
       {
         variant: 'primary',

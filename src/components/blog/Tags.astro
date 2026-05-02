@@ -11,7 +11,7 @@ export interface Props {
   isCategory?: boolean;
 }
 
-const { tags, class: className = 'text-sm', title = undefined, isCategory = false } = Astro.props;
+const { tags, class: className = 'flex flex-wrap gap-2 text-xs', title = undefined, isCategory = false } = Astro.props;
 ---
 
 {
@@ -22,11 +22,11 @@ const { tags, class: className = 'text-sm', title = undefined, isCategory = fals
       )}
       <ul class={className}>
         {tags.map((tag) => (
-          <li class="bg-[var(--aw-surface)] border border-[var(--aw-border)] rounded-sm inline-block mr-2 rtl:mr-0 rtl:ml-2 mb-2 py-0.5 px-2 lowercase font-medium">
+          <li class="hta-badge lowercase">
             {!APP_BLOG?.tag?.isEnabled ? (
               tag.title
             ) : (
-              <a href={getPermalink(tag.slug, isCategory ? 'category' : 'tag')} class="text-muted hover:text-primary">
+              <a href={getPermalink(tag.slug, isCategory ? 'category' : 'tag')} class="hta-focus-ring rounded-full">
                 {tag.title}
               </a>
             )}

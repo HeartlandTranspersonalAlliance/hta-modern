@@ -1,6 +1,5 @@
 ---
 import type { ImageMetadata } from 'astro';
-import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 import PostTags from '~/components/blog/Tags.astro';
 
@@ -22,15 +21,16 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
 ---
 
 <article
-  class={`surface-card border rounded-lg p-5 md:p-6 max-w-none grid gap-6 md:gap-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${
-    image ? 'md:grid-cols-[0.92fr_1.08fr]' : ''
-  }`}
+  class="surface-card flex h-full max-w-none flex-col overflow-hidden rounded-lg border intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
 >
   {
     image &&
       (link ? (
-        <a class="relative block group" href={link ?? 'javascript:void(0)'}>
-          <div class="relative h-56 overflow-hidden bg-[var(--aw-surface)] rounded-md border border-[var(--aw-border)]">
+        <a
+          class="group relative block overflow-hidden border-b border-[var(--hta-border)]"
+          href={link ?? 'javascript:void(0)'}
+        >
+          <div class="relative aspect-[16/9] overflow-hidden bg-[var(--aw-surface)]">
             {image && (
               <Image
                 src={image}
@@ -47,7 +47,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
           </div>
         </a>
       ) : (
-        <div class="relative h-56 overflow-hidden bg-[var(--aw-surface)] rounded-md border border-[var(--aw-border)]">
+        <div class="relative aspect-[16/9] overflow-hidden border-b border-[var(--hta-border)] bg-[var(--aw-surface)]">
           {image && (
             <Image
               src={image}
@@ -64,17 +64,15 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
         </div>
       ))
   }
-  <div>
+  <div class="flex flex-1 flex-col p-5 md:p-6">
     <header>
-      <div class="mb-2 text-sm text-muted">
-        <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5" />
+      <div class="mb-3 text-sm leading-6 text-muted">
         <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
         {
           post.author && (
             <>
               {' '}
-              · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5" />
-              <span>{post.author.replaceAll('-', ' ')}</span>
+              &bull; <span>{post.author.replaceAll('-', ' ')}</span>
             </>
           )
         }
@@ -82,7 +80,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
           post.category && (
             <>
               {' '}
-              ·{' '}
+              &bull;{' '}
               <a class="hover:underline" href={getPermalink(post.category.slug, 'category')}>
                 {post.category.title}
               </a>
@@ -90,7 +88,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
           )
         }
       </div>
-      <h2 class="text-2xl font-semibold leading-tight mb-2 font-heading">
+      <h2 class="mb-3 font-heading text-2xl font-semibold leading-tight">
         {
           link ? (
             <a class="inline-block hover:text-primary transition ease-in duration-200" href={link}>
@@ -103,10 +101,10 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
       </h2>
     </header>
 
-    {post.excerpt && <p class="text-muted text-base md:text-lg leading-relaxed">{post.excerpt}</p>}
+    {post.excerpt && <p class="line-clamp-3 text-base leading-relaxed text-muted md:text-lg">{post.excerpt}</p>}
     {
       post.tags && Array.isArray(post.tags) ? (
-        <footer class="mt-5">
+        <footer class="mt-auto pt-5">
           <PostTags tags={post.tags} />
         </footer>
       ) : (
