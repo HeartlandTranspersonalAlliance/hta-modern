@@ -1,6 +1,5 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
 
 const metadata = {
   title: 'Board Application',
@@ -8,11 +7,17 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <HeroText
-    tagline="Board Application"
-    title="Serve HTA"
-    subtitle="Complete the application below. We review submissions on a rolling basis."
-  />
+  <section class="board-app-hero relative not-prose border-y border-white/10">
+    <div class="mx-auto max-w-5xl px-4 py-10 sm:px-6 md:py-12">
+      <p class="section-kicker">Board Application</p>
+      <h1 class="mt-5 max-w-3xl font-heading text-4xl font-semibold leading-[1.04] text-white md:text-5xl">
+        Serve HTA
+      </h1>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-white/80 md:text-xl">
+        Complete the application below. We review submissions on a rolling basis.
+      </p>
+    </div>
+  </section>
 
   <section class="px-4 py-14 sm:px-6 md:py-16 mx-auto max-w-5xl not-prose">
     <div class="mb-8 max-w-3xl">
@@ -35,3 +40,11 @@ const metadata = {
     </div>
   </section>
 </Layout>
+
+<style>
+  .board-app-hero {
+    background:
+      linear-gradient(90deg, rgba(8, 112, 134, 0.24), transparent 38%),
+      var(--hta-hero-bg);
+  }
+</style>

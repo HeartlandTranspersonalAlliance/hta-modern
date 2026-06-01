@@ -6,10 +6,9 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Button from '~/components/ui/Button.astro';
 import ProgramCard from '~/components/ui/ProgramCard.astro';
-import { getPermalink } from '~/utils/permalinks';
+import { getAsset, getPermalink } from '~/utils/permalinks';
 
 import heroImage from '~/assets/images/hta/hero-image.jpg';
-import publicHealthGrid from '~/assets/images/hta/visuals/public-health-grid.svg';
 
 const metadata = {
   title: 'Heartland Transpersonal Alliance',
@@ -224,10 +223,10 @@ const principles = [
     <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
       <div class="overflow-hidden rounded-lg border border-[var(--hta-border)] bg-[var(--hta-paper)]">
         <img
-          src={publicHealthGrid.src}
+          src={getAsset('/images/hta/placeholders/regional-ecosystem.png')}
           width="720"
           height="420"
-          alt=""
+          alt="Temporary regional ecosystem placeholder showing connected education, integration, community, and field care pathways."
           class="h-full min-h-[22rem] w-full object-cover"
           loading="lazy"
         />
