@@ -32,16 +32,22 @@ import { UI } from 'astrowind:config';
   };
   initTheme();
 
+  window.__htaInteractionController = null;
+
   function attachEvent(selector, event, fn) {
+    const signal = window.__htaInteractionController?.signal;
     const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
     if (matches && matches.length) {
       matches.forEach((elem) => {
-        elem.addEventListener(event, (e) => fn(e, elem), false);
+        elem.addEventListener(event, (e) => fn(e, elem), { signal });
       });
     }
   }
 
   const onLoad = function () {
+    window.__htaInteractionController?.abort();
+    window.__htaInteractionController = new AbortController();
+
     let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
 
@@ -102,11 +108,15 @@ import { UI } from 'astrowind:config';
     });
 
     const screenSize = window.matchMedia('(max-width: 767px)');
-    screenSize.addEventListener('change', function () {
-      if (!screenSize.matches) {
-        closeMobileNav();
-      }
-    });
+    screenSize.addEventListener(
+      'change',
+      function () {
+        if (!screenSize.matches) {
+          closeMobileNav();
+        }
+      },
+      { signal: window.__htaInteractionController.signal }
+    );
 
     function applyHeaderStylesOnScroll() {
       const header = document.querySelector('#header[data-aw-sticky-header]');
@@ -140,10 +150,10 @@ import { UI } from 'astrowind:config';
     document.body.classList.remove('overflow-hidden');
   };
 
-  window.onload = onLoad;
-  window.onpageshow = onPageShow;
+  window.addEventListener('load', onLoad, { once: true });
+  window.addEventListener('pageshow', onPageShow);
 
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener('astro:page-load', () => {
     initTheme();
     onLoad();
     onPageShow();
@@ -159,6 +169,9 @@ import { UI } from 'astrowind:config';
     elements: null,
 
     start() {
+      this.observer?.disconnect();
+      this.animationCounter = 0;
+
       const selectors = [
         '[class*=" intersect:"]',
         '[class*=":intersect:"]',
@@ -179,7 +192,9 @@ import { UI } from 'astrowind:config';
       };
 
       this.elements.forEach((el) => {
-        el.setAttribute('no-intersect', '');
+        if (!el.hasAttribute('data-animated')) {
+          el.setAttribute('no-intersect', '');
+        }
         el._intersectionThreshold = getThreshold(el);
       });
 
@@ -248,7 +263,7 @@ import { UI } from 'astrowind:config';
 
   Observer.start();
 
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener('astro:page-load', () => {
     Observer.start();
   });
 </script>
