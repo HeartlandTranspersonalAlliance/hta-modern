@@ -9,6 +9,7 @@ let
       pkgs.gawk
       pkgs.gnugrep
       pkgs.gnused
+      pkgs.lsof
       pkgs.nginx
       pkgs.nodejs_24
     ] ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
@@ -27,6 +28,7 @@ in
 
   packages = [
     pkgs.nginx
+    pkgs.lsof
     pkgs.nodejs_24
     htaLanPreview
   ] ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
@@ -44,7 +46,7 @@ in
   processes.preview.exec = "hta-lan-preview";
 
   enterShell = ''
-    preview_port="''${LAN_PREVIEW_PORT:-''${HTA_PORT:-8081}}"
+    preview_port="''${HTA_PORT:-8081}"
     preview_auto="''${LAN_PREVIEW_AUTO:-''${HTA_AUTO_PREVIEW:-1}}"
     preview_build="''${LAN_PREVIEW_AUTO_BUILD:-''${HTA_AUTO_BUILD:-0}}"
     preview_root="''${LAN_PREVIEW_SITE_ROOT:-''${HTA_SITE_ROOT:-$PWD}}"

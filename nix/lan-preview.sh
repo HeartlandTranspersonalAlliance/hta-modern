@@ -22,8 +22,7 @@ Environment:
   ${env_prefix}_BUILD=1           Build before serving. Set to 0 to serve existing dist/.
   ${env_prefix}_SITE_ROOT=\$PWD    Site root. Defaults to the current directory.
   ${env_prefix}_DIST_DIR=dist     Static output directory, relative to site root unless absolute.
-  ${env_prefix}_BASE_PATH=        Optional deployment base path, for example /hta-modern.
-  LAN_PREVIEW_PORT=$default_port  Shared override for the preview port.
+  ${env_prefix}_BASE_PATH=        Optional deployment base path for non-root previews.
 
 Examples:
   $command_name
@@ -72,7 +71,7 @@ base_path_var="${env_prefix}_BASE_PATH"
 
 site_root="$(cd "${LAN_PREVIEW_SITE_ROOT:-${!site_root_var:-$PWD}}" && pwd)"
 host="${LAN_PREVIEW_HOST:-${!host_var:-0.0.0.0}}"
-port="${LAN_PREVIEW_PORT:-${!port_var:-$default_port}}"
+port="${!port_var:-$default_port}"
 build="${LAN_PREVIEW_BUILD:-${!build_var:-1}}"
 dist_setting="${LAN_PREVIEW_DIST_DIR:-${!dist_dir_var:-dist}}"
 base_path="${LAN_PREVIEW_BASE_PATH:-${!base_path_var:-}}"
@@ -146,6 +145,28 @@ running_pid() {
   fi
 
   return 1
+}
+
+port_in_use() {
+  if command -v lsof >/dev/null 2>&1; then
+    lsof -nP -iTCP:"$port" -sTCP:LISTEN -t 2>/dev/null | grep -q .
+    return $?
+  fi
+
+  if command -v ss >/dev/null 2>&1; then
+    ss -H -ltn "sport = :$port" 2>/dev/null | grep -q .
+    return $?
+  fi
+
+  return 1
+}
+
+check_port_available() {
+  if port_in_use; then
+    echo "error: $name nginx preview cannot start: $host:$port is already in use" >&2
+    echo "       stop the process using that port or choose another port with ${env_prefix}_PORT=$((port + 1))." >&2
+    exit 1
+  fi
 }
 
 print_urls() {
@@ -353,6 +374,8 @@ if pid="$(running_pid)"; then
 fi
 
 rm -f "$pid_file"
+
+check_port_available
 
 write_config
 

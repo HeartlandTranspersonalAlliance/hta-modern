@@ -191,11 +191,35 @@ import { UI } from 'astrowind:config';
         return 0;
       };
 
+      const getViewportRatio = (element) => {
+        const rect = element.getBoundingClientRect();
+        if (rect.height <= 0) return 0;
+        const visible = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        return Math.max(0, Math.min(visible / rect.height, 1));
+      };
+
+      const startsInViewport = (element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.92 && rect.bottom > window.innerHeight * 0.08;
+      };
+
+      const revealViewportElements = () => {
+        this.elements.forEach((el) => {
+          if (startsInViewport(el)) {
+            el.removeAttribute('no-intersect');
+            el.setAttribute('data-animated', 'true');
+          }
+        });
+      };
+
       this.elements.forEach((el) => {
-        if (!el.hasAttribute('data-animated')) {
+        el._intersectionThreshold = getThreshold(el);
+        if (startsInViewport(el) || getViewportRatio(el) >= el._intersectionThreshold) {
+          el.removeAttribute('no-intersect');
+          el.setAttribute('data-animated', 'true');
+        } else if (!el.hasAttribute('data-animated')) {
           el.setAttribute('no-intersect', '');
         }
-        el._intersectionThreshold = getThreshold(el);
       });
 
       const callback = (entries) => {
@@ -249,6 +273,9 @@ import { UI } from 'astrowind:config';
       this.elements.forEach((el) => {
         this.observer.observe(el);
       });
+
+      requestAnimationFrame(revealViewportElements);
+      window.setTimeout(revealViewportElements, 300);
     },
 
     removeAnimationDelay() {

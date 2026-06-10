@@ -209,9 +209,31 @@
   }
 }
 
+@keyframes hta-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .bg-page {
     background-color: var(--bg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .motion-safe\:md\:opacity-0[no-intersect] {
+      opacity: 0;
+    }
+
+    .motion-safe\:md\:intersect\:animate-fade:not([no-intersect]) {
+      animation: hta-fade-in-up 1s both;
+    }
   }
 
   .bg-dark {
