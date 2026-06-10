@@ -123,7 +123,7 @@ fi
 
 runtime_base="${LAN_PREVIEW_RUNTIME_DIR:-${XDG_RUNTIME_DIR:-}}"
 if [[ -z "$runtime_base" || ! -d "$runtime_base" || ! -w "$runtime_base" ]]; then
-  runtime_base="${TMPDIR:-/tmp}"
+  runtime_base="/tmp"
 fi
 
 runtime_slug="$(printf "%s" "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g; s/--*/-/g; s/^-//; s/-$//')"
@@ -224,13 +224,19 @@ prepare_runtime() {
 close_extra_fds() {
   local fd fd_dir fd_path
 
-  fd_dir="/proc/$$/fd"
-  [[ -d "$fd_dir" ]] || return 0
+  if [[ -d "/proc/$$/fd" ]]; then
+    fd_dir="/proc/$$/fd"
+  elif [[ -d "/dev/fd" ]]; then
+    fd_dir="/dev/fd"
+  else
+    return 0
+  fi
 
   for fd_path in "$fd_dir"/*; do
     fd="${fd_path##*/}"
     [[ "$fd" =~ ^[0-9]+$ ]] || continue
     [[ "$fd" -gt 2 ]] || continue
+    [[ "$fd" -ne 255 ]] || continue
     eval "exec ${fd}>&-"
   done
 }
