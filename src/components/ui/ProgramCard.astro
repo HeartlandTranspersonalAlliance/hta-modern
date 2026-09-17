@@ -38,7 +38,7 @@ const titleMargin = label ? 'mt-3' : number ? 'mt-8' : icon ? 'mt-5' : 'mt-6';
 <article class={twMerge(`editorial-card program-card ${accent} flex h-full flex-col p-6`, className)}>
   {
     number || icon ? (
-      <div class:list={['flex items-start gap-4', number ? 'justify-between' : 'justify-start']}>
+      <div class:list={['flex items-start gap-4', number ? 'justify-between' : 'justify-center']}>
         {number && <span class="font-heading text-4xl font-semibold text-[var(--hta-card-accent)]">{number}</span>}
         {icon && (
           <span class="hta-icon-badge !h-12 !w-12" aria-hidden="true">
