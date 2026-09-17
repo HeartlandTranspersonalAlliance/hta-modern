@@ -1,16 +1,8 @@
 ---
-import { SITE } from 'astrowind:config';
-import logoWordmark from '~/assets/images/hta_header_footer.png';
+import logo from '~/assets/images/hta/hta-mark.svg';
 ---
 
-<span class="flex items-center self-center whitespace-nowrap">
-  <img
-    src={logoWordmark.src}
-    width={logoWordmark.width}
-    height={logoWordmark.height}
-    alt={SITE?.name ?? 'Heartland Transpersonal Alliance'}
-    class="h-10 w-auto max-w-[12.5rem] object-contain md:h-11 md:max-w-[14rem]"
-    loading="eager"
-    decoding="async"
-  />
+<span class="hta-brand">
+  <img src={logo.src} width="360" height="120" alt="" decoding="async" />
+  <span class="hta-brand-name">Heartland<br />Transpersonal Alliance</span>
 </span>

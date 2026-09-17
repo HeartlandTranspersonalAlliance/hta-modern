@@ -24,13 +24,7 @@ const {
   items && items.length > 0 && (
     <div class={containerClass}>
       {items.map(({ title, description, icon, classes: itemClasses = {} }, index = 0) => (
-        <article
-          class={twMerge(
-            'relative pl-14 pb-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
-            panelClass,
-            itemClasses?.panel
-          )}
-        >
+        <article class={twMerge('relative pl-14 pb-8', panelClass, itemClasses?.panel)}>
           <div class="absolute left-0 top-0 flex flex-col items-center">
             <span class="hta-icon-badge">
               {(icon || defaultIcon) && (

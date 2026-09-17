@@ -1,14 +1,11 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import { Icon } from 'astro-icon/components';
-import Image from '~/components/common/Image.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Button from '~/components/ui/Button.astro';
 import ProgramCard from '~/components/ui/ProgramCard.astro';
-import { getAsset, getPermalink } from '~/utils/permalinks';
-
-import heroImage from '~/assets/images/hta/hero-image.jpg';
+import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'Heartland Transpersonal Alliance',
@@ -46,7 +43,6 @@ const pillars = [
 
 const pathways = [
   {
-    label: '01',
     icon: 'tabler:circles-relation',
     title: 'Integration circles',
     description:
@@ -56,7 +52,6 @@ const pathways = [
     accent: 'accent-integration',
   },
   {
-    label: '02',
     icon: 'tabler:school',
     title: 'Public education',
     description:
@@ -66,7 +61,6 @@ const pathways = [
     accent: 'accent-education',
   },
   {
-    label: '03',
     icon: 'tabler:shield-heart',
     title: 'Event support',
     description:
@@ -85,79 +79,38 @@ const principles = [
 ---
 
 <Layout metadata={metadata}>
-  <section class="institutional-band relative not-prose border-y border-white/10">
-    <div
-      class="mx-auto grid max-w-7xl items-center gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-2 lg:gap-12 lg:py-20"
-    >
-      <div class="max-w-3xl">
-        <p class="section-kicker">Community Education Harm Reduction Integration</p>
-        <h1 class="mt-6 font-heading text-5xl font-semibold leading-[0.98] text-white md:text-6xl lg:text-7xl">
-          <span class="block">Heartland Transpersonal</span>
-          <span class="block">Alliance</span>
-        </h1>
-        <p class="mt-6 max-w-md text-lg leading-relaxed text-white/80 md:text-xl">
-          HTA builds practical pathways for safe, responsible exploration of consciousness in Kansas City through
-          nonprofit governance, community education, integration, and field-tested harm reduction.
+  <section class="home-hero not-prose" aria-labelledby="home-title">
+    <div class="home-hero-inner">
+      <div class="hero-angle" aria-hidden="true"></div>
+      <div class="relative max-w-3xl">
+        <p class="section-kicker">Kansas City · Community nonprofit</p>
+        <h1 id="home-title" class="mt-6">Heartland<br />Transpersonal<br />Alliance</h1>
+        <p class="mt-7 max-w-xl text-xl leading-relaxed">
+          A community for the exploration of consciousness.<br class="hidden sm:block" />
+          Grounded in education, integration, and care.
         </p>
-
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button
-            variant="primary"
-            href={getPermalink('/initiatives')}
-            icon="tabler:arrow-right"
-            class="w-full sm:w-auto"
+          <Button variant="primary" href={getPermalink('/initiatives')} icon="tabler:arrow-right"
+            >Explore initiatives</Button
           >
-            Explore Initiatives
-          </Button>
-          <Button
-            variant="secondary"
-            href={getPermalink('/board')}
-            icon="tabler:users"
-            class="w-full border-white/40 text-white hover:text-white sm:w-auto"
-          >
-            Meet the Board
-          </Button>
+          <Button variant="secondary" href={getPermalink('/about')}>About the alliance</Button>
         </div>
       </div>
-
-      <div class="grid gap-4">
-        <div class="overflow-hidden rounded-lg border border-white/20 bg-white/5">
-          <Image
-            src={heroImage}
-            alt="Abstract fractal mandala artwork representing consciousness and integration."
-            width={1721}
-            height={902}
-            widths={[480, 768, 1200, 1721]}
-            sizes="(max-width: 1023px) 100vw, 48vw"
-            class="aspect-[16/10] h-full w-full object-cover opacity-90"
-            loading="eager"
-          />
-        </div>
-        <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <div class="border-l-4 border-[var(--hta-logo-yellow)] bg-white/10 p-4">
-            <div class="font-heading text-3xl font-semibold text-white">3</div>
-            <div class="text-sm font-semibold uppercase tracking-[0.05em] text-white/70">active initiatives</div>
-          </div>
-          <div class="border-l-4 border-[var(--hta-logo-cyan)] bg-white/10 p-4">
-            <div class="font-heading text-2xl font-semibold text-white">501(c)(3)</div>
-            <div class="text-sm font-semibold uppercase tracking-[0.05em] text-white/70">Missouri nonprofit</div>
-          </div>
-          <div class="border-l-4 border-white/40 bg-white/10 p-4">
-            <div class="font-heading text-3xl font-semibold text-white">KC</div>
-            <div class="text-sm font-semibold uppercase tracking-[0.05em] text-white/70">regional focus</div>
-          </div>
-        </div>
+      <div class="hero-footnote">
+        <span>Rooted in Kansas City</span>
+        <span>Three connected initiatives</span>
+        <span>Registered 501(c)(3) nonprofit</span>
       </div>
     </div>
   </section>
 
   <section class="relative not-prose">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
-      <div class="grid items-start gap-8 lg:grid-cols-[0.84fr_1.16fr]">
+      <div class="grid items-start gap-10">
         <div>
           <p class="section-kicker">What HTA Makes Possible</p>
-          <h2 class="mt-5 max-w-2xl font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
-            Transform intensity into support people can actually reach.
+          <h2 class="mt-5 max-w-3xl font-heading text-3xl font-medium leading-[1.15] md:text-4xl">
+            Support that connects people, knowledge, and care.
           </h2>
           <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
             HTA is the nonprofit home for Kansas City programs that connect education, integration, and field care into
@@ -169,7 +122,7 @@ const principles = [
             </Button>
           </div>
         </div>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-5 md:grid-cols-3">
           {
             pillars.map((item) => (
               <ProgramCard
@@ -191,8 +144,8 @@ const principles = [
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
       <div class="mb-8 grid items-end gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <p class="section-kicker">Begin Your Journey</p>
-          <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">Three doors into the work</h2>
+          <p class="section-kicker">Our initiatives</p>
+          <h2 class="mt-5 font-heading text-3xl font-medium leading-[1.15] md:text-4xl">Find your way into the work</h2>
         </div>
         <p class="max-w-3xl text-lg leading-relaxed text-muted">
           Inspired by compassionate peer-support models, HTA gives Kansas City trusted programs, trained collaborators,
@@ -206,7 +159,6 @@ const principles = [
             <ProgramCard
               accent={item.accent}
               icon={item.icon}
-              number={item.label}
               title={item.title}
               description={item.description}
               href={item.href}
@@ -220,45 +172,30 @@ const principles = [
   </section>
 
   <section class="relative not-prose">
-    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
-      <div class="overflow-hidden rounded-lg border border-[var(--hta-border)] bg-[var(--hta-paper)]">
-        <img
-          src={getAsset('/images/hta/placeholders/regional-ecosystem.png')}
-          width="720"
-          height="420"
-          alt="Temporary regional ecosystem placeholder showing connected education, integration, community, and field care pathways."
-          class="h-full min-h-[22rem] w-full object-cover"
-          loading="lazy"
-        />
-      </div>
-
-      <div class="paper-panel p-6 md:p-8 lg:p-10">
-        <p class="section-kicker">Regional Ecosystem</p>
-        <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
-          One alliance, multiple access points.
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:py-24">
+      <div>
+        <p class="section-kicker">One alliance, shared purpose</p>
+        <h2 class="mt-5 font-heading text-3xl font-medium leading-tight md:text-4xl">
+          Local relationships.<br />Lasting support.
         </h2>
-        <p class="mt-5 text-lg leading-relaxed text-muted">
-          HTA aligns public education, peer integration, and event-based care so community members and partners can find
-          the right form of support at the right moment.
+        <p class="mt-5 max-w-xl text-lg leading-relaxed">
+          HTA connects public education, peer integration, and event-based care so community members and partners can
+          find the right support at the right moment.
         </p>
-
-        <ul class="mt-8 grid gap-4">
-          {
-            principles.map((principle) => (
-              <li class="resource-card accent-institutional flex gap-3 bg-[var(--hta-surface)] p-4 text-base leading-relaxed">
-                <span class="hta-icon-badge mt-0.5">
-                  <Icon name="tabler:check" />
-                </span>
-                <span class="hta-strong font-semibold">{principle}</span>
-              </li>
-            ))
-          }
-        </ul>
-
-        <div class="mt-8">
-          <a class="btn-primary" href={getPermalink('/initiatives')}>View all initiatives</a>
-        </div>
+        <Button variant="link" href={getPermalink('/board')} icon="tabler:arrow-right" class="mt-6"
+          >Meet our board</Button
+        >
       </div>
+      <ul class="self-center divide-y divide-[var(--hta-border)] border-y border-[var(--hta-border)]">
+        {
+          principles.map((principle) => (
+            <li class="flex items-center gap-4 py-6 text-lg">
+              <Icon name="tabler:check" class="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+              <span>{principle}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 

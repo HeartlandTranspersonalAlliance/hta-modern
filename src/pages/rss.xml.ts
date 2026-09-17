@@ -17,7 +17,7 @@ export const GET = async () => {
   const rss = await getRssString({
     title: `${SITE.name}’s Blog`,
     description: METADATA?.description || '',
-    site: import.meta.env.SITE,
+    site: new URL(SITE.base, SITE.site).toString(),
 
     items: posts.map((post) => ({
       link: getPermalink(post.permalink, 'post'),

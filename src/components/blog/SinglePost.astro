@@ -20,9 +20,7 @@ const { post, url } = Astro.props;
 
 <section class="py-6 md:py-10 mx-auto">
   <article class="max-w-5xl mx-auto px-4 sm:px-6">
-    <header
-      class="surface-panel border rounded-lg p-6 md:p-8 lg:p-10 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-    >
+    <header class="surface-panel border rounded-lg p-6 md:p-8 lg:p-10">
       <div class="text-sm text-muted mb-3">
         <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5" />
         <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>

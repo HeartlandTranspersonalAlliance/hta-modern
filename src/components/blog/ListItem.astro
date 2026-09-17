@@ -20,9 +20,7 @@ const image = (await findImage(post.image)) as ImageMetadata | undefined;
 const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
 ---
 
-<article
-  class="surface-card flex h-full max-w-none flex-col overflow-hidden rounded-lg border intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
->
+<article class="surface-card flex h-full max-w-none flex-col overflow-hidden rounded-lg border">
   {
     image &&
       (link ? (

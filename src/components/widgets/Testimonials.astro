@@ -26,7 +26,7 @@ const {
     {
       testimonials &&
         testimonials.map(({ title, testimonial, name, job, image }) => (
-          <article class="field-card rounded-lg p-5 md:p-6 flex flex-col h-full intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+          <article class="field-card rounded-lg p-5 md:p-6 flex flex-col h-full">
             {title && <h2 class="text-lg font-semibold font-heading pb-3">{title}</h2>}
             {testimonial && (
               <blockquote class="flex-auto">

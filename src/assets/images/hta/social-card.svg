@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#e7ebe9"/>
+<g transform="translate(72 64) scale(.5)" fill="#000"><path d="M0 0h21v51h61V0h21v120H82V72H21v48H0zM123 0h100v21h-39v99h-22V21h-39z"/><path fill-rule="evenodd" d="M244 0l116 120h-29l-8-8h-58v8h-21V0zm21 39v52h37z"/><path d="M274 0h78v79z"/></g>
+<g font-family="Arial, sans-serif" fill="#202d2d">
+<text x="72" y="252" font-size="66" letter-spacing="-2">Heartland</text>
+<text x="72" y="330" font-size="66" letter-spacing="-2">Transpersonal Alliance</text>
+<text x="72" y="406" font-size="28" fill="#4d605d">Community. Education. Integration. Care.</text>
+<path d="M72 500H1128" stroke="#c7d0cd"/>
+<text x="72" y="550" font-size="22" fill="#326b65">KANSAS CITY · HEARTLANDTA.ORG</text>
+</g></svg>

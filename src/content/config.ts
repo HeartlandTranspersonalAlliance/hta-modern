@@ -46,8 +46,18 @@ const metadataDefinition = () =>
     })
     .optional();
 
+const postLoader = glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/post/hta' });
+
 const postCollection = defineCollection({
-  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/post/hta' }),
+  loader: {
+    name: 'hta-post-loader',
+    async load(context) {
+      // Astro 5.12's glob loader returns early for an empty directory, retaining
+      // cached articles. Rebuild this small collection so removed news stays removed.
+      context.store.clear();
+      await postLoader.load(context);
+    },
+  },
   schema: z.object({
     publishDate: z.date().optional(),
     updateDate: z.date().optional(),

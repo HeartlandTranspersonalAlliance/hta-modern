@@ -81,7 +81,7 @@ const infrastructure = [
       <div class="mb-8 grid items-end gap-6 lg:grid-cols-[0.82fr_1.18fr]">
         <div>
           <p class="section-kicker">Program Pathways</p>
-          <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
+          <h2 class="mt-5 font-heading text-3xl font-medium leading-[1.15] md:text-4xl">
             Distinct programs, shared standards.
           </h2>
         </div>
@@ -98,11 +98,10 @@ const infrastructure = [
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
-          initiatives.map((initiative, index) => (
+          initiatives.map((initiative) => (
             <ProgramCard
               accent={initiative.accent}
               icon={initiative.icon}
-              number={String(index + 1).padStart(2, '0')}
               label={initiative.label}
               title={initiative.name}
               description={initiative.summary}
@@ -121,7 +120,7 @@ const infrastructure = [
     <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-[0.9fr_1.1fr]">
       <div class="paper-panel p-6 md:p-8 lg:p-10">
         <p class="section-kicker">Shared Infrastructure</p>
-        <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">
+        <h2 class="mt-5 font-heading text-3xl font-medium leading-[1.15] md:text-4xl">
           Education, integration, and field support stay connected.
         </h2>
         <p class="mt-5 text-lg leading-relaxed text-muted">
@@ -132,14 +131,11 @@ const infrastructure = [
 
       <div class="grid gap-4 sm:grid-cols-2">
         {
-          infrastructure.map((item, index) => (
+          infrastructure.map((item) => (
             <article class={`editorial-card resource-card ${item.accent} flex h-full flex-col p-5 md:p-6`}>
               <div class="flex items-center justify-between gap-4">
                 <span class="hta-icon-badge">
                   <Icon name={item.icon} />
-                </span>
-                <span class="font-heading text-2xl font-semibold text-[var(--hta-card-accent)]">
-                  {String(index + 1).padStart(2, '0')}
                 </span>
               </div>
               <h3 class="hta-strong mt-5 font-heading text-2xl font-semibold leading-tight">{item.title}</h3>

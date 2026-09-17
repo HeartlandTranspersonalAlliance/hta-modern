@@ -1,57 +1,128 @@
----
-import { UI } from 'astrowind:config';
----
-
-<script is:inline define:vars={{ defaultTheme: UI.theme }}>
-  if (window.basic_script) {
-    return;
-  }
-
-  window.basic_script = true;
-
-  function applyTheme() {
-    document.documentElement.classList.add('dark');
-    try {
-      localStorage.theme = 'dark';
-    } catch {
-      // Theme persistence is optional.
+<script is:inline>
+  (() => {
+    if (window.basic_script) {
+      return;
     }
-    syncThemeToggleState();
-  }
 
-  function syncThemeToggleState() {
-    const isDark = document.documentElement.classList.contains('dark');
-    document.querySelectorAll('[data-aw-toggle-color-scheme]').forEach((elem) => {
-      elem.setAttribute('aria-pressed', String(isDark));
-      elem.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    });
-  }
+    window.basic_script = true;
 
-  const initTheme = function () {
-    applyTheme(defaultTheme);
-  };
-  initTheme();
+    window.__htaInteractionController = null;
 
-  window.__htaInteractionController = null;
+    function attachEvent(selector, event, fn) {
+      const signal = window.__htaInteractionController?.signal;
+      const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
+      if (matches && matches.length) {
+        matches.forEach((elem) => {
+          elem.addEventListener(event, (e) => fn(e, elem), { signal });
+        });
+      }
+    }
 
-  function attachEvent(selector, event, fn) {
-    const signal = window.__htaInteractionController?.signal;
-    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
-    if (matches && matches.length) {
-      matches.forEach((elem) => {
-        elem.addEventListener(event, (e) => fn(e, elem), { signal });
+    const onLoad = function () {
+      window.__htaInteractionController?.abort();
+      window.__htaInteractionController = new AbortController();
+
+      let lastKnownScrollPosition = window.scrollY;
+      let ticking = true;
+
+      const closeMobileNav = () => {
+        const toggle = document.querySelector('[data-aw-toggle-menu]');
+        toggle?.classList.remove('expanded');
+        toggle?.setAttribute('aria-expanded', 'false');
+        document.querySelector('#header [data-aw-mobile-nav]')?.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      };
+
+      attachEvent('#header [data-aw-mobile-nav]', 'click', function (event) {
+        if (event.target.closest('a')) closeMobileNav();
       });
-    }
-  }
+      attachEvent([document], 'keydown', function (event) {
+        if (event.key === 'Escape') {
+          const toggle = document.querySelector('[data-aw-toggle-menu]');
+          const wasOpen = toggle?.getAttribute('aria-expanded') === 'true';
+          closeMobileNav();
+          if (wasOpen) toggle.focus();
+        }
+      });
 
-  const onLoad = function () {
-    window.__htaInteractionController?.abort();
-    window.__htaInteractionController = new AbortController();
+      attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
+        elem.classList.toggle('expanded');
+        const mobileNav = document.querySelector('#header [data-aw-mobile-nav]');
+        mobileNav?.classList.toggle('hidden');
+        const isOpen = !mobileNav?.classList.contains('hidden');
+        elem.setAttribute('aria-expanded', String(isOpen));
+        document.body.classList.toggle('overflow-hidden', isOpen);
+      });
 
-    let lastKnownScrollPosition = window.scrollY;
-    let ticking = true;
+      attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
+        const network = elem.getAttribute('data-aw-social-share');
+        const url = encodeURIComponent(elem.getAttribute('data-aw-url'));
+        const text = encodeURIComponent(elem.getAttribute('data-aw-text'));
 
-    const closeMobileNav = () => {
+        let href;
+        switch (network) {
+          case 'facebook':
+            href = `https://www.facebook.com/sharer.php?u=${url}`;
+            break;
+          case 'twitter':
+            href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+            break;
+          case 'linkedin':
+            href = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}`;
+            break;
+          case 'whatsapp':
+            href = `https://wa.me/?text=${text}%20${url}`;
+            break;
+          case 'mail':
+            href = `mailto:?subject=%22${text}%22&body=${text}%20${url}`;
+            break;
+
+          default:
+            return;
+        }
+
+        const newlink = document.createElement('a');
+        newlink.target = '_blank';
+        newlink.href = href;
+        newlink.click();
+      });
+
+      const screenSize = window.matchMedia('(max-width: 1023px)');
+      screenSize.addEventListener(
+        'change',
+        function () {
+          if (!screenSize.matches) {
+            closeMobileNav();
+          }
+        },
+        { signal: window.__htaInteractionController.signal }
+      );
+
+      function applyHeaderStylesOnScroll() {
+        const header = document.querySelector('#header[data-aw-sticky-header]');
+        if (!header) return;
+        if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
+          header.classList.add('scroll');
+        } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
+          header.classList.remove('scroll');
+        }
+        ticking = false;
+      }
+      applyHeaderStylesOnScroll();
+
+      attachEvent([document], 'scroll', function () {
+        lastKnownScrollPosition = window.scrollY;
+
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            applyHeaderStylesOnScroll();
+          });
+          ticking = true;
+        }
+      });
+    };
+    const onPageShow = function () {
+      document.documentElement.classList.add('motion-safe:scroll-smooth');
       const toggle = document.querySelector('[data-aw-toggle-menu]');
       toggle?.classList.remove('expanded');
       toggle?.setAttribute('aria-expanded', 'false');
@@ -59,238 +130,12 @@ import { UI } from 'astrowind:config';
       document.body.classList.remove('overflow-hidden');
     };
 
-    syncThemeToggleState();
+    window.addEventListener('load', onLoad, { once: true });
+    window.addEventListener('pageshow', onPageShow);
 
-    attachEvent('#header [data-aw-mobile-nav]', 'click', function () {
-      closeMobileNav();
+    document.addEventListener('astro:page-load', () => {
+      onLoad();
+      onPageShow();
     });
-
-    attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
-      elem.classList.toggle('expanded');
-      const mobileNav = document.querySelector('#header [data-aw-mobile-nav]');
-      mobileNav?.classList.toggle('hidden');
-      const isOpen = !mobileNav?.classList.contains('hidden');
-      elem.setAttribute('aria-expanded', String(isOpen));
-      document.body.classList.toggle('overflow-hidden', isOpen);
-    });
-
-    attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
-      const network = elem.getAttribute('data-aw-social-share');
-      const url = encodeURIComponent(elem.getAttribute('data-aw-url'));
-      const text = encodeURIComponent(elem.getAttribute('data-aw-text'));
-
-      let href;
-      switch (network) {
-        case 'facebook':
-          href = `https://www.facebook.com/sharer.php?u=${url}`;
-          break;
-        case 'twitter':
-          href = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
-          break;
-        case 'linkedin':
-          href = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}`;
-          break;
-        case 'whatsapp':
-          href = `https://wa.me/?text=${text}%20${url}`;
-          break;
-        case 'mail':
-          href = `mailto:?subject=%22${text}%22&body=${text}%20${url}`;
-          break;
-
-        default:
-          return;
-      }
-
-      const newlink = document.createElement('a');
-      newlink.target = '_blank';
-      newlink.href = href;
-      newlink.click();
-    });
-
-    const screenSize = window.matchMedia('(max-width: 767px)');
-    screenSize.addEventListener(
-      'change',
-      function () {
-        if (!screenSize.matches) {
-          closeMobileNav();
-        }
-      },
-      { signal: window.__htaInteractionController.signal }
-    );
-
-    function applyHeaderStylesOnScroll() {
-      const header = document.querySelector('#header[data-aw-sticky-header]');
-      if (!header) return;
-      if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
-        header.classList.add('scroll');
-      } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
-        header.classList.remove('scroll');
-      }
-      ticking = false;
-    }
-    applyHeaderStylesOnScroll();
-
-    attachEvent([document], 'scroll', function () {
-      lastKnownScrollPosition = window.scrollY;
-
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          applyHeaderStylesOnScroll();
-        });
-        ticking = true;
-      }
-    });
-  };
-  const onPageShow = function () {
-    document.documentElement.classList.add('motion-safe:scroll-smooth');
-    const toggle = document.querySelector('[data-aw-toggle-menu]');
-    toggle?.classList.remove('expanded');
-    toggle?.setAttribute('aria-expanded', 'false');
-    document.querySelector('#header [data-aw-mobile-nav]')?.classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
-  };
-
-  window.addEventListener('load', onLoad, { once: true });
-  window.addEventListener('pageshow', onPageShow);
-
-  document.addEventListener('astro:page-load', () => {
-    initTheme();
-    onLoad();
-    onPageShow();
-  });
-</script>
-
-<script is:inline>
-  /* Inspired by: https://github.com/heidkaemper/tailwindcss-intersect */
-  const Observer = {
-    observer: null,
-    delayBetweenAnimations: 100,
-    animationCounter: 0,
-    elements: null,
-
-    start() {
-      this.observer?.disconnect();
-      this.animationCounter = 0;
-
-      const selectors = [
-        '[class*=" intersect:"]',
-        '[class*=":intersect:"]',
-        '[class^="intersect:"]',
-        '[class="intersect"]',
-        '[class*=" intersect "]',
-        '[class^="intersect "]',
-        '[class$=" intersect"]',
-      ];
-
-      this.elements = Array.from(document.querySelectorAll(selectors.join(',')));
-
-      const getThreshold = (element) => {
-        if (element.classList.contains('intersect-full')) return 0.99;
-        if (element.classList.contains('intersect-half')) return 0.5;
-        if (element.classList.contains('intersect-quarter')) return 0.25;
-        return 0;
-      };
-
-      const getViewportRatio = (element) => {
-        const rect = element.getBoundingClientRect();
-        if (rect.height <= 0) return 0;
-        const visible = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-        return Math.max(0, Math.min(visible / rect.height, 1));
-      };
-
-      const startsInViewport = (element) => {
-        const rect = element.getBoundingClientRect();
-        return rect.top < window.innerHeight * 0.92 && rect.bottom > window.innerHeight * 0.08;
-      };
-
-      const revealViewportElements = () => {
-        this.elements.forEach((el) => {
-          if (startsInViewport(el)) {
-            el.removeAttribute('no-intersect');
-            el.setAttribute('data-animated', 'true');
-          }
-        });
-      };
-
-      this.elements.forEach((el) => {
-        el._intersectionThreshold = getThreshold(el);
-        if (startsInViewport(el) || getViewportRatio(el) >= el._intersectionThreshold) {
-          el.removeAttribute('no-intersect');
-          el.setAttribute('data-animated', 'true');
-        } else if (!el.hasAttribute('data-animated')) {
-          el.setAttribute('no-intersect', '');
-        }
-      });
-
-      const callback = (entries) => {
-        entries.forEach((entry) => {
-          requestAnimationFrame(() => {
-            const target = entry.target;
-            const intersectionRatio = entry.intersectionRatio;
-            const threshold = target._intersectionThreshold;
-
-            if (target.classList.contains('intersect-no-queue')) {
-              if (entry.isIntersecting) {
-                target.removeAttribute('no-intersect');
-                if (target.classList.contains('intersect-once')) {
-                  this.observer.unobserve(target);
-                }
-              } else {
-                target.setAttribute('no-intersect', '');
-              }
-              return;
-            }
-
-            if (intersectionRatio >= threshold) {
-              if (!target.hasAttribute('data-animated')) {
-                target.removeAttribute('no-intersect');
-                target.setAttribute('data-animated', 'true');
-
-                const delay = this.animationCounter * this.delayBetweenAnimations;
-                this.animationCounter++;
-
-                target.style.transitionDelay = `${delay}ms`;
-                target.style.animationDelay = `${delay}ms`;
-
-                if (target.classList.contains('intersect-once')) {
-                  this.observer.unobserve(target);
-                }
-              }
-            } else {
-              target.setAttribute('no-intersect', '');
-              target.removeAttribute('data-animated');
-              target.style.transitionDelay = '';
-              target.style.animationDelay = '';
-
-              this.animationCounter = 0;
-            }
-          });
-        });
-      };
-
-      this.observer = new IntersectionObserver(callback.bind(this), { threshold: [0, 0.25, 0.5, 0.99] });
-
-      this.elements.forEach((el) => {
-        this.observer.observe(el);
-      });
-
-      requestAnimationFrame(revealViewportElements);
-      window.setTimeout(revealViewportElements, 300);
-    },
-
-    removeAnimationDelay() {
-      this.elements.forEach((el) => {
-        if (el.getAttribute('data-animated') === 'true') {
-          el.style.transitionDelay = '';
-          el.style.animationDelay = '';
-        }
-      });
-    },
-  };
-
-  Observer.start();
-
-  document.addEventListener('astro:page-load', () => {
-    Observer.start();
-  });
+  })();
 </script>

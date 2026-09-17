@@ -24,7 +24,7 @@ const {
     {
       prices &&
         prices.map(({ title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle }) => (
-          <article class="hta-card surface-card relative flex h-full flex-col rounded-lg border p-6 md:p-7 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+          <article class="hta-card surface-card relative flex h-full flex-col rounded-lg border p-6 md:p-7">
             {hasRibbon && ribbonTitle && (
               <span class="absolute top-3 right-3 rounded-sm bg-[var(--hta-logo-yellow)] px-3 py-1 text-[0.75rem] font-bold uppercase text-[var(--hta-logo-navy)]">
                 {ribbonTitle}

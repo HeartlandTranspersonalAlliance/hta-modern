@@ -1,7 +1,7 @@
 site:
   name: Heartland Transpersonal Alliance
-  site: 'https://heartlandta.org'
-  base: '/'
+  site: 'https://heartlandtranspersonalalliance.github.io'
+  base: '/hta-modern/'
   trailingSlash: false
 
   googleSiteVerificationId: false
@@ -19,8 +19,8 @@ metadata:
     site_name: Heartland Transpersonal Alliance
     images:
       - url: '~/assets/images/hta_social_share.png'
-        width: 1170
-        height: 253
+        width: 1200
+        height: 630
     type: website
   twitter:
     handle: ''
@@ -69,4 +69,4 @@ analytics:
       id: null
 
 ui:
-  theme: 'dark:only'
+  theme: 'light:only'

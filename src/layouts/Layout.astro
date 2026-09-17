@@ -7,12 +7,10 @@ import { ClientRouter } from 'astro:transitions';
 import CommonMeta from '~/components/common/CommonMeta.astro';
 import Favicons from '~/components/Favicons.astro';
 import CustomStyles from '~/components/CustomStyles.astro';
-import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
 import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
-import editorialGeometry from '~/assets/images/hta/visuals/editorial-geometry.svg';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -22,71 +20,23 @@ export interface Props {
 
 const { metadata = {} } = Astro.props;
 const { language, textDirection } = I18N;
-const pageTransition = {
-  forwards: {
-    old: {
-      name: 'hta-page-exit',
-      duration: '180ms',
-      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-      fillMode: 'both',
-    },
-    new: {
-      name: 'hta-page-enter',
-      duration: '210ms',
-      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-      fillMode: 'both',
-    },
-  },
-  backwards: {
-    old: {
-      name: 'hta-page-exit',
-      duration: '180ms',
-      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-      fillMode: 'both',
-    },
-    new: {
-      name: 'hta-page-enter',
-      duration: '210ms',
-      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-      fillMode: 'both',
-    },
-  },
-};
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection}>
+<html lang={language} dir={textDirection} style="color-scheme: light">
   <head>
     <CommonMeta />
+    <meta name="theme-color" content="#e7ebe9" />
     <Favicons />
     <CustomStyles />
-    <ApplyColorMode />
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
-    <ClientRouter fallback="animate" />
+    <ClientRouter />
   </head>
 
-  <body
-    class="antialiased text-default bg-page relative min-h-screen overflow-x-hidden"
-    transition:animate={pageTransition}
-    transition:name="page"
-  >
-    <div class="pointer-events-none fixed inset-0 -z-20" aria-hidden="true">
-      <div class="absolute inset-0 page-grid"></div>
-      <img
-        src={editorialGeometry.src}
-        width="960"
-        height="540"
-        alt=""
-        class="absolute right-[-14vw] top-16 h-[58vh] w-[82vw] object-cover opacity-[0.16] mix-blend-multiply dark:opacity-[0.1] dark:mix-blend-screen"
-        loading="eager"
-        decoding="async"
-      />
-      <div class="page-wash absolute inset-0"></div>
-      <div class="page-grain absolute inset-0 opacity-[0.08] dark:opacity-[0.05]"></div>
-    </div>
-
+  <body class="antialiased text-default bg-page relative min-h-screen" transition:animate="none">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <slot />
 
     <BasicScripts />

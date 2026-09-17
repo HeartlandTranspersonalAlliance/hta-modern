@@ -1,8 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
-import footerWordmark from '~/assets/images/hta_header_footer.png';
+import Logo from '~/components/Logo.astro';
 
 interface Link {
   text?: string;
@@ -29,19 +28,11 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative mt-16 md:mt-20 pb-8 md:pb-12 not-prose']}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="footer-shell rounded-lg px-5 sm:px-7 py-7 md:py-8">
-      <div class="grid grid-cols-12 gap-8">
-        <div class="col-span-12 lg:col-span-4">
-          <a class="hta-logo-plate hta-focus-ring inline-flex rounded-md px-3 py-2" href={getHomePermalink()}>
-            <img
-              src={footerWordmark.src}
-              width={footerWordmark.width}
-              height={footerWordmark.height}
-              alt={SITE?.name ?? 'Heartland Transpersonal Alliance'}
-              class="h-10 w-auto max-w-[80vw] object-contain md:h-12"
-              loading="lazy"
-              decoding="async"
-            />
+    <div class="footer-shell px-5 sm:px-7 py-7 md:py-8">
+      <div class="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-6 lg:grid-cols-12">
+        <div class="col-span-2 md:col-span-6 lg:col-span-5">
+          <a class="hta-logo-plate hta-focus-ring inline-flex rounded-md py-2" href={getHomePermalink()}>
+            <Logo />
           </a>
           <p class="mt-5 text-sm leading-7 text-[var(--hta-footer-muted)]">
             Heartland Transpersonal Alliance is building safe, practical pathways for community, education, and
@@ -67,7 +58,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 
         {
           links.map(({ title, links: groupLinks }) => (
-            <div class="col-span-6 md:col-span-4 lg:col-span-2">
+            <div class="col-span-1 md:col-span-2 lg:col-span-2">
               <div class="mb-3 font-heading text-[0.78rem] font-bold uppercase tracking-[0.065em] text-[var(--hta-footer-text)]">
                 {title}
               </div>
@@ -90,7 +81,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
           ))
         }
 
-        <div class="col-span-12 lg:col-span-2 lg:flex lg:justify-end">
+        <div class="col-span-2 md:col-span-6 lg:col-span-1 lg:flex lg:justify-end">
           {
             socialLinks?.length ? (
               <ul class="flex gap-2.5 lg:flex-col lg:items-end">
