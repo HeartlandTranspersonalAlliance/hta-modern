@@ -30,7 +30,7 @@ Use 2-space indentation, UTF-8, LF line endings (`.editorconfig`). Prettier is a
 
 ## Testing Guidelines
 
-There is currently no dedicated unit/integration test suite in this repo. Treat `npm run check` and `npm run build` as required validation before opening a PR. If you add tests, colocate them near the feature and use `*.test.*` naming so they are easy to discover.
+Run `npm run test:ci` before opening a PR: policy fixtures, Astro/lint/format checks, production build, and Playwright tests. Install the matching Chromium browser with `npx playwright install chromium`. CI policy tests live in `scripts/ci/*.test.mjs`; production-preview tests live in `tests/e2e/*.test.ts`. See `docs/ci.md` for commands and coverage limits.
 
 ## Commit & Pull Request Guidelines
 
@@ -43,4 +43,4 @@ Recent commit history favors short, imperative subjects (for example: `Fix GitHu
 
 ## Deployment Notes
 
-GitHub Actions builds on pushes/PRs and deploys `dist/` to GitHub Pages from `main`. Keep `astro.config.ts` and site base settings aligned with the deployment target before merging.
+GitHub Actions validates pushes/PRs and publishes the tested `dist/` artifact from `main` only after the Website gate passes and site changes are detected. Direct pushes are allowed; there is no approval step. Keep `astro.config.ts` and site base settings aligned with the deployment target before merging.

@@ -1,41 +1,146 @@
-name: GitHub Actions
+name: Website CI
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
   push:
-    branches:
-      - main
+    branches: [main]
+  merge_group:
+    types: [checks_requested]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  build:
+  changes:
+    name: Detect changes
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 18
-          - 20
-          - 22
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      site_changed: ${{ steps.changes.outputs.site_changed }}
+      production: ${{ steps.changes.outputs.production }}
+      sha: ${{ steps.changes.outputs.sha }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js v${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      # - run: npm test
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Test gate policy
+        run: node --test scripts/ci/*.test.mjs
+      - name: Detect website changes
+        id: changes
+        run: node scripts/ci/detect.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
 
-  check:
+  validate:
+    name: Validate website
+    needs: changes
+    if: needs.changes.outputs.site_changed == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: website-validation-${{ github.event.pull_request.number || github.run_id }}
+      cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 22
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          node-version: 22
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
           cache: npm
+      - name: Check workflow syntax
+        run: |
+          curl --fail --silent --show-error --location --max-time 60 --retry 2 --output "$RUNNER_TEMP/actionlint.tar.gz" https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $RUNNER_TEMP/actionlint.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
+          "$RUNNER_TEMP/actionlint" .github/workflows/actions.yaml
       - run: npm ci
+      - run: npm run test:policy
       - run: npm run check
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Upload browser failures
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: browser-failures-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Upload validated website
+        if: needs.changes.outputs.production == 'true'
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: dist
+          retention-days: 7
+
+  gate:
+    name: Website gate
+    if: always()
+    needs: [changes, validate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - run: node scripts/ci/gate.mjs
+        env:
+          DETECTION_RESULT: ${{ needs.changes.result }}
+          SITE_CHANGED: ${{ needs.changes.outputs.site_changed }}
+          VALIDATION_RESULT: ${{ needs.validate.result }}
+
+  deploy:
+    name: Deploy Pages
+    needs: [changes, gate]
+    if: >-
+      needs.gate.result == 'success' &&
+      needs.changes.outputs.site_changed == 'true' &&
+      needs.changes.outputs.production == 'true' &&
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      needs.changes.outputs.sha == github.sha
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Reject stale release
+        id: release
+        run: node scripts/ci/release.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Publish Pages
+        id: deployment
+        if: steps.release.outputs.publish == 'true'
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

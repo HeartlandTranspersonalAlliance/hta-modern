@@ -20,7 +20,10 @@
     "check:prettier": "prettier --check .",
     "fix": "npm run fix:eslint && npm run fix:prettier",
     "fix:eslint": "eslint --fix .",
-    "fix:prettier": "prettier -w ."
+    "fix:prettier": "prettier -w .",
+    "test:policy": "node --test scripts/ci/*.test.mjs",
+    "test:e2e": "playwright test",
+    "test:ci": "npm run test:policy && npm run check && npm run build && npm run test:e2e"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
@@ -42,9 +45,11 @@
     "@astrojs/mdx": "^4.3.3",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/tailwind": "^5.1.5",
+    "@axe-core/playwright": "4.13.0",
     "@eslint/js": "^9.33.0",
     "@iconify-json/flat-color-icons": "^1.2.1",
     "@iconify-json/tabler": "^1.2.20",
+    "@playwright/test": "1.63.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash.merge": "^4.6.9",

@@ -1,3 +1,5 @@
+> HTA deployment and local CI commands: [Website CI guide](docs/ci.md). Production uses GitHub Pages; template hosting examples below are not active deployment paths.
+
 # 🚀 AstroWind
 
 <img src="https://raw.githubusercontent.com/arthelokyo/.github/main/resources/astrowind/lighthouse-score.png" align="right"

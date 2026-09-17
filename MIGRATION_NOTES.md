@@ -36,9 +36,11 @@ This avoids pulling AstroWind sample posts into HTA news.
 
 ## GitHub Pages deploy
 
-- Workflow file: `.github/workflows/deploy-pages.yml`
+- Workflow file: `.github/workflows/actions.yaml`
 - Trigger: push to `main`
-- Deploy actions: `actions/configure-pages`, `actions/upload-pages-artifact`, `actions/deploy-pages`
+- Deploy actions: `actions/upload-pages-artifact`, `actions/deploy-pages` (after the Website gate)
 - Current site target: `https://heartlandtranspersonalalliance.github.io/hta-modern/`
 
 This configuration assumes standard GitHub Pages project-site hosting (no custom domain).
+
+Current release gate, documentation-only policy, and rollback procedure: [Website CI](docs/ci.md). The old standalone manual deployment workflow has been removed.
