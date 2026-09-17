@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
+import Button from '~/components/ui/Button.astro';
 
 export interface Props {
   accent?: string;
@@ -8,6 +9,7 @@ export interface Props {
   number?: string;
   label?: string;
   title: string;
+  headingLevel?: 'h2' | 'h3';
   description?: string;
   href?: string;
   cta?: string;
@@ -21,6 +23,7 @@ const {
   number,
   label,
   title,
+  headingLevel: Heading = 'h3',
   description,
   href,
   cta,
@@ -48,7 +51,8 @@ const titleMargin = label ? 'mt-3' : number ? 'mt-8' : icon ? 'mt-5' : 'mt-6';
 
   {label && <p class="mt-5 text-sm font-bold uppercase tracking-[0.055em] text-[var(--hta-card-accent)]">{label}</p>}
 
-  <h3 class={twMerge('hta-strong font-heading text-2xl font-semibold leading-tight', titleMargin)}>{title}</h3>
+  <Heading class={twMerge('hta-strong font-heading text-2xl font-semibold leading-tight', titleMargin)}>{title}</Heading
+  >
 
   {
     description && (
@@ -60,14 +64,15 @@ const titleMargin = label ? 'mt-3' : number ? 'mt-8' : icon ? 'mt-5' : 'mt-6';
 
   {
     href && cta && (
-      <a
+      <Button
+        variant="link"
         href={href}
-        class="hta-focus-ring mt-6 inline-flex min-h-10 items-center gap-2 rounded-md text-sm font-bold uppercase tracking-[0.04em] text-[var(--hta-link)] transition duration-200 hover:text-[var(--hta-link-hover)]"
-        {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
+        target={isExternal ? '_blank' : undefined}
+        class="mt-6"
+        icon="tabler:arrow-up-right"
       >
         {cta}
-        <Icon name="tabler:arrow-up-right" class="h-4 w-4" />
-      </a>
+      </Button>
     )
   }
 </article>

@@ -59,7 +59,10 @@ export const footerData = {
       ],
     },
   ],
-  secondaryLinks: [],
+  secondaryLinks: [
+    { text: 'Privacy', href: getPermalink('/privacy') },
+    { text: 'Terms', href: getPermalink('/terms') },
+  ],
   socialLinks: [
     {
       ariaLabel: 'Facebook',

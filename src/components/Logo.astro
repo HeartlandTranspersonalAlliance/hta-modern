@@ -1,8 +1,8 @@
 ---
-import logo from '~/assets/images/hta/hta-mark.svg';
+import logo from '~/assets/images/hta/hta-mark.svg?raw';
 ---
 
 <span class="hta-brand">
-  <img src={logo.src} width="360" height="120" alt="" decoding="async" />
+  <span class="hta-brand-mark" aria-hidden="true" set:html={logo} />
   <span class="hta-brand-name">Heartland<br />Transpersonal Alliance</span>
 </span>

@@ -81,9 +81,7 @@ const infrastructure = [
       <div class="mb-8 grid items-end gap-6 lg:grid-cols-[0.82fr_1.18fr]">
         <div>
           <p class="section-kicker">Program Pathways</p>
-          <h2 class="mt-5 font-heading text-3xl font-medium leading-[1.15] md:text-4xl">
-            Distinct programs, shared standards.
-          </h2>
+          <h2 class="mt-5 hta-section-title">Distinct programs, shared standards.</h2>
         </div>
         <p class="max-w-3xl text-lg leading-relaxed text-muted">
           Each initiative serves a distinct need while staying connected through HTA's nonprofit mission, governance,
@@ -91,7 +89,7 @@ const infrastructure = [
         </p>
       </div>
 
-      <div class="mb-6 flex flex-wrap items-center gap-2" aria-label="Program categories">
+      <div class="mb-6 flex flex-wrap items-center gap-2">
         <span class="mr-1 text-sm font-bold uppercase tracking-[0.065em] text-muted">Program categories</span>
         {initiatives.map((initiative) => <span class={`hta-badge ${initiative.accent}`}>{initiative.label}</span>)}
       </div>
@@ -108,7 +106,7 @@ const infrastructure = [
               href={initiative.href}
               cta={initiative.cta}
               class="min-h-[23rem]"
-              descriptionClass="mb-0 min-h-[5rem] line-clamp-3"
+              descriptionClass="mb-0"
             />
           ))
         }
@@ -120,9 +118,7 @@ const infrastructure = [
     <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-[0.9fr_1.1fr]">
       <div class="paper-panel p-6 md:p-8 lg:p-10">
         <p class="section-kicker">Shared Infrastructure</p>
-        <h2 class="mt-5 font-heading text-3xl font-medium leading-[1.15] md:text-4xl">
-          Education, integration, and field support stay connected.
-        </h2>
+        <h2 class="mt-5 hta-section-title">Education, integration, and field support stay connected.</h2>
         <p class="mt-5 text-lg leading-relaxed text-muted">
           HTA keeps these access points aligned so partners and community members can move from curiosity to support to
           safer action without starting over each time.

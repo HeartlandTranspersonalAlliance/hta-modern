@@ -1,49 +1,102 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import Button from '~/components/ui/Button.astro';
+import { getPermalink } from '~/utils/permalinks';
 
-const metadata = {
-  title: 'Board Application',
-};
+const metadata = { title: 'Board Application' };
+const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc0Pj5z_OkO5SkjWi8jH2iyhtAc7Y6epPmPq6MrngoglqHQqA/viewform';
+const questions = [
+  'Your name and email address.',
+  'Are you physically located in the Greater Kansas City Metropolitan Area? If your situation needs explanation, please describe it.',
+  'Why are you interested in joining the Heartland Transpersonal Alliance Board of Directors, and how does HTA’s mission align with your personal values?',
+  'What unique perspective or skill set do you believe you can bring to HTA’s leadership team?',
+  'Describe a time you had to navigate a challenging organizational or ethical dilemma. How did you approach it, and what was the outcome?',
+  'What do you see as the most significant challenges and opportunities facing HTA, and how would you contribute to addressing them?',
+  'Are you prepared to engage in fundraising, outreach, or other forms of organizational support beyond attending board meetings?',
+  'Is there anything else you would like to include for consideration? (Optional)',
+];
 ---
 
 <Layout metadata={metadata}>
-  <section class="board-app-hero relative not-prose">
+  <section class="institutional-band relative not-prose">
     <div class="mx-auto max-w-5xl px-4 py-10 sm:px-6 md:py-12">
       <p class="section-kicker">Board Application</p>
       <h1 class="mt-5 max-w-3xl font-heading text-4xl font-semibold leading-[1.04] hta-strong md:text-5xl">
         Serve HTA
       </h1>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted md:text-xl">
-        Complete the application below. We review submissions on a rolling basis.
+        Share your background and interest in supporting HTA. We review applications on a rolling basis.
       </p>
     </div>
   </section>
-
   <section class="px-4 py-14 sm:px-6 md:py-16 mx-auto max-w-5xl not-prose">
-    <div class="mb-8 max-w-3xl">
-      <p class="section-kicker">Board Service</p>
-      <h2 class="mt-5 font-heading text-4xl font-semibold leading-[1.02] md:text-5xl">Rolling application review</h2>
-      <p class="mt-4 text-lg leading-relaxed text-muted">
-        Use this form to share your background, areas of expertise, and interest in supporting HTA's nonprofit
-        governance.
-      </p>
+    <h2 class="hta-section-title">Choose how to apply</h2>
+    <p class="mt-5 readable-copy">
+      Apply using Google Forms, or send your responses by email using the questions below.
+    </p>
+    <div class="mt-7 flex flex-wrap gap-4">
+      <Button variant="primary" href={formUrl}>Open application in Google Forms</Button>
+      <Button href="mailto:info@psychedelickc.org?subject=HTA%20Board%20Application">Apply by email</Button>
     </div>
-    <div class="paper-panel p-2 sm:p-4">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSc0Pj5z_OkO5SkjWi8jH2iyhtAc7Y6epPmPq6MrngoglqHQqA/viewform?embedded=true"
-        width="100%"
-        height="2000"
-        title="HTA Board Application"
+    <p class="mt-5 text-sm">
+      Read our <a class="text-primary underline" href={getPermalink('/privacy')}>Privacy Policy</a> before sharing your information.
+      Google Forms is a third-party service.
+    </p>
+
+    <details class="surface-panel mt-8 p-6 md:p-8">
+      <summary class="cursor-pointer font-heading text-xl font-semibold hta-strong"
+        >Application questions and email option</summary
       >
-        Loading...
-      </iframe>
+      <p class="mt-5">
+        If Google Forms is difficult to use or you prefer email, send your answers to <a
+          class="text-primary underline break-all"
+          href="mailto:info@psychedelickc.org?subject=HTA%20Board%20Application">info@psychedelickc.org</a
+        > with the subject “HTA Board Application.” Include the following:
+      </p>
+      <ol class="mt-5 list-decimal pl-6 space-y-4 readable-copy">{questions.map((question) => <li>{question}</li>)}</ol>
+      <p class="mt-5 text-sm">
+        The email link opens your email app. You can also copy the address and questions into your preferred email
+        service.
+      </p>
+    </details>
+
+    <div class="surface-panel mt-8 p-6 md:p-8">
+      <h2 class="hta-section-title">Apply on this page</h2>
+      <p class="mt-4 readable-copy">
+        You can also load the Google Form here. Loading it connects to Google and may use third-party cookies. If it
+        does not display, use the direct link or email option above.
+      </p>
+      <button
+        type="button"
+        class="btn-secondary mt-5"
+        data-load-application
+        aria-controls="application-embed"
+        aria-expanded="false">Load Google Form</button
+      >
+      <div id="application-embed" class="mt-5"></div>
+      <template id="application-template">
+        <iframe
+          src={`${formUrl}?embedded=true`}
+          width="100%"
+          height="2000"
+          title="HTA Board Application"
+          class="border-0"></iframe>
+      </template>
     </div>
   </section>
 </Layout>
 
-<style>
-  .board-app-hero {
-    background: var(--hta-hero-bg);
-    border-bottom: 1px solid var(--hta-border);
-  }
-</style>
+<script>
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const button = target.closest<HTMLButtonElement>('[data-load-application]');
+    if (!button || button.getAttribute('aria-expanded') === 'true') return;
+    const template = document.querySelector<HTMLTemplateElement>('#application-template');
+    const container = document.querySelector('#application-embed');
+    if (!template || !container) return;
+    container.append(template.content.cloneNode(true));
+    button.setAttribute('aria-expanded', 'true');
+    button.textContent = 'Google Form loaded';
+  });
+</script>

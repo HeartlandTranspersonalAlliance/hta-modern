@@ -1,5 +1,7 @@
 ---
 import '~/assets/styles/tailwind.css';
+import bodyFont from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
+import headingFont from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
 
 import { I18N } from 'astrowind:config';
 import { ClientRouter } from 'astro:transitions';
@@ -26,6 +28,8 @@ const { language, textDirection } = I18N;
 <html lang={language} dir={textDirection} style="color-scheme: light">
   <head>
     <CommonMeta />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#e7ebe9" />
     <Favicons />
     <CustomStyles />

@@ -36,6 +36,9 @@
       attachEvent('#header [data-aw-mobile-nav]', 'click', function (event) {
         if (event.target.closest('a')) closeMobileNav();
       });
+      attachEvent([document], 'focusin', function (event) {
+        if (!event.target.closest('#header')) closeMobileNav();
+      });
       attachEvent([document], 'keydown', function (event) {
         if (event.key === 'Escape') {
           const toggle = document.querySelector('[data-aw-toggle-menu]');
