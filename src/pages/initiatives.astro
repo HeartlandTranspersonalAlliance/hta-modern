@@ -78,10 +78,10 @@ const infrastructure = [
 
   <section class="relative not-prose">
     <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-16">
-      <div class="mb-8 grid items-end gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+      <div class="mb-8 mx-auto grid max-w-3xl gap-6 text-center">
         <div>
-          <p class="section-kicker">Program Pathways</p>
-          <h2 class="mt-5 hta-section-title">Distinct programs, shared standards.</h2>
+          <p class="section-kicker text-center">Program Pathways</p>
+          <h2 class="text-center mt-5 hta-section-title">Distinct programs, shared standards.</h2>
         </div>
         <p class="max-w-3xl text-lg leading-relaxed text-muted">
           Each initiative serves a distinct need while staying connected through HTA's nonprofit mission, governance,
@@ -89,7 +89,7 @@ const infrastructure = [
         </p>
       </div>
 
-      <div class="mb-6 flex flex-wrap items-center gap-2">
+      <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
         <span class="mr-1 text-sm font-bold uppercase tracking-[0.065em] text-muted">Program categories</span>
         {initiatives.map((initiative) => <span class={`hta-badge ${initiative.accent}`}>{initiative.label}</span>)}
       </div>
@@ -117,8 +117,8 @@ const infrastructure = [
   <section class="resource-stripe relative not-prose">
     <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:py-16 lg:grid-cols-[0.9fr_1.1fr]">
       <div class="paper-panel p-6 md:p-8 lg:p-10">
-        <p class="section-kicker">Shared Infrastructure</p>
-        <h2 class="mt-5 hta-section-title">Education, integration, and field support stay connected.</h2>
+        <p class="section-kicker text-center">Shared Infrastructure</p>
+        <h2 class="text-center mt-5 hta-section-title">Education, integration, and field support stay connected.</h2>
         <p class="mt-5 text-lg leading-relaxed text-muted">
           HTA keeps these access points aligned so partners and community members can move from curiosity to support to
           safer action without starting over each time.
@@ -134,7 +134,9 @@ const infrastructure = [
                   <Icon name={item.icon} />
                 </span>
               </div>
-              <h3 class="hta-strong mt-5 font-heading text-2xl font-semibold leading-tight">{item.title}</h3>
+              <h3 class="text-center hta-strong mt-5 font-heading text-2xl font-semibold leading-tight">
+                {item.title}
+              </h3>
               <p class="hta-muted mt-3 text-base leading-relaxed">{item.description}</p>
             </article>
           ))

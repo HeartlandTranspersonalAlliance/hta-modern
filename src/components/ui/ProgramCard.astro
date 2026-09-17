@@ -49,9 +49,16 @@ const titleMargin = label ? 'mt-3' : number ? 'mt-8' : icon ? 'mt-5' : 'mt-6';
     ) : null
   }
 
-  {label && <p class="mt-5 text-sm font-bold uppercase tracking-[0.055em] text-[var(--hta-card-accent)]">{label}</p>}
+  {
+    label && (
+      <p class="text-center mt-5 text-sm font-bold uppercase tracking-[0.055em] text-[var(--hta-card-accent)]">
+        {label}
+      </p>
+    )
+  }
 
-  <Heading class={twMerge('hta-strong font-heading text-2xl font-semibold leading-tight', titleMargin)}>{title}</Heading
+  <Heading class={twMerge('text-center hta-strong font-heading text-2xl font-semibold leading-tight', titleMargin)}
+    >{title}</Heading
   >
 
   {
