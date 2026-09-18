@@ -2,7 +2,7 @@
 
 ## Policy
 
-`main` accepts direct pushes. No reviewer or approval wait is required. The new **Website gate**, once adopted, protects production release, not entry into the branch: a failing direct push remains on `main` but cannot deploy. Administrators and anyone able to change trusted workflow code can change this policy.
+`main` accepts direct pushes. No reviewer or approval wait is required. The **Website gate** protects production release, not entry into the branch: a failing direct push remains on `main` but cannot deploy. Administrators and anyone able to change trusted workflow code can change this policy.
 
 The `Website CI` workflow runs on every PR into `main`, every push to `main`, manual dispatch, and merge-group event. There are no workflow path filters. PRs and merge groups never deploy. Manual dispatch must target `main` and cannot bypass checks.
 
@@ -47,9 +47,9 @@ Automated axe results do not establish full accessibility conformance. Manual sc
 
 Verified during implementation: GitHub Pages uses Actions; the `github-pages` environment permits only the **branch** `main`, has no required reviewers or wait timer, and `main` has no branch protection/ruleset. No setting changes were necessary. Netlify is not an active deployment target according to the owner; obsolete `netlify.toml` is removed. No preview deployment provider is configured.
 
-When adopting this change:
+Rollout and ongoing configuration:
 
-1. Review and land the isolated `ci-gated-pages` bookmark. Landing on `main` intentionally starts automatic validation and deployment when site changes exist. Do not land it if production deployment is not yet desired.
+1. The pipeline is active on `main`. Site-affecting pushes automatically validate and deploy; documentation-only changes skip website work unless site changes remain undeployed.
 2. Confirm **Settings → Pages → Build and deployment → Source = GitHub Actions**.
 3. Confirm **Settings → Environments → github-pages** has no required reviewers or wait timer and only `main` under selected deployment branches/tags (branch rule, not a tag wildcard).
 4. Confirm the old standalone deployment workflow has been removed, and disable its historical workflow entry with `gh workflow disable 235574760 --repo HeartlandTranspersonalAlliance/hta-modern` so old manual runs cannot be reused. Disable any independently configured hosting/GitHub App deployment if one is later discovered; it would bypass this gate.
@@ -69,4 +69,4 @@ To roll back, revert the unwanted site commit on a new commit on `main` (or revi
 
 Verified locally on macOS through Nix/Node 24: clean `npm ci`, five policy test groups (including temporary Git-history fixtures), Astro/TypeScript, ESLint, Prettier, production build, and all 50 Chromium desktop/mobile tests with `CI=true`. `actionlint` passed. Injecting a missing internal destination into the built homepage caused the route check to fail; the original build was restored and the clean suite passed afterward. Read-only deployment-history detection returned the currently published SHA `2ac9231ecdaf6af8e67351cbf73f3c237fe348a5`.
 
-No production workflow was dispatched and no change was pushed to `main`. Linux runner execution, GitHub scheduling/cancellation, artifact handoff, and OIDC publication still need a real Actions run after adoption. The previous workflow remains active on production until these changes are landed and the historical deployment entry is disabled as described above.
+Rolled out to `main` as `21ba42a74364b88555204cec0b721d6925623d30`. [The first gated release](https://github.com/HeartlandTranspersonalAlliance/hta-modern/actions/runs/35290838827) passed Linux validation, the Website gate, artifact handoff, and OIDC Pages publication. The historical manual deployment workflow is disabled. GitHub concurrency races and PR-specific execution remain covered by local policy tests and configuration review rather than a production stress test.
