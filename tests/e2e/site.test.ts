@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-const prefix = '/hta-modern';
+const prefix = (process.env.BASE_PATH || '/hta-modern').replace(/\/$/, '');
 const origin = 'http://127.0.0.1:4341';
 function htmlRoutes(dir = 'dist'): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -28,7 +28,10 @@ const test = base.extend<{ health: void }>({
       page.on('requestfailed', (request) => {
         if (
           request.url().startsWith(origin) &&
-          !(request.isNavigationRequest() && request.failure()?.errorText.includes('ERR_ABORTED'))
+          !(
+            request.failure()?.errorText.includes('ERR_ABORTED') &&
+            (request.isNavigationRequest() || request.headers()['sec-purpose']?.includes('prefetch'))
+          )
         )
           errors.push(`Failed ${request.url()}`);
       });
@@ -74,7 +77,9 @@ for (const path of routes) {
       const url = new URL(href);
       const local = [origin, 'https://heartlandtranspersonalalliance.github.io'].includes(url.origin);
       if (!local) continue;
-      expect(url.pathname, `Base path escaped by ${href}`).toMatch(/^\/hta-modern(?:\/|$)/);
+      expect(url.pathname === prefix || url.pathname.startsWith(prefix + '/'), `Base path escaped by ${href}`).toBe(
+        true
+      );
       const response = await request.get(`${origin}${url.pathname}${url.search}`);
       expect(response.ok(), `${path} links to ${href}: ${response.status()}`).toBe(true);
       if (url.hash) {
@@ -145,7 +150,9 @@ test('application loads once and survives client navigation', async ({ page }) =
   await page.getByRole('button', { name: 'Google Form loaded' }).click();
   await expect(page.locator('iframe')).toHaveCount(1);
   await page.getByRole('link', { name: 'Contact', exact: true }).last().click();
+  await expect(page).toHaveURL(`${origin}${prefix}/contact`);
   await page.getByRole('link', { name: 'Board Application', exact: true }).click();
+  await expect(page).toHaveURL(`${origin}${prefix}/board-app`);
   await expect(page.locator('iframe')).toHaveCount(0);
   await page.getByRole('button', { name: 'Load Google Form' }).click();
   await expect(page.frameLocator('iframe').getByRole('heading', { name: 'Application fixture' })).toBeVisible();

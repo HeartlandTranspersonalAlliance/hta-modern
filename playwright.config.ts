@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  workers: process.env.CI ? 2 : undefined,
+  workers: 1,
   timeout: 45_000,
   expect: { timeout: 8_000 },
   reporter: [['list'], ['html', { open: 'never' }]],
@@ -24,7 +24,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'npm run preview -- --host 127.0.0.1 --port 4341',
-    url: 'http://127.0.0.1:4341/hta-modern/',
+    url: `http://127.0.0.1:4341${process.env.BASE_PATH || '/hta-modern/'}`,
     reuseExistingServer: false,
     timeout: 30_000,
   },

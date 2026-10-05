@@ -26,6 +26,10 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegra
         const resolvedVirtualModuleId = '\0' + virtualModuleId;
 
         const rawJsonConfig = (await loadConfig(_themeConfig)) as Config;
+        if (rawJsonConfig.site) {
+          if (process.env.SITE_URL) rawJsonConfig.site.site = process.env.SITE_URL;
+          if (process.env.BASE_PATH) rawJsonConfig.site.base = process.env.BASE_PATH;
+        }
         const { SITE, I18N, METADATA, APP_BLOG, UI, ANALYTICS } = configBuilder(rawJsonConfig);
 
         updateConfig({
