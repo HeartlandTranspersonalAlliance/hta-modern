@@ -31,7 +31,11 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
     <div class="footer-shell px-5 sm:px-7 py-7 md:py-8">
       <div class="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-6 lg:grid-cols-12">
         <div class="col-span-2 md:col-span-6 lg:col-span-5">
-          <a class="hta-logo-plate hta-focus-ring inline-flex rounded-md py-2" href={getHomePermalink()}>
+          <a
+            class="hta-logo-plate hta-focus-ring inline-flex rounded-md py-2"
+            aria-label="Heartland Transpersonal Alliance"
+            href={getHomePermalink()}
+          >
             <Logo />
           </a>
           <p class="mt-5 text-sm leading-7 text-[var(--hta-footer-muted)]">
