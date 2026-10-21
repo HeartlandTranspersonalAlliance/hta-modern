@@ -49,7 +49,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                   <>
                     {index !== 0 ? ' · ' : ''}
                     <a
-                      class="hta-focus-ring rounded-sm transition hover:text-[var(--hta-link-hover)] hover:underline"
+                      class="hta-focus-ring inline-flex min-h-6 items-center rounded-sm transition hover:text-[var(--hta-link-hover)] hover:underline"
                       href={href}
                       set:html={text}
                     />
@@ -71,7 +71,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                   {groupLinks.map(({ text, href, ariaLabel }) => (
                     <li>
                       <a
-                        class="hta-focus-ring rounded-sm text-[var(--hta-footer-muted)] transition hover:text-[var(--hta-link-hover)]"
+                        class="hta-focus-ring inline-flex min-h-6 items-center rounded-sm text-[var(--hta-footer-muted)] transition hover:text-[var(--hta-link-hover)]"
                         href={href}
                         aria-label={ariaLabel}
                       >
