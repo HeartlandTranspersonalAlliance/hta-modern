@@ -1,0 +1,117 @@
+---
+import GovernanceDocument from '~/components/ui/GovernanceDocument.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const sections = [
+  { id: 'what-the-drug-war-cost', title: 'What the drug war cost' },
+  { id: 'who-bore-the-cost', title: 'Who bore the cost' },
+  { id: 'a-different-response', title: 'A different response to harm' },
+  { id: 'sources', title: 'Sources and limitations' },
+];
+---
+
+<GovernanceDocument
+  page="war-on-drugs"
+  title="War on Drugs & Restorative Justice"
+  category="Public education"
+  description="Decades of punishment have not delivered the safety they promised. HTA supports harm reduction and accountability that takes harm seriously, gives people a choice, and looks for ways to repair it."
+  sections={sections}
+>
+  <section id="what-the-drug-war-cost" aria-labelledby="what-the-drug-war-cost-heading">
+    <h2 class="hta-section-title" id="what-the-drug-war-cost-heading">What the drug war cost</h2>
+    <p>
+      In June 1971, President Richard Nixon called drug abuse “public enemy number one” and announced an intensified
+      federal campaign. It included treatment and prevention, but punitive enforcement became a defining part of the
+      U.S. response. An Associated Press investigation estimated that the country had spent about $1 trillion on the
+      effort by 2010, after roughly four decades. That is a historical estimate across several kinds of spending, not an
+      audited total or a measure of what the United States spends today.
+    </p>
+    <p>
+      More incarceration did not line up with better outcomes in a Pew analysis using 2014 state data. States that
+      imprisoned more people for drug offenses did not have lower self-reported drug use (excluding marijuana), drug
+      arrest rates, or overdose death rates. That comparison cannot establish cause and effect. It does undermine the
+      simple claim that more imprisonment reliably brings less harm.
+    </p>
+    <p>
+      The National Institute of Justice also finds that increasing the severity of punishment does little to deter
+      crime. We believe public resources should prioritize practical ways to reduce harm: accurate education, overdose
+      prevention, voluntary treatment, and peer support.
+    </p>
+  </section>
+
+  <section id="who-bore-the-cost" aria-labelledby="who-bore-the-cost-heading">
+    <h2 class="hta-section-title" id="who-bore-the-cost-heading">Who bore the cost</h2>
+    <p>
+      Enforcement has never landed evenly. The ACLU’s analysis of marijuana arrests from 2010 through 2018 found that
+      Black people were 3.64 times as likely as white people to be arrested for marijuana possession, despite comparable
+      use. That finding is specific to marijuana possession in the period studied; it shows how a policy can carry very
+      different consequences for different communities.
+    </p>
+    <p>
+      An arrest or conviction can have consequences long after the case ends. Any honest conversation about drug policy
+      has to weigh those consequences alongside the harms the policy is supposed to prevent.
+    </p>
+  </section>
+
+  <section id="a-different-response" aria-labelledby="a-different-response-heading">
+    <h2 class="hta-section-title" id="a-different-response-heading">A different response to harm</h2>
+    <p>
+      Restorative justice asks what happened, who was affected, and what meaningful accountability or repair could look
+      like. The people affected should have a real say. Participation must be voluntary, and people can withdraw. No one
+      should be pressured to meet with someone, accept an apology, forgive, or give up other options.
+    </p>
+    <p>
+      HTA’s community has used restorative approaches when people were willing to take part. They are not right for
+      every situation. When participation is unsafe, unwanted, or ruled out by a serious power imbalance, safety and
+      other accountability options come first. A restorative conversation is not a substitute for emergency help or for
+      a fair, independent review of serious allegations.
+    </p>
+    <p>
+      Read our <a href={getPermalink('/code-of-conduct')}>Ethical Code of Conduct overview</a> for more on the difference
+      between voluntary repair and independent review.
+    </p>
+  </section>
+
+  <section id="sources" aria-labelledby="sources-heading">
+    <h2 class="hta-section-title" id="sources-heading">Sources and limitations</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.presidency.ucsb.edu/documents/remarks-about-intensified-program-for-drug-abuse-prevention-and-control"
+        >
+          Nixon’s June 17, 1971 remarks on drug abuse prevention and control
+        </a> (American Presidency Project transcript).
+      </li>
+      <li>
+        <a href="https://www.ksl.com/article/10817577"
+          >Associated Press investigation on four decades of drug-war spending</a
+        >
+        (2010; historical estimate).
+      </li>
+      <li>
+        <a
+          href="https://www.pew.org/en/research-and-analysis/issue-briefs/2018/03/more-imprisonment-does-not-reduce-state-drug-problems"
+        >
+          Pew’s state-by-state analysis of drug imprisonment and outcomes
+        </a> (2018; observational analysis of 2014 data).
+      </li>
+      <li>
+        <a href="https://nij.ojp.gov/topics/articles/five-things-about-deterrence"
+          >National Institute of Justice: Five Things About Deterrence</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.aclu.org/publications/tale-two-countries-racially-targeted-arrests-era-marijuana-reform">
+          ACLU analysis of racial disparities in marijuana arrests
+        </a> (2010–2018 data).
+      </li>
+      <li>
+        <a
+          href="https://www.unodc.org/e4j/en/crime-prevention-criminal-justice/module-8/key-issues/1--concept--values-and-origin-of-restorative-justice.html"
+        >
+          United Nations Office on Drugs and Crime: values and origins of restorative justice
+        </a>.
+      </li>
+    </ul>
+  </section>
+</GovernanceDocument>

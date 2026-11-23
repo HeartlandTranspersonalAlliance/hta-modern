@@ -8,11 +8,21 @@ export const headerData = {
     },
     {
       text: 'Our Work',
-      href: getPermalink('/initiatives'),
+      links: [
+        { text: 'Initiatives', href: getPermalink('/initiatives') },
+        { text: 'War on Drugs & Restorative Justice', href: getPermalink('/war-on-drugs') },
+      ],
     },
     {
       text: 'Board',
       href: getPermalink('/board'),
+    },
+    {
+      text: 'Governance',
+      links: [
+        { text: 'Bylaws', href: getPermalink('/bylaws') },
+        { text: 'Ethical Code of Conduct', href: getPermalink('/code-of-conduct') },
+      ],
     },
     {
       text: 'News',
@@ -62,6 +72,8 @@ export const footerData = {
   secondaryLinks: [
     { text: 'Privacy', href: getPermalink('/privacy') },
     { text: 'Terms', href: getPermalink('/terms') },
+    { text: 'Bylaws', href: getPermalink('/bylaws') },
+    { text: 'Ethical Code of Conduct', href: getPermalink('/code-of-conduct') },
   ],
   socialLinks: [
     {

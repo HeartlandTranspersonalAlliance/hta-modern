@@ -101,7 +101,19 @@ for (const path of routes) {
   });
 }
 
-for (const path of ['', '/about', '/initiatives', '/board', '/board-app', '/contact', '/pricing', '/services']) {
+for (const path of [
+  '',
+  '/about',
+  '/initiatives',
+  '/board',
+  '/board-app',
+  '/contact',
+  '/pricing',
+  '/services',
+  '/war-on-drugs',
+  '/bylaws',
+  '/code-of-conduct',
+]) {
   test(`accessibility: ${path || '/'}`, async ({ page }) => {
     await page.goto(`${prefix}/${path.replace(/^\//, '')}`);
     const results = await new AxeBuilder({ page }).analyze();
@@ -177,8 +189,11 @@ for (const viewport of [
     await expect(toggle).toBeFocused();
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await toggle.click();
-    // Six links follow the toggle; the next Tab exits the disclosure.
-    for (let i = 0; i < 7; i++) await page.keyboard.press('Tab');
+    // Count visible controls, not links inside closed submenus.
+    const controls = await page
+      .locator('#mobile-navigation a[href]:visible, #mobile-navigation summary:visible')
+      .count();
+    for (let i = 0; i <= controls; i++) await page.keyboard.press('Tab');
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await expect(page.locator('body')).not.toHaveClass(/overflow-hidden/);
     await toggle.click();
@@ -188,6 +203,31 @@ for (const viewport of [
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });
 }
+
+test('governance pages are reachable and cross-linked', async ({ page }, testInfo) => {
+  await page.goto(`${prefix}/`);
+  if (testInfo.project.name === 'mobile') {
+    await page.getByRole('button', { name: 'Toggle Menu' }).click();
+    const nav = page.getByRole('navigation', { name: 'Mobile navigation' });
+    await nav.getByText('Governance', { exact: true }).click();
+    await nav.getByRole('link', { name: 'Bylaws', exact: true }).click();
+  } else {
+    const nav = page.getByRole('navigation', { name: 'Main navigation' });
+    await nav.getByRole('button', { name: 'Governance' }).focus();
+    await nav.getByRole('link', { name: 'Bylaws', exact: true }).click();
+  }
+  await expect(page).toHaveURL(/\/bylaws$/);
+  const main = page.getByRole('main');
+  await main.getByRole('link', { name: 'Ethical Code of Conduct', exact: true }).click();
+  await expect(page).toHaveURL(/\/code-of-conduct$/);
+  await main
+    .getByRole('navigation', { name: 'On this page' })
+    .getByRole('link', { name: 'Independent review and recusal' })
+    .click();
+  await expect(page).toHaveURL(/#independent-review$/);
+  await main.getByRole('link', { name: 'War on Drugs & Restorative Justice', exact: true }).last().click();
+  await expect(page).toHaveURL(/\/war-on-drugs$/);
+});
 
 // This shipped admin shell requires third-party identity; CI does not authenticate.
 test('legacy CMS shell and local configuration', async ({ page, request }) => {

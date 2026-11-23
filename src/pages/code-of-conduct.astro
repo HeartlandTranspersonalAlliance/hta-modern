@@ -1,0 +1,107 @@
+---
+import GovernanceDocument from '~/components/ui/GovernanceDocument.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const sections = [
+  { id: 'standards', title: 'Ethical standards' },
+  { id: 'support-and-boundaries', title: 'Peer support and boundaries' },
+  { id: 'raising-a-concern', title: 'Raising a concern' },
+  { id: 'restorative-options', title: 'Voluntary restorative options' },
+  { id: 'independent-review', title: 'Independent review and recusal' },
+];
+---
+
+<GovernanceDocument
+  page="code-of-conduct"
+  title="Ethical Code of Conduct"
+  category="Governance"
+  description="A public overview of ethical expectations, voluntary restorative options, and safeguards for an impartial response to serious concerns."
+  sections={sections}
+>
+  <section id="standards" aria-labelledby="standards-heading">
+    <h2 class="hta-section-title" id="standards-heading">Ethical standards</h2>
+    <p>
+      This guide draws on HTA’s current working code for affiliated roles, including volunteers, presenters,
+      facilitators, vendors, contractors, committee members, and partner representatives in events, support spaces, and
+      related online activities. It summarizes the working text; it is not a record of formal adoption. The <a
+        href="https://psychedelickc.org/coc/">Psychedelic Society of Kansas City publishes its own Code of Conduct</a
+      >
+      for that program.
+    </p>
+    <p>
+      Treat people with dignity. Respect their autonomy, culture, and access needs. Be honest about what you know,
+      acknowledge uncertainty, and use evidence when offering information. Do not exploit cultural, spiritual, clinical,
+      or organizational authority. Disclose conflicts and do not use HTA spaces to pressure people into purchases,
+      donations, or private services.
+    </p>
+  </section>
+
+  <section id="support-and-boundaries" aria-labelledby="support-and-boundaries-heading">
+    <h2 class="hta-section-title" id="support-and-boundaries-heading">Peer support and boundaries</h2>
+    <ul>
+      <li>
+        Peer support can include listening, grounding, de-escalation, and helping someone find appropriate care. It is
+        not diagnosis, treatment, or a chance to solicit clients. Escalate urgent or out-of-scope needs to a lead,
+        medical staff, or emergency services as appropriate.
+      </li>
+      <li>
+        Ask before touching or recording anyone. Honor refusals, consider whether the person is in a position to
+        consent, and never pressure them to share personal details. Do not pursue sexual or romantic contact with
+        someone you are supporting.
+      </li>
+      <li>
+        Do not supply, administer, or facilitate access to controlled substances, recruit people for underground
+        services, or work while impaired. Keep personal information private and disclose only what is necessary for
+        safety or legal obligations.
+      </li>
+    </ul>
+  </section>
+
+  <section id="raising-a-concern" aria-labelledby="raising-a-concern-heading">
+    <h2 class="hta-section-title" id="raising-a-concern-heading">Raising a concern</h2>
+    <p>
+      Use the <a href={getPermalink('/contact')}>general contact page</a> to ask where to raise a concern. It is not a secure
+      case intake channel. Do not send sensitive allegations or another person’s private information there. If there is immediate
+      danger, call 911.
+    </p>
+    <p>
+      Concerns should be taken seriously, with attention to immediate safety and retaliation. No one should face
+      retaliation for reporting in good faith or participating in a review. Share information only as needed for a fair
+      and safe response; absolute confidentiality is not promised.
+    </p>
+  </section>
+
+  <section id="restorative-options" aria-labelledby="restorative-options-heading">
+    <h2 class="hta-section-title" id="restorative-options-heading">Voluntary restorative options</h2>
+    <p>
+      A restorative approach can help people name the harm and agree on what repair would look like, when it is safe and
+      they freely choose to take part. No one is required to meet with another person or accept mediation. See
+      <a href={getPermalink('/war-on-drugs')}>War on Drugs &amp; Restorative Justice</a> for the principles behind this approach.
+    </p>
+  </section>
+
+  <section id="independent-review" aria-labelledby="independent-review-heading">
+    <h2 class="hta-section-title" id="independent-review-heading">Independent review and recusal</h2>
+    <p>
+      Serious allegations should not be decided by friends, close colleagues, or people with a stake in the outcome. An
+      impartial review requires independence from people involved in the matter and from pressure to reach a particular
+      result. It is separate from voluntary restorative work.
+    </p>
+    <p>
+      For serious allegations, the non-recused board members choose a pool of eligible reviewers. A case-specific
+      committee forms independently from that pool. Any board member or volunteer with a personal connection to anyone
+      involved must step aside. That means taking no part in choosing reviewers, reviewing evidence, deliberating, or
+      making a decision on the case.
+    </p>
+    <p>
+      A fair review gives people an opportunity to respond where safe. Depending on what is needed, responses can range
+      from coaching or training to restrictions, removal, or referral when required. Interim protections can be
+      necessary before findings are made. Restorative options do not replace these protections or anyone’s ability to
+      seek emergency or outside help.
+    </p>
+    <p>
+      The <a href={getPermalink('/bylaws')}>bylaws overview</a> explains the distinction between organizational governance
+      and expectations for conduct.
+    </p>
+  </section>
+</GovernanceDocument>
