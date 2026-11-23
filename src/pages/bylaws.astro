@@ -1,0 +1,90 @@
+---
+import GovernanceDocument from '~/components/ui/GovernanceDocument.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const sections = [
+  { id: 'what-bylaws-do', title: 'What bylaws do' },
+  { id: 'how-hta-is-organized', title: 'How HTA is organized' },
+  { id: 'board-decisions', title: 'How the board makes decisions' },
+  { id: 'financial-stewardship', title: 'Money, conflicts, and community trust' },
+  { id: 'changes-and-questions', title: 'Changes and governance questions' },
+];
+---
+
+<GovernanceDocument
+  page="bylaws"
+  title="Bylaws"
+  category="Governance"
+  description="A plain-language guide to Heartland Transpersonal Alliance’s current consolidated bylaws draft: who makes decisions, what the board oversees, and how it is held accountable."
+  sections={sections}
+>
+  <section id="what-bylaws-do" aria-labelledby="what-bylaws-do-heading">
+    <h2 class="hta-section-title" id="what-bylaws-do-heading">What bylaws do</h2>
+    <p>
+      Bylaws set out how a nonprofit governs itself. They determine who has authority, how the board makes decisions,
+      and how the organization changes its rules. The <a href={getPermalink('/code-of-conduct')}>ethical code</a>
+      addresses a different question: how people should act and what to do when someone raises a concern.
+    </p>
+    <p>
+      This page summarizes the current consolidated draft. It is not the signed bylaws or a record of formal adoption.
+      For a question that depends on the exact wording or legal status, contact HTA.
+    </p>
+  </section>
+
+  <section id="how-hta-is-organized" aria-labelledby="how-hta-is-organized-heading">
+    <h2 class="hta-section-title" id="how-hta-is-organized-heading">How HTA is organized</h2>
+    <p>
+      Heartland Transpersonal Alliance is a Missouri charitable and educational nonprofit. The Psychedelic Society of
+      Kansas City, Safe Journey Sanctum, the Kansas City Psychedelic Integration Circle, and the Kansas City Psychedelic
+      Conference operate under HTA’s board oversight. Programs may not make commitments on HTA’s behalf without
+      authorization.
+    </p>
+    <p>
+      The draft describes a board-governed organization with at least three directors. Participating in a program,
+      donating, or volunteering does not confer legal voting rights in the corporation. HTA may invite community input
+      without transferring the board’s governing authority.
+    </p>
+    <p>
+      The board oversees strategy, finances, and programs. The president leads the board; the executive director leads
+      operations and programs; the secretary keeps board records; and the treasurer oversees budgets, financial
+      reporting, and filings. Committees work within a written scope and delegated authority. They report back to the
+      board, which remains responsible for oversight.
+    </p>
+  </section>
+
+  <section id="board-decisions" aria-labelledby="board-decisions-heading">
+    <h2 class="hta-section-title" id="board-decisions-heading">How the board makes decisions</h2>
+    <p>
+      Under the draft, a majority of the directors in office is needed to hold a vote. At a meeting with that quorum,
+      ordinary decisions generally require a majority of directors present. Directors can meet remotely. Action outside
+      a meeting requires unanimous written consent. Board minutes record decisions, votes, and relevant conflict
+      disclosures.
+    </p>
+  </section>
+
+  <section id="financial-stewardship" aria-labelledby="financial-stewardship-heading">
+    <h2 class="hta-section-title" id="financial-stewardship-heading">Money, conflicts, and community trust</h2>
+    <p>
+      The draft calls for budgets, financial records, documented approvals, and honoring donor restrictions. Directors
+      disclose personal, family, financial, or business conflicts, do not vote on the affected matter, and have the
+      disclosure recorded. Disinterested directors review compensation involving insiders.
+    </p>
+    <p>
+      It also calls for consent and safety, lawful harm reduction, nondiscrimination, privacy in handling records, and
+      no retaliation for good-faith reporting or participation in an investigation.
+    </p>
+  </section>
+
+  <section id="changes-and-questions" aria-labelledby="changes-and-questions-heading">
+    <h2 class="hta-section-title" id="changes-and-questions-heading">Changes and governance questions</h2>
+    <p>
+      The draft sets a two-thirds vote of directors in office for amendments, with notice and documentation, unless a
+      higher threshold applies. If HTA dissolves, any assets remaining after its obligations are met are to go to
+      qualifying charitable purposes.
+    </p>
+    <p>
+      <a href={getPermalink('/contact')}>Contact HTA</a> to ask about the governing document or send a governance question.
+      You can also <a href={getPermalink('/board')}>meet the Board of Directors</a>.
+    </p>
+  </section>
+</GovernanceDocument>
