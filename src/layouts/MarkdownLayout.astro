@@ -18,12 +18,12 @@ const metadata: MetaData = {
 
 <Layout metadata={metadata}>
   <section class="px-4 sm:px-6 py-8 md:py-12 mx-auto max-w-5xl">
-    <div class="surface-panel border rounded-lg p-6 md:p-10">
+    <div class="surface-panel border rounded-lg p-5 sm:p-7 md:p-10">
       <h1 class="font-heading font-semibold text-4xl md:text-5xl leading-[1.05]">
         {frontmatter.title}
       </h1>
       <div
-        class="mx-auto prose prose-lg max-w-none dark:prose-invert prose-md prose-headings:font-heading prose-headings:leading-tight prose-headings:font-semibold prose-a:text-primary prose-img:rounded-md prose-img:shadow-none mt-8"
+        class="mx-auto prose prose-lg max-w-[68ch] dark:prose-invert prose-md prose-headings:font-heading prose-headings:leading-tight prose-headings:font-semibold prose-a:text-primary prose-img:rounded-md prose-img:shadow-none mt-8"
       >
         <slot />
       </div>

@@ -238,3 +238,56 @@ test('legacy CMS shell and local configuration', async ({ page, request }) => {
   expect(config.ok()).toBe(true);
   expect(await config.text()).toContain('branch: main');
 });
+
+test('dark reading surfaces and primary actions keep contrast', async ({ page, isMobile }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  if (isMobile) await page.setViewportSize({ width: 320, height: 760 });
+
+  const renderedContrast = (element: Element) => {
+    const luminance = (value: string) => {
+      const [r, g, b] = value
+        .match(/\d+(?:\.\d+)?/g)!
+        .slice(0, 3)
+        .map((channel) => {
+          const c = Number(channel) / 255;
+          return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+        });
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    };
+    const foreground = luminance(getComputedStyle(element).color);
+    let surface = element;
+    while (surface.parentElement && getComputedStyle(surface).backgroundColor === 'rgba(0, 0, 0, 0)') {
+      surface = surface.parentElement;
+    }
+    const background = luminance(getComputedStyle(surface).backgroundColor);
+    return {
+      background,
+      contrast: (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05),
+    };
+  };
+
+  await page.goto(`${prefix}/`);
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark');
+  const home = await page.locator('body').evaluate(renderedContrast);
+  expect(home.background).toBeLessThan(0.12);
+  expect(home.contrast).toBeGreaterThanOrEqual(4.5);
+  await expect(page.locator('.hta-brand-mark svg')).not.toHaveCSS('fill', 'rgb(0, 0, 0)');
+  const action = page.getByRole('link', { name: 'Explore initiatives', exact: true });
+  expect((await action.evaluate(renderedContrast)).contrast).toBeGreaterThanOrEqual(4.5);
+  if (!isMobile) {
+    await action.hover();
+    await expect(action).toHaveCSS('background-color', 'rgb(182, 238, 220)');
+    expect((await action.evaluate(renderedContrast)).contrast).toBeGreaterThanOrEqual(4.5);
+  }
+  await page.getByRole('link', { name: 'Privacy', exact: true }).click();
+  await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark');
+  const markdown = await page.locator('main .prose p').first().evaluate(renderedContrast);
+  expect(markdown.background).toBeLessThan(0.12);
+  expect(markdown.contrast).toBeGreaterThanOrEqual(4.5);
+
+  await page.goto(`${prefix}/bylaws`);
+  const governance = await page.locator('main .document-body p').first().evaluate(renderedContrast);
+  expect(governance.background).toBeLessThan(0.12);
+  expect(governance.contrast).toBeGreaterThanOrEqual(4.5);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
