@@ -34,7 +34,7 @@
   }
   ::selection {
     background: var(--hta-link);
-    color: var(--hta-surface);
+    color: var(--hta-accent-ink);
   }
   :focus-visible {
     outline: 2px solid var(--hta-focus);
@@ -78,9 +78,14 @@
     border: 1px solid var(--hta-border);
     border-radius: 0.5rem;
   }
+  .resource-stripe .paper-panel,
+  .resource-stripe .editorial-card,
+  .resource-stripe .hta-card {
+    background: var(--hta-surface-raised);
+  }
   .institutional-band {
     color: var(--hta-text);
-    background: var(--hta-bg);
+    background: linear-gradient(125deg, var(--hta-hero-bg), var(--hta-bg) 70%);
     border-bottom: 1px solid var(--hta-border);
   }
   .cta-band {
@@ -90,7 +95,7 @@
     border-radius: 0.5rem;
   }
   .resource-stripe {
-    background: var(--hta-surface);
+    background: var(--hta-hero-bg);
     border-block: 1px solid var(--hta-border);
   }
   .accent-research,
@@ -128,6 +133,7 @@
   }
   .hta-brand-mark svg {
     display: block;
+    fill: var(--hta-link);
     width: 100%;
     height: 100%;
   }
@@ -167,12 +173,12 @@
     text-decoration-line: underline;
   }
   .hta-button-primary {
-    color: var(--hta-surface);
+    color: var(--hta-accent-ink);
     background: var(--hta-link);
     border-color: var(--hta-link);
   }
   .hta-button-primary:hover {
-    color: var(--hta-surface);
+    color: var(--hta-accent-ink);
     background: var(--hta-link-hover);
     border-color: var(--hta-link-hover);
   }
@@ -294,6 +300,7 @@
   }
   .home-hero {
     position: relative;
+    background: radial-gradient(ellipse at 78% 14%, var(--hta-hero-highlight), transparent 65%), var(--hta-bg);
     overflow: hidden;
     border-bottom: 1px solid var(--hta-border);
   }
@@ -301,12 +308,12 @@
     position: relative;
     max-width: 80rem;
     margin: auto;
-    padding: 5rem 1.5rem 4rem;
+    padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 3vw, 1.5rem) clamp(2.5rem, 7vw, 4rem);
   }
   .home-hero h1 {
     position: relative;
     max-width: 14ch;
-    font-size: clamp(2.7rem, 5.9vw, 5.3rem);
+    font-size: clamp(2.4rem, 5.9vw, 5.3rem);
     line-height: 1.05;
     font-weight: 500;
     letter-spacing: -0.055em;
@@ -346,6 +353,28 @@
   .skip-link:focus {
     transform: translateY(0);
   }
+}
+
+/* Match Tailwind Typography’s nested text, rules and code to the same palette. */
+.dark .prose.prose {
+  --tw-prose-body: var(--hta-text);
+  --tw-prose-headings: var(--hta-text-strong);
+  --tw-prose-lead: var(--hta-text);
+  --tw-prose-links: var(--hta-link);
+  --tw-prose-bold: var(--hta-text-strong);
+  --tw-prose-counters: var(--hta-text-muted);
+  --tw-prose-bullets: var(--hta-link);
+  --tw-prose-hr: var(--hta-border);
+  --tw-prose-quotes: var(--hta-text-strong);
+  --tw-prose-quote-borders: var(--hta-border-strong);
+  --tw-prose-captions: var(--hta-text-muted);
+  --tw-prose-kbd: var(--hta-text-strong);
+  --tw-prose-kbd-shadows: 155 217 198;
+  --tw-prose-code: var(--hta-text-strong);
+  --tw-prose-pre-code: var(--hta-text);
+  --tw-prose-pre-bg: var(--hta-bg);
+  --tw-prose-th-borders: var(--hta-border-strong);
+  --tw-prose-td-borders: var(--hta-border);
 }
 
 @media (max-width: 1023px) {
