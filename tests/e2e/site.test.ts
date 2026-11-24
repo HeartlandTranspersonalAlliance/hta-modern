@@ -271,7 +271,7 @@ test('dark reading surfaces and primary actions keep contrast', async ({ page, i
   const home = await page.locator('body').evaluate(renderedContrast);
   expect(home.background).toBeLessThan(0.12);
   expect(home.contrast).toBeGreaterThanOrEqual(4.5);
-  await expect(page.locator('.hta-brand-mark svg')).not.toHaveCSS('fill', 'rgb(0, 0, 0)');
+  await expect(page.locator('header .hta-brand-mark svg')).not.toHaveCSS('fill', 'rgb(0, 0, 0)');
   const action = page.getByRole('link', { name: 'Explore initiatives', exact: true });
   expect((await action.evaluate(renderedContrast)).contrast).toBeGreaterThanOrEqual(4.5);
   if (!isMobile) {
