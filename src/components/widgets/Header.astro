@@ -70,19 +70,25 @@ const navPlacementClass =
           aria-label="Main navigation"
         >
           {
-            links.map(({ text, href, links }) => (
+            links.map(({ text, href, links }, linkIndex) => (
               <div class:list={[links?.length ? 'dropdown relative' : 'relative']}>
                 {links?.length ? (
                   <>
                     <button
                       type="button"
                       class="hta-nav-link hta-focus-ring inline-flex items-center gap-1 whitespace-nowrap"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      aria-controls={`${id}-menu-${linkIndex}`}
                       data-active={links.some(({ href: href2 }) => href2 === currentPath) ? 'true' : undefined}
                     >
                       {text}
                       <Icon name="tabler:chevron-down" class="h-4 w-4" />
                     </button>
-                    <ul class="dropdown-menu hta-nav-shell hidden absolute top-[calc(100%+0.4rem)] left-0 rounded-lg border min-w-[210px] shadow-2xl p-1.5 z-20">
+                    <ul
+                      id={`${id}-menu-${linkIndex}`}
+                      class="dropdown-menu hta-nav-shell hidden absolute top-[calc(100%+0.4rem)] left-0 rounded-lg border min-w-[210px] shadow-2xl p-1.5 z-20"
+                    >
                       {links.map(({ text: text2, href: href2 }) => (
                         <li>
                           <a
