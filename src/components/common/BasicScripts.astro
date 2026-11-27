@@ -45,6 +45,12 @@
           const wasOpen = toggle?.getAttribute('aria-expanded') === 'true';
           closeMobileNav();
           if (wasOpen) toggle.focus();
+
+          const openDropdown = document.querySelector('#header .dropdown button[aria-expanded="true"]');
+          if (openDropdown) {
+            openDropdown.focus();
+            openDropdown.setAttribute('aria-expanded', 'false');
+          }
         }
       });
 
