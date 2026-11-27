@@ -409,8 +409,7 @@
 #header.scroll .hta-nav-shell {
   border-color: var(--hta-border-strong);
 }
-.dropdown:focus .dropdown-menu,
-.dropdown:focus-within .dropdown-menu,
+.dropdown button[aria-expanded='true'] + .dropdown-menu,
 .dropdown:hover .dropdown-menu {
   display: block;
 }
